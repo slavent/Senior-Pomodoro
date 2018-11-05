@@ -25,17 +25,25 @@ class App extends React.Component {
         const { tasks } = this.state
 
         return (
-            <Container fluid={ true }>
-                <Row>
-                    <Col xs={ 12 }>
-                        <h4>Your tasks:</h4>
-                        { tasks.map( ( { title }, key ) =>
-                            <p key={ key }>{ key + 1 }. { title }</p>
-                        ) }
-                        <Button color={ "danger" } className="float-right">Add new task</Button>
-                    </Col>
-                </Row>
-            </Container>
+            <div>
+                <header></header>
+                <Container fluid={ true }>
+                    <Row>
+                        <Col xs={ 12 }>
+                            <h4>Your tasks:</h4>
+                            <div className="tasks">
+                                { tasks.map( ( { title }, key ) =>
+                                    <div className="tasks__item" key={ key }>
+                                        <h6>{ key + 1 }. { title } <input type="checkbox"/></h6>
+                                    </div>
+                                ) }
+                            </div>
+                            <Button color={ "danger" } className="float-right">Add new task</Button>
+                        </Col>
+                    </Row>
+                    <footer></footer>
+                </Container>
+            </div>
         )
     }
 }

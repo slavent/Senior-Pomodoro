@@ -1,2 +1,16 @@
 body {
 }
+
+header {
+    min-height: 60px;
+    margin: 0 0 20px 0;
+    background: #000;
+}
+
+.tasks__item {
+    margin: 0 0 20px 0;
+}
+
+.tasks__item input[type=checkbox] {
+    margin: 0 0 0 5px;
+}
