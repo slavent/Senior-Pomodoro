@@ -1,7 +1,10 @@
 import React from "react"
 import axios from "axios"
 import { render } from "react-dom"
-import { Container, Row, Col, Card, CardTitle } from "reactstrap"
+import { Container, Row, Col, Card, Button } from "reactstrap"
+import "bootstrap/dist/css/bootstrap.css"
+import "normalize.css"
+import "./style.css"
 
 class App extends React.Component {
     constructor ( props ) {
@@ -22,16 +25,16 @@ class App extends React.Component {
         const { tasks } = this.state
 
         return (
-            <Container>
+            <Container fluid={ true }>
                 <Row>
                     <Col xs={ 12 }>
+                        <h2>Ваши задачи</h2>
                         { tasks.map( ( { title }, key ) =>
                             <Card key={ key }>
-                                <CardTitle>
-                                    { title }
-                                </CardTitle>
+                                <h3>{ key + 1 }. { title }</h3>
                             </Card>
                         ) }
+                        <Button color={ "danger" }>Add new task</Button>
                     </Col>
                 </Row>
             </Container>
