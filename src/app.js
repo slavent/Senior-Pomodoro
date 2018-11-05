@@ -1,7 +1,7 @@
 import React from "react"
 import axios from "axios"
 import { render } from "react-dom"
-import { Container, Row, Col, Card, Button } from "reactstrap"
+import { Container, Row, Col, Button } from "reactstrap"
 import "bootstrap/dist/css/bootstrap.css"
 import "normalize.css"
 import "./style.css"
@@ -28,13 +28,11 @@ class App extends React.Component {
             <Container fluid={ true }>
                 <Row>
                     <Col xs={ 12 }>
-                        <h2>Ваши задачи</h2>
+                        <h4>Your tasks:</h4>
                         { tasks.map( ( { title }, key ) =>
-                            <Card key={ key }>
-                                <h3>{ key + 1 }. { title }</h3>
-                            </Card>
+                            <p key={ key }>{ key + 1 }. { title }</p>
                         ) }
-                        <Button color={ "danger" }>Add new task</Button>
+                        <Button color={ "danger" } className="float-right">Add new task</Button>
                     </Col>
                 </Row>
             </Container>
