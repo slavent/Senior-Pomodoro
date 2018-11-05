@@ -7,6 +7,22 @@ header {
     background: #000;
 }
 
+header h2 {
+    color: #fff;
+    text-align: center;
+    margin: 0;
+    padding: 20px 0;
+}
+
+.container {
+    width: 800px;
+    margin: auto;
+}
+
+.tasks {
+    margin: 20px 0;
+}
+
 .tasks__item {
     margin: 0 0 20px 0;
 }

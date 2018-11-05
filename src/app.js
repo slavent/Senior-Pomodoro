@@ -26,8 +26,10 @@ class App extends React.Component {
 
         return (
             <div>
-                <header></header>
-                <Container fluid={ true }>
+                <header>
+                    <h2>Todo List App</h2>
+                </header>
+                <Container className="container">
                     <Row>
                         <Col xs={ 12 }>
                             <h4>Your tasks:</h4>
@@ -38,7 +40,9 @@ class App extends React.Component {
                                     </div>
                                 ) }
                             </div>
-                            <Button color={ "danger" } className="float-right">Add new task</Button>
+                            <div style={ { textAlign: "center" } }>
+                                <Button color={ "danger" }>Add new task</Button>
+                            </div>
                         </Col>
                     </Row>
                     <footer></footer>
