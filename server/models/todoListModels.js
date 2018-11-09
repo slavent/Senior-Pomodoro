@@ -11,11 +11,9 @@ TaskSchema = new Schema( {
         default: Date.now
     },
     status: {
-        type: [ {
-            type: String,
-            enum: [ "to do", "in progress", "done" ]
-        } ],
-        default: [ "to do" ]
+        type: String,
+        enum: [ "to do", "in progress", "done" ],
+        default: "to do"
     }
 } )
 
