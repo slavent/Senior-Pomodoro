@@ -2,13 +2,14 @@ const express = require( "express" )
 const mongoose = require( "mongoose" )
 const Task = require( "./models/todoListModels" )
 const bodyParser = require( "body-parser" )
-const controller = require("./controllers/todoListController")
+const controller = require( "./controllers/todoListController" )
 
 const app = express()
 const port = process.env.PORT || 3000
+const dbPath = "mongodb+srv://slavent:V35CypcmOO0vutjt@cluster0-punqb.azure.mongodb.net/test?retryWrites=true"
 
 mongoose.Promise = global.Promise
-mongoose.connect( "mongodb://localhost/TodoDataBase", { useNewUrlParser: true } )
+mongoose.connect( dbPath, { useNewUrlParser: true } )
 
 app.use( bodyParser.urlencoded( { extended: true } ) )
 app.use( bodyParser.json() )

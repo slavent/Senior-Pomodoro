@@ -1,54 +1,54 @@
 const mongoose = require( "mongoose" )
 const Task = mongoose.model( "Tasks" )
 
-exports.getAllTasks = ( req, res ) => {
-    Task.find( {}, ( err, task ) => {
-        if ( err ) {
-            res.send( err )
+exports.getAllTasks = ( request, response ) => {
+    Task.find( {}, ( error, task ) => {
+        if ( error ) {
+            response.send( error )
         }
 
-        res.json( task )
+        response.json( task )
     } )
 }
 
-exports.createTask = ( req, res ) => {
-    const newTask = new Task( req.body )
+exports.createTask = ( request, response ) => {
+    const newTask = new Task( request.body )
 
-    newTask.save( ( err, task ) => {
-        if ( err ) {
-            res.send( err )
+    newTask.save( ( error, task ) => {
+        if ( error ) {
+            response.send( error )
         }
 
-        res.json( task )
+        response.json( task )
     } )
 }
 
-exports.getTask = ( req, res ) => {
-    Task.findById( req.params.taskId, ( err, task ) => {
-        if ( err ) {
-            res.send( err )
+exports.getTask = ( request, response ) => {
+    Task.findById( request.params.taskId, ( error, task ) => {
+        if ( error ) {
+            response.send( error )
         }
 
-        res.json( task )
+        response.json( task )
     } )
 }
 
-exports.updateTask = ( req, res ) => {
-    Task.findOneAndUpdate( { _id: req.params.taskId }, req.body, { new: true }, ( err, task ) => {
-        if ( err ) {
-            res.send( err )
+exports.updateTask = ( request, response ) => {
+    Task.findOneAndUpdate( { _id: request.params.taskId }, request.body, { new: true }, ( error, task ) => {
+        if ( error ) {
+            response.send( error )
         }
 
-        res.json( task )
+        response.json( task )
     } )
 }
 
-exports.deleteTask = ( req, res ) => {
-    Task.remove( { _id: req.params.taskId }, ( err, task ) => {
-        if ( err ) {
-            res.send( err )
+exports.deleteTask = ( request, response ) => {
+    Task.remove( { _id: request.params.taskId }, ( error, task ) => {
+        if ( error ) {
+            response.send( error )
         }
 
-        res.json( { message: "Task successfully deleted" } )
+        response.json( { message: "Task successfully deleted" } )
     } )
 }
