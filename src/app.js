@@ -2,7 +2,7 @@ import React from "react"
 import axios from "axios"
 import { render } from "react-dom"
 import { Alert, Container, Row, Col, Button, InputGroup, Input } from "reactstrap"
-import { remove, isEmpty } from "lodash"
+import { remove, isEmpty, find } from "lodash"
 import "bootstrap/dist/css/bootstrap.css"
 import "normalize.css"
 import "./style.css"
@@ -80,6 +80,21 @@ class App extends React.Component {
         axios.post( `/api/comments`, { text: "some text" } ).then( response => {
             axios.put( `/api/tasks/${taskId}`, { comments: [ response.data._id ] } )
         } ).catch( error => console.error( error ) )
+
+        this.toggleCommentForm( taskId )
+    }
+
+    toggleCommentForm ( _id ) {
+        const { tasks } = this.state
+        const newTasks = tasks.map( task => {
+            if ( task._id === _id ) {
+                task.isAddComment = !task.isAddComment
+            }
+x
+            return task
+        } )
+
+        this.setState( { tasks: newTasks } )
     }
 
     render () {
@@ -95,7 +110,7 @@ class App extends React.Component {
                         <Col xs={ 12 }>
                             <h4>Your tasks:</h4>
                             <div className="tasks">
-                                { tasks.map( ( { _id, title, status, comments }, key ) =>
+                                { tasks.map( ( { _id, title, status, comments, isAddComment }, key ) =>
                                     <Alert
                                         key={ key }
                                         color={ status === STATUSES.DONE ? "success" : "primary" }
@@ -110,15 +125,27 @@ class App extends React.Component {
                                                     </p>
                                                 }
                                                 <hr/>
-                                                <Input
-                                                    type="textarea"
-                                                    placeholder="Your comment for this task..."
-                                                    style={ { margin: "0 0 10px" } }/>
-                                                <Button
-                                                    color={ "info" }
-                                                    onClick={ this.addComment.bind( this, _id ) }>
-                                                    Add comment
-                                                </Button>
+                                                {
+                                                    !isAddComment &&
+                                                    <Button
+                                                        color={ "info" }
+                                                        onClick={ this.toggleCommentForm.bind( this, _id ) }>
+                                                        Add new comment
+                                                    </Button>
+                                                }
+                                                { isAddComment &&
+                                                <div>
+                                                    <Input
+                                                        type="textarea"
+                                                        placeholder="Your comment for this task..."
+                                                        style={ { margin: "0 0 10px" } }/>
+                                                    <Button
+                                                        color={ "info" }
+                                                        onClick={ this.addComment.bind( this, _id ) }>
+                                                        Add
+                                                    </Button>
+                                                </div>
+                                                }
                                             </Col>
                                             <Col xs={ 4 } style={ { textAlign: "right" } }>
                                                 <Button
@@ -127,7 +154,6 @@ class App extends React.Component {
                                                     { status === STATUSES.DONE ? "Return" : "Done" }
                                                 </Button>
                                                 <span> </span>
-
                                                 <Button
                                                     color={ "danger" }
                                                     onClick={ this.deleteTask.bind( this, _id ) }>
