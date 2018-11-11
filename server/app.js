@@ -1,6 +1,6 @@
 const express = require( "express" )
 const mongoose = require( "mongoose" )
-const Task = require( "./models/todoListModels" )
+const Task = require( "./models/task" )
 const bodyParser = require( "body-parser" )
 const controller = require( "./controllers/todoListController" )
 
