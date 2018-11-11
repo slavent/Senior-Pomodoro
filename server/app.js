@@ -7,9 +7,10 @@ const controller = require( "./controllers/todoListController" )
 const app = express()
 const port = process.env.PORT || 3000
 const dbPath = "mongodb+srv://slavent:V35CypcmOO0vutjt@cluster0-punqb.azure.mongodb.net/test?retryWrites=true"
+const dbLocalPath = "mongodb://localhost/TodoDataBase"
 
 mongoose.Promise = global.Promise
-mongoose.connect( dbPath, { useNewUrlParser: true } )
+mongoose.connect( dbLocalPath, { useNewUrlParser: true } )
 
 app.use( bodyParser.urlencoded( { extended: true } ) )
 app.use( bodyParser.json() )
