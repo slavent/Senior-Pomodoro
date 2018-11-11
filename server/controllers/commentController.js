@@ -1,6 +1,5 @@
 const mongoose = require( "mongoose" )
 const Comments = mongoose.model( "Comments" )
-const Tasks = mongoose.model( "Tasks" )
 
 exports.getAllComments = ( request, response ) => {
     Comments.find( {}, ( error, comments ) => {
@@ -9,32 +8,6 @@ exports.getAllComments = ( request, response ) => {
         }
 
         response.json( comments )
-    } )
-}
-
-exports.getUserComments = ( request, response ) => {
-
-}
-
-exports.getTaskComments = taskId => {
-    const taskComments = []
-
-    Tasks.find( { _id: taskId }, ( error, task ) => {
-        if ( error ) {
-            response.send( error )
-        }
-
-        task.comments.forEach( commentId => {
-            Comments.find( { _id: commentId }, ( error, comment ) => {
-                if ( error ) {
-                    response.send( error )
-                }
-
-                taskComments.push( comment )
-            } )
-        } )
-
-        response.json( taskComments )
     } )
 }
 
