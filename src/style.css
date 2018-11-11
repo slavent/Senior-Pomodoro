@@ -23,10 +23,11 @@ header h2 {
     margin: 20px 0;
 }
 
-.tasks__item {
-    margin: 0 0 20px 0;
-}
-
 .tasks__item input[type=checkbox] {
     margin: 0 0 0 5px;
+}
+
+.comments {
+    color: #999;
+    font-size: 12px;
 }

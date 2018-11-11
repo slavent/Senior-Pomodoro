@@ -1,8 +1,8 @@
 import React from "react"
 import axios from "axios"
 import { render } from "react-dom"
-import { Container, Row, Col, Button, InputGroup, Input } from "reactstrap"
-import { remove } from "lodash"
+import { Alert, Container, Row, Col, Button, InputGroup, Input } from "reactstrap"
+import { remove, isEmpty } from "lodash"
 import "bootstrap/dist/css/bootstrap.css"
 import "normalize.css"
 import "./style.css"
@@ -95,34 +95,55 @@ class App extends React.Component {
                         <Col xs={ 12 }>
                             <h4>Your tasks:</h4>
                             <div className="tasks">
-                                { tasks.map( ( { _id, title, status }, key ) =>
-                                    <div className="tasks__item" key={ key }>
-                                        <h6>{ key + 1 }. { title }</h6>
-                                        <Button
-                                            color={ status === STATUSES.DONE ? "success" : "secondary" }
-                                            onClick={ this.onChangeTaskStatus.bind( this, _id ) }>
-                                            { status === STATUSES.DONE ? "To do" : "Done" }
-                                        </Button>
-                                        <span> </span>
-                                        <Button
-                                            color={ "danger" }
-                                            onClick={ this.deleteTask.bind( this, _id ) }>
-                                            Delete
-                                        </Button>
-                                        <span> </span>
-                                        <Button
-                                            color={ "info" }
-                                            onClick={ this.addComment.bind( this, _id ) }>
-                                            Add comment
-                                        </Button>
-                                    </div>
+                                { tasks.map( ( { _id, title, status, comments }, key ) =>
+                                    <Alert
+                                        key={ key }
+                                        color={ status === STATUSES.DONE ? "success" : "primary" }
+                                        style={ { margin: "0 0 20px 0" } }>
+                                        <Row>
+                                            <Col xs={ 8 }>
+                                                <h6>{ key + 1 }. { title }</h6>
+                                                {
+                                                    !isEmpty( comments ) &&
+                                                    <p className="comments">
+                                                        { comments.length } { comments.length > 1 ? "comments" : "comment" }
+                                                    </p>
+                                                }
+                                                <hr/>
+                                                <Input
+                                                    type="textarea"
+                                                    placeholder="Your comment for this task..."
+                                                    style={ { margin: "0 0 10px" } }/>
+                                                <Button
+                                                    color={ "info" }
+                                                    onClick={ this.addComment.bind( this, _id ) }>
+                                                    Add comment
+                                                </Button>
+                                            </Col>
+                                            <Col xs={ 4 } style={ { textAlign: "right" } }>
+                                                <Button
+                                                    color={ status === STATUSES.DONE ? "secondary" : "success" }
+                                                    onClick={ this.onChangeTaskStatus.bind( this, _id ) }>
+                                                    { status === STATUSES.DONE ? "Return" : "Done" }
+                                                </Button>
+                                                <span> </span>
+
+                                                <Button
+                                                    color={ "danger" }
+                                                    onClick={ this.deleteTask.bind( this, _id ) }>
+                                                    Delete
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                    </Alert>
                                 ) }
                             </div>
                             <div style={ { textAlign: "center" } }>
                                 <InputGroup>
                                     <Input
+                                        type="textarea"
                                         value={ newTaskTitle }
-                                        placeholder="Buy the ticket to theatre"
+                                        placeholder="Your new task..."
                                         onChange={ this.onInputTask.bind( this ) }/>
                                 </InputGroup>
                                 <br/>
