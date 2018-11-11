@@ -1,4 +1,5 @@
 const mongoose = require( "mongoose" )
+const commentController = require( "./commentController" )
 const Tasks = mongoose.model( "Tasks" )
 
 exports.getAllTasks = ( request, response ) => {
@@ -28,6 +29,10 @@ exports.getTask = ( request, response ) => {
         if ( error ) {
             response.send( error )
         }
+
+        const comments = commentController.getTaskComments( request.params.taskId )
+
+        task.comments = comments
 
         response.json( task )
     } )
