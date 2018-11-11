@@ -2,7 +2,7 @@ const express = require( "express" )
 const mongoose = require( "mongoose" )
 const Task = require( "./models/task" )
 const bodyParser = require( "body-parser" )
-const controller = require( "./controllers/todoListController" )
+const controller = require( "./controllers/taskController" )
 
 const app = express()
 const port = process.env.PORT || 3000

@@ -1,18 +1,18 @@
 const mongoose = require( "mongoose" )
-const Task = mongoose.model( "Tasks" )
+const Tasks = mongoose.model( "Tasks" )
 
 exports.getAllTasks = ( request, response ) => {
-    Task.find( {}, ( error, task ) => {
+    Tasks.find( {}, ( error, tasks ) => {
         if ( error ) {
             response.send( error )
         }
 
-        response.json( task )
+        response.json( tasks )
     } )
 }
 
 exports.createTask = ( request, response ) => {
-    const newTask = new Task( request.body )
+    const newTask = new Tasks( request.body )
 
     newTask.save( ( error, task ) => {
         if ( error ) {
@@ -24,7 +24,7 @@ exports.createTask = ( request, response ) => {
 }
 
 exports.getTask = ( request, response ) => {
-    Task.findById( request.params.taskId, ( error, task ) => {
+    Tasks.findById( request.params.taskId, ( error, task ) => {
         if ( error ) {
             response.send( error )
         }
@@ -34,7 +34,7 @@ exports.getTask = ( request, response ) => {
 }
 
 exports.updateTask = ( request, response ) => {
-    Task.findOneAndUpdate( { _id: request.params.taskId }, request.body, { new: true }, ( error, task ) => {
+    Tasks.findOneAndUpdate( { _id: request.params.taskId }, request.body, { new: true }, ( error, task ) => {
         if ( error ) {
             response.send( error )
         }
@@ -44,7 +44,7 @@ exports.updateTask = ( request, response ) => {
 }
 
 exports.deleteTask = ( request, response ) => {
-    Task.remove( { _id: request.params.taskId }, ( error, task ) => {
+    Tasks.remove( { _id: request.params.taskId }, ( error, task ) => {
         if ( error ) {
             response.send( error )
         }
