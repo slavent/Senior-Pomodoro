@@ -76,6 +76,12 @@ class App extends React.Component {
         this.setState( { newTaskTitle: event.target.value } )
     }
 
+    addComment ( taskId ) {
+        axios.post( `/api/comments`, { text: "some text" } ).then( response => {
+            axios.put( `/api/tasks/${taskId}`, { comments: [ response.data._id ] } )
+        } ).catch( error => console.error( error ) )
+    }
+
     render () {
         const { tasks, newTaskTitle } = this.state
 
@@ -91,18 +97,23 @@ class App extends React.Component {
                             <div className="tasks">
                                 { tasks.map( ( { _id, title, status }, key ) =>
                                     <div className="tasks__item" key={ key }>
-                                        <h6>
-                                            { key + 1 }. { title }
-                                            <span> </span>
-                                            <input
-                                                type="checkbox"
-                                                checked={ status === STATUSES.DONE }
-                                                onChange={ this.onChangeTaskStatus.bind( this, _id ) }/>
-                                        </h6>
+                                        <h6>{ key + 1 }. { title }</h6>
+                                        <Button
+                                            color={ status === STATUSES.DONE ? "success" : "secondary" }
+                                            onClick={ this.onChangeTaskStatus.bind( this, _id ) }>
+                                            { status === STATUSES.DONE ? "To do" : "Done" }
+                                        </Button>
+                                        <span> </span>
                                         <Button
                                             color={ "danger" }
                                             onClick={ this.deleteTask.bind( this, _id ) }>
                                             Delete
+                                        </Button>
+                                        <span> </span>
+                                        <Button
+                                            color={ "info" }
+                                            onClick={ this.addComment.bind( this, _id ) }>
+                                            Add comment
                                         </Button>
                                     </div>
                                 ) }
