@@ -8,4 +8,4 @@ SettingsSchema = new Schema( {
     }
 } )
 
-module.exports = mongoose.model( "Tasks", SettingsSchema )
+module.exports = mongoose.model( "Settings", SettingsSchema )
