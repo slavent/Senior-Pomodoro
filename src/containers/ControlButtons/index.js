@@ -1,5 +1,5 @@
 import React from "react"
-import Button from "reactstrap/src/Button"
+import { Button } from "reactstrap"
 import STATUSES from "constants/TaskFlow"
 
 const ControlButtons = ( { status, onChangeTaskStatus, onDeleteTask } ) =>

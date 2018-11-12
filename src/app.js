@@ -3,12 +3,12 @@ import axios from "axios"
 import { render } from "react-dom"
 import { Container, Row, Col } from "reactstrap"
 import { remove, isEmpty, find } from "lodash"
+import STATUSES from "constants/TaskFlow"
+import AddTaskForm from "containers/AddTaskForm"
+import TaskList from "containers/TaskList"
 import "bootstrap/dist/css/bootstrap.css"
 import "normalize.css"
 import "./style.css"
-import STATUSES from "constants/TaskFlow"
-import AddTaskForm from "./containers/AddTaskForm"
-import TaskList from "./containers/TaskList"
 
 class App extends React.Component {
     constructor ( props ) {
