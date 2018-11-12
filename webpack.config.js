@@ -38,6 +38,14 @@ module.exports = {
         } ),
         new webpack.HotModuleReplacementPlugin()
     ],
+    resolve: {
+        extensions: [ ".js", ".jsx" ],
+        alias: {
+            constants: path.resolve( __dirname, "./src/constants" ),
+            containers: path.resolve( __dirname, "./src/containers" ),
+            components: path.resolve( __dirname, "./src/components" )
+        }
+    },
     devServer: {
         contentBase: "./dist",
         port: 8080,

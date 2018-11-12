@@ -1,17 +1,14 @@
 import React from "react"
 import axios from "axios"
 import { render } from "react-dom"
-import { Alert, Container, Row, Col, Button, InputGroup, Input } from "reactstrap"
+import { Container, Row, Col } from "reactstrap"
 import { remove, isEmpty, find } from "lodash"
 import "bootstrap/dist/css/bootstrap.css"
 import "normalize.css"
 import "./style.css"
-
-const STATUSES = {
-    TODO: "to do",
-    IN_PROGRESS: "in progress",
-    DONE: "done"
-}
+import STATUSES from "constants/TaskFlow"
+import AddTaskForm from "./containers/AddTaskForm"
+import TaskList from "./containers/TaskList"
 
 class App extends React.Component {
     constructor ( props ) {
@@ -90,7 +87,7 @@ class App extends React.Component {
             if ( task._id === _id ) {
                 task.isAddComment = !task.isAddComment
             }
-x
+
             return task
         } )
 
@@ -108,80 +105,19 @@ x
                 <Container className="container">
                     <Row>
                         <Col xs={ 12 }>
-                            <h4>Your tasks:</h4>
-                            <div className="tasks">
-                                { tasks.map( ( { _id, title, status, comments, isAddComment }, key ) =>
-                                    <Alert
-                                        key={ key }
-                                        color={ status === STATUSES.DONE ? "success" : "primary" }
-                                        style={ { margin: "0 0 20px 0" } }>
-                                        <Row>
-                                            <Col xs={ 8 }>
-                                                <h6>{ key + 1 }. { title }</h6>
-                                                {
-                                                    !isEmpty( comments ) &&
-                                                    <p className="comments">
-                                                        { comments.length } { comments.length > 1 ? "comments" : "comment" }
-                                                    </p>
-                                                }
-                                                <hr/>
-                                                {
-                                                    !isAddComment &&
-                                                    <Button
-                                                        color={ "info" }
-                                                        onClick={ this.toggleCommentForm.bind( this, _id ) }>
-                                                        Add new comment
-                                                    </Button>
-                                                }
-                                                { isAddComment &&
-                                                <div>
-                                                    <Input
-                                                        type="textarea"
-                                                        placeholder="Your comment for this task..."
-                                                        style={ { margin: "0 0 10px" } }/>
-                                                    <Button
-                                                        color={ "info" }
-                                                        onClick={ this.addComment.bind( this, _id ) }>
-                                                        Add
-                                                    </Button>
-                                                </div>
-                                                }
-                                            </Col>
-                                            <Col xs={ 4 } style={ { textAlign: "right" } }>
-                                                <Button
-                                                    color={ status === STATUSES.DONE ? "secondary" : "success" }
-                                                    onClick={ this.onChangeTaskStatus.bind( this, _id ) }>
-                                                    { status === STATUSES.DONE ? "Return" : "Done" }
-                                                </Button>
-                                                <span> </span>
-                                                <Button
-                                                    color={ "danger" }
-                                                    onClick={ this.deleteTask.bind( this, _id ) }>
-                                                    Delete
-                                                </Button>
-                                            </Col>
-                                        </Row>
-                                    </Alert>
-                                ) }
-                            </div>
-                            <div style={ { textAlign: "center" } }>
-                                <InputGroup>
-                                    <Input
-                                        type="textarea"
-                                        value={ newTaskTitle }
-                                        placeholder="Your new task..."
-                                        onChange={ this.onInputTask.bind( this ) }/>
-                                </InputGroup>
-                                <br/>
-                                <Button
-                                    color={ "success" }
-                                    onClick={ this.addNewTask.bind( this ) }>
-                                    Add new task
-                                </Button>
-                            </div>
+                            <TaskList
+                                tasks={ tasks }
+                                addComment={ this.addComment.bind( this ) }
+                                deleteTask={ this.deleteTask.bind( this ) }
+                                onChangeTaskStatus={ this.onChangeTaskStatus.bind( this ) }
+                                toggleCommentForm={ this.toggleCommentForm.bind( this ) }/>
+                            <AddTaskForm
+                                newTaskTitle={ newTaskTitle }
+                                onAddNewTask={ this.addNewTask.bind( this ) }
+                                onInputTask={ this.onInputTask.bind( this ) }/>
                         </Col>
                     </Row>
-                    <footer></footer>
+                    <footer/>
                 </Container>
             </div>
         )
