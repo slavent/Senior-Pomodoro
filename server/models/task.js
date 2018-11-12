@@ -1,7 +1,7 @@
 const mongoose = require( "mongoose" )
 const Schema = mongoose.Schema
 
-TaskSchema = new Schema( {
+SettingsSchema = new Schema( {
     title: {
         type: String,
         required: "Task's title is required."
@@ -24,4 +24,4 @@ TaskSchema = new Schema( {
     comments: []
 } )
 
-module.exports = mongoose.model( "Tasks", TaskSchema )
+module.exports = mongoose.model( "Tasks", SettingsSchema )
