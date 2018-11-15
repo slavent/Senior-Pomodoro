@@ -9,6 +9,11 @@ SettingsSchema = new Schema( {
     description: {
         type: String
     },
+    estimate: {
+        type: Number,
+        required: "Task's estimation is required.",
+        default: 0
+    },
     createdDate: {
         type: Date,
         default: Date.now
