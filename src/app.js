@@ -35,7 +35,8 @@ class App extends React.Component {
 
             this.setState( {
                 tasks,
-                title: ""
+                title: "",
+                estimate: ""
             } )
         } ).catch( error => console.error( error ) )
     }
@@ -117,7 +118,7 @@ class App extends React.Component {
                                 onChangeTaskStatus={ this.onChangeTaskStatus.bind( this ) }
                                 toggleCommentForm={ this.toggleCommentForm.bind( this ) }/>
                             <AddTaskForm
-                                newTaskTitle={ title }
+                                title={ title }
                                 estimate={ estimate }
                                 onAddNewTask={ this.addNewTask.bind( this ) }
                                 onInputTask={ this.onInputTask.bind( this ) }
