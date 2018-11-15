@@ -16,7 +16,8 @@ class App extends React.Component {
 
         this.state = {
             tasks: [],
-            newTaskTitle: ""
+            title: "",
+            estimate: ""
         }
     }
 
@@ -27,14 +28,14 @@ class App extends React.Component {
     }
 
     addNewTask () {
-        const { newTaskTitle, tasks } = this.state
+        const { title, estimate, tasks } = this.state
 
-        axios.post( "/api/tasks", { title: newTaskTitle } ).then( response => {
+        axios.post( "/api/tasks", { title, estimate } ).then( response => {
             tasks.push( response.data )
 
             this.setState( {
                 tasks,
-                newTaskTitle: ""
+                title: ""
             } )
         } ).catch( error => console.error( error ) )
     }
@@ -70,7 +71,11 @@ class App extends React.Component {
     }
 
     onInputTask ( event ) {
-        this.setState( { newTaskTitle: event.target.value } )
+        this.setState( { title: event.target.value } )
+    }
+
+    onInputEstimate ( event ) {
+        this.setState( { estimate: event.target.value } )
     }
 
     addComment ( taskId ) {
@@ -95,7 +100,7 @@ class App extends React.Component {
     }
 
     render () {
-        const { tasks, newTaskTitle } = this.state
+        const { tasks, title, estimate } = this.state
 
         return (
             <div>
@@ -112,9 +117,11 @@ class App extends React.Component {
                                 onChangeTaskStatus={ this.onChangeTaskStatus.bind( this ) }
                                 toggleCommentForm={ this.toggleCommentForm.bind( this ) }/>
                             <AddTaskForm
-                                newTaskTitle={ newTaskTitle }
+                                newTaskTitle={ title }
+                                estimate={ estimate }
                                 onAddNewTask={ this.addNewTask.bind( this ) }
-                                onInputTask={ this.onInputTask.bind( this ) }/>
+                                onInputTask={ this.onInputTask.bind( this ) }
+                                onInputEstimate={ this.onInputEstimate.bind( this ) }/>
                         </Col>
                     </Row>
                     <footer/>

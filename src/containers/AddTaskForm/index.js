@@ -1,15 +1,26 @@
 import React from "react"
-import { InputGroup, Input, Button } from "reactstrap"
+import { Input, Button, Row, Col } from "reactstrap"
 
-const AddTaskForm = ( { newTaskTitle, onInputTask, onAddNewTask } ) =>
+const AddTaskForm = ( { title, estimate, onInputTask, onAddNewTask, onInputEstimate } ) =>
     <div style={ { textAlign: "center" } }>
-        <InputGroup>
-            <Input
-                type="textarea"
-                value={ newTaskTitle }
-                placeholder="Your new task..."
-                onChange={ onInputTask }/>
-        </InputGroup>
+        <Row>
+            <Col xs={ 12 }>
+                <label>Task:</label>
+                <Input
+                    type="textarea"
+                    value={ title }
+                    placeholder="Your new task..."
+                    onChange={ onInputTask }/>
+            </Col>
+            <Col xs={ 12 }>
+                <label>Estimate:</label>
+                <Input
+                    type="textarea"
+                    value={ estimate }
+                    placeholder="0"
+                    onChange={ onInputEstimate }/>
+            </Col>
+        </Row>
         <br/>
         <Button
             color={ "success" }
