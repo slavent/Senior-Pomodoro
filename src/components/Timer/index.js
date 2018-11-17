@@ -1,12 +1,14 @@
 import React from "react"
 
+const POMODORO_INTERVAL = 0.2
+
 export default class Timer extends React.Component {
     constructor ( props ) {
         super( props )
+
         this.state = {
-            time: 0,
-            isOn: false,
-            start: 0
+            time: convertToMs( POMODORO_INTERVAL ),
+            isOn: false
         }
 
         this.startTimer = this.startTimer.bind( this )
@@ -14,16 +16,22 @@ export default class Timer extends React.Component {
         this.resetTimer = this.resetTimer.bind( this )
     }
 
-    startTimer () {
-        this.setState( {
-            isOn: true,
-            time: this.state.time,
-            start: Date.now() - this.state.time
-        } )
+    componentWillReceiveProps ( newProps ) {
+        newProps.isOn ? this.startTimer() : this.stopTimer()
+    }
 
-        this.timer = setInterval( () => this.setState( {
-            time: Date.now() - this.state.start
-        } ), 1 )
+    startTimer () {
+        this.timer = setInterval( () => {
+            if ( Number( this.state.time ) === 0 ) {
+                this.stopTimer()
+
+                return
+            }
+
+            this.setState( {
+                time: this.state.time - 1000
+            } )
+        }, 1000 )
     }
 
     stopTimer () {
@@ -40,31 +48,13 @@ export default class Timer extends React.Component {
     }
 
     render () {
-        let start = ( this.state.time == 0 ) ?
-            <button onClick={ this.startTimer }>start</button> :
-            null
-        let stop = ( this.state.time == 0 || !this.state.isOn ) ?
-            null :
-            <button onClick={ this.stopTimer }>stop</button>
-        let resume = ( this.state.time == 0 || this.state.isOn ) ?
-            null :
-            <button onClick={ this.startTimer }>resume</button>
-        let reset = ( this.state.time == 0 || this.state.isOn ) ?
-            null :
-            <button onClick={ this.resetTimer }>reset</button>
-        return (
-            <div>
-                <h3>timer: { convertMsToTime( this.state.time ) }</h3>
-                { start }
-                { resume }
-                { stop }
-                { reset }
-            </div>
-        )
+        return <h3>timer: { convertMsToTime( this.state.time ) }</h3>
     }
 }
 
-const convertMsToTime =  value => {
+const convertToMs = value => value * 60 * 1000
+
+const convertMsToTime = value => {
     let milliseconds = value % 1000
     value = ( value - milliseconds ) / 1000
     let seconds = value % 60

@@ -9,6 +9,7 @@ import TaskList from "containers/TaskList"
 import "bootstrap/dist/css/bootstrap.css"
 import "normalize.css"
 import "./style.css"
+import Timer from "components/Timer"
 
 class App extends React.Component {
     constructor ( props ) {
@@ -17,7 +18,8 @@ class App extends React.Component {
         this.state = {
             tasks: [],
             title: "",
-            estimate: ""
+            estimate: "",
+            timerIsOn: false
         }
     }
 
@@ -30,7 +32,10 @@ class App extends React.Component {
     addNewTask () {
         const { title, estimate, tasks } = this.state
 
-        axios.post( "/api/tasks", { title, estimate } ).then( response => {
+        axios.post( "/api/tasks", {
+            title,
+            estimate
+        } ).then( response => {
             tasks.push( response.data )
 
             this.setState( {
@@ -100,8 +105,12 @@ class App extends React.Component {
         this.setState( { tasks: newTasks } )
     }
 
+    onStartTask ( _id, estimate ) {
+        this.setState( { timerIsOn: true } )
+    }
+
     render () {
-        const { tasks, title, estimate } = this.state
+        const { tasks, title, estimate, timerIsOn } = this.state
 
         return (
             <div>
@@ -111,12 +120,14 @@ class App extends React.Component {
                 <Container className="container">
                     <Row>
                         <Col xs={ 12 }>
+                            <Timer isOn={ timerIsOn }/>
                             <TaskList
                                 tasks={ tasks }
                                 addComment={ this.addComment.bind( this ) }
                                 deleteTask={ this.deleteTask.bind( this ) }
                                 onChangeTaskStatus={ this.onChangeTaskStatus.bind( this ) }
-                                toggleCommentForm={ this.toggleCommentForm.bind( this ) }/>
+                                toggleCommentForm={ this.toggleCommentForm.bind( this ) }
+                                onStartTask={ this.onStartTask.bind( this ) }/>
                             <AddTaskForm
                                 title={ title }
                                 estimate={ estimate }

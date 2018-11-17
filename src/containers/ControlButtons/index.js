@@ -2,7 +2,7 @@ import React from "react"
 import { Button } from "reactstrap"
 import STATUSES from "constants/TaskFlow"
 
-const ControlButtons = ( { status, onChangeTaskStatus, onDeleteTask } ) =>
+const ControlButtons = ( { status, onChangeTaskStatus, onDeleteTask, onStartTask } ) =>
     <div>
         <Button
             color={ status === STATUSES.DONE ? "secondary" : "success" }
@@ -14,6 +14,11 @@ const ControlButtons = ( { status, onChangeTaskStatus, onDeleteTask } ) =>
             color={ "danger" }
             onClick={ onDeleteTask }>
             Delete
+        </Button>
+        <Button
+            color={ "success" }
+            onClick={ onStartTask }>
+            Start
         </Button>
     </div>
 

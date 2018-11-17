@@ -5,11 +5,11 @@ import ControlButtons from "containers/ControlButtons"
 import STATUSES from "constants/TaskFlow"
 import { isEmpty } from "lodash"
 
-const TaskList = ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, deleteTask } ) =>
+const TaskList = ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, deleteTask, onStartTask } ) =>
     <div>
         <h4>Your tasks:</h4>
         <div className="tasks">
-            { tasks.map( ( { _id, title, status, comments, isAddComment }, key ) =>
+            { tasks.map( ( { _id, title, status, comments, isAddComment, estimate }, key ) =>
                 <Alert
                     key={ key }
                     color={ status === STATUSES.DONE ? "success" : "primary" }
@@ -17,6 +17,10 @@ const TaskList = ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, d
                     <Row>
                         <Col xs={ 8 }>
                             <h6>{ key + 1 }. { title }</h6>
+                            {
+                                estimate > 0 &&
+                                <p>Estimated by { estimate }</p>
+                            }
                             {
                                 !isEmpty( comments ) &&
                                 <p className="comments">
@@ -41,7 +45,8 @@ const TaskList = ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, d
                             <ControlButtons
                                 status={ status }
                                 onChangeTaskStatus={ () => onChangeTaskStatus( _id ) }
-                                onDeleteTask={ () => deleteTask( _id ) }/>
+                                onDeleteTask={ () => deleteTask( _id ) }
+                                onStartTask={ () => onStartTask( _id, estimate ) }/>
                         </Col>
                     </Row>
                 </Alert>
