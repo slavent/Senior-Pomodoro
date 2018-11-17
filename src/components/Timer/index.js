@@ -8,16 +8,12 @@ export default class Timer extends React.Component {
 
         this.state = {
             time: convertToMs( POMODORO_INTERVAL ),
-            isOn: false
+            isOn: props.isOn || false
         }
 
         this.startTimer = this.startTimer.bind( this )
         this.stopTimer = this.stopTimer.bind( this )
         this.resetTimer = this.resetTimer.bind( this )
-    }
-
-    componentWillReceiveProps ( newProps ) {
-        newProps.isOn ? this.startTimer() : this.stopTimer()
     }
 
     startTimer () {
@@ -48,7 +44,7 @@ export default class Timer extends React.Component {
     }
 
     render () {
-        return <h3>timer: { convertMsToTime( this.state.time ) }</h3>
+        return <h3>{ convertMsToTime( this.state.time ) }</h3>
     }
 }
 

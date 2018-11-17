@@ -120,7 +120,7 @@ class App extends React.Component {
                 <Container className="container">
                     <Row>
                         <Col xs={ 12 }>
-                            <Timer isOn={ timerIsOn }/>
+                            { timerIsOn && <Timer isOn={ timerIsOn }/> }
                             <TaskList
                                 tasks={ tasks }
                                 addComment={ this.addComment.bind( this ) }
