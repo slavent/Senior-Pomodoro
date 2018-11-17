@@ -121,7 +121,7 @@ class App extends React.Component {
                 if ( task._id === startedTaskId ) {
                     task.estimate = task.estimate - 1
 
-                    if (task.estimate === 0 ) {
+                    if ( task.estimate === 0 ) {
                         task.status = "done"
                     }
 
@@ -151,7 +151,7 @@ class App extends React.Component {
                                     onDone={ this.onTimerDone.bind( this ) }/>
                             }
                             <TaskList
-                                tasks={ tasks }
+                                tasks={ sortTasksByStatus( tasks ) }
                                 addComment={ this.addComment.bind( this ) }
                                 deleteTask={ this.deleteTask.bind( this ) }
                                 onChangeTaskStatus={ this.onChangeTaskStatus.bind( this ) }
@@ -171,5 +171,23 @@ class App extends React.Component {
         )
     }
 }
+
+const sortTasksByStatus = tasks => tasks.sort( ( task1, task2 ) => {
+    if ( task1.status === "to do" || task2.status === "done" ) {
+        return -1
+    }
+
+    if ( task1.status === "done" || task2.status === "to do" ) {
+        return 1
+    }
+
+    if ( task1.status === "to do" || task2.status === "to do" ) {
+        return 0
+    }
+
+    if ( task1.status === "done" || task2.status === "done" ) {
+        return 0
+    }
+} )
 
 render( <App/>, document.getElementById( "app" ) )
