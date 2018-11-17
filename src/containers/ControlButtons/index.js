@@ -4,24 +4,29 @@ import STATUSES from "constants/TaskFlow"
 
 const ControlButtons = ( { status, onChangeTaskStatus, onDeleteTask, onStartTask, showStartButton } ) =>
     <div>
-        <Button
-            color={ status === STATUSES.DONE ? "secondary" : "success" }
-            onClick={ onChangeTaskStatus }>
-            { status === STATUSES.DONE ? "Return" : "Done" }
-        </Button>
-        <span> </span>
-        <Button
-            color={ "danger" }
-            onClick={ onDeleteTask }>
-            Delete
-        </Button>
+        <div style={ { margin: "0 0 10px" } }>
+            <Button
+                color={ status === STATUSES.DONE ? "secondary" : "success" }
+                onClick={ onChangeTaskStatus }>
+                { status === STATUSES.DONE ? "Return" : "Done" }
+            </Button>
+        </div>
+        <div style={ { margin: "0 0 10px" } }>
+            <Button
+                color={ "danger" }
+                onClick={ onDeleteTask }>
+                Delete
+            </Button>
+        </div>
         {
             showStartButton &&
-            <Button
-                color={ "success" }
-                onClick={ onStartTask }>
-                Start
-            </Button>
+            <div style={ { margin: "0 0 10px" } }>
+                <Button
+                    color={ "primary" }
+                    onClick={ onStartTask }>
+                    Start
+                </Button>
+            </div>
         }
     </div>
 

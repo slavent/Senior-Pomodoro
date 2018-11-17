@@ -1,32 +1,44 @@
 import React from "react"
-import { Input, Button, Row, Col } from "reactstrap"
+import { Input, Button, Row, Col, Label } from "reactstrap"
 
 const AddTaskForm = ( { title, estimate, onInputTask, onAddNewTask, onInputEstimate } ) =>
-    <div style={ { textAlign: "center" } }>
+    <div>
         <Row>
             <Col xs={ 12 }>
-                <label>Task:</label>
-                <Input
-                    type="textarea"
-                    value={ title }
-                    placeholder="Your new task..."
-                    onChange={ onInputTask }/>
-            </Col>
-            <Col xs={ 12 }>
-                <label>Estimate:</label>
-                <Input
-                    type="textarea"
-                    value={ estimate }
-                    placeholder="0"
-                    onChange={ onInputEstimate }/>
+                <div style={ { margin: "0 0 20px" } }>
+                    <Label for="input">Task</Label>
+                    <Input
+                        style={ { height: 100 } }
+                        id="input"
+                        type="textarea"
+                        value={ title }
+                        placeholder="Your new task..."
+                        onChange={ onInputTask }/>
+                </div>
+                <div>
+                    <Label for="select">Estimate</Label>
+                    <Input
+                        value={ estimate }
+                        type="select"
+                        id="select"
+                        onChange={ onInputEstimate }>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </Input>
+                </div>
             </Col>
         </Row>
         <br/>
-        <Button
-            color={ "success" }
-            onClick={ onAddNewTask }>
-            Add new task
-        </Button>
+        <div style={ { textAlign: "center" } }>
+            <Button
+                color={ "success" }
+                onClick={ onAddNewTask }>
+                Add new task
+            </Button>
+        </div>
     </div>
 
 export default AddTaskForm

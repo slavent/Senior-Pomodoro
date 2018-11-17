@@ -16,7 +16,7 @@ const TaskList = ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, d
                     style={ { margin: "0 0 20px 0" } }>
                     <Row>
                         <Col xs={ 8 }>
-                            <h6>{ key + 1 }. { title }</h6>
+                            <h6>{ title }</h6>
                             {
                                 estimate > 0 &&
                                 <p>Estimated by { estimate }</p>
