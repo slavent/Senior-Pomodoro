@@ -173,19 +173,19 @@ class App extends React.Component {
 }
 
 const sortTasksByStatus = tasks => tasks.sort( ( task1, task2 ) => {
-    if ( task1.status === "to do" || task2.status === "done" ) {
+    if ( task1.status === "to do" && task2.status === "done" ) {
         return -1
     }
 
-    if ( task1.status === "done" || task2.status === "to do" ) {
+    if ( task1.status === "done" && task2.status === "to do" ) {
         return 1
     }
 
-    if ( task1.status === "to do" || task2.status === "to do" ) {
+    if ( task1.status === "to do" && task2.status === "to do" ) {
         return 0
     }
 
-    if ( task1.status === "done" || task2.status === "done" ) {
+    if ( task1.status === "done" && task2.status === "done" ) {
         return 0
     }
 } )

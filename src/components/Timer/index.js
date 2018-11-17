@@ -1,6 +1,6 @@
 import React from "react"
 
-const POMODORO_INTERVAL = 0.2
+const POMODORO_INTERVAL = 0.1
 
 export default class Timer extends React.Component {
     constructor ( props ) {
