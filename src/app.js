@@ -10,6 +10,7 @@ import "bootstrap/dist/css/bootstrap.css"
 import "normalize.css"
 import "./style.css"
 import Timer from "components/Timer"
+import TaskFlow from "constants/TaskFlow"
 
 class App extends React.Component {
     constructor ( props ) {
@@ -122,7 +123,7 @@ class App extends React.Component {
                     task.estimate = task.estimate - 1
 
                     if ( task.estimate === 0 ) {
-                        task.status = "done"
+                        task.status = TaskFlow.DONE
                     }
 
                     axios.put( `/api/tasks/${task._id}`, task ).catch( error => console.error( error ) )
@@ -173,19 +174,19 @@ class App extends React.Component {
 }
 
 const sortTasksByStatus = tasks => tasks.sort( ( task1, task2 ) => {
-    if ( task1.status === "to do" && task2.status === "done" ) {
+    if ( task1.status === TaskFlow.TODO && task2.status === TaskFlow.DONE ) {
         return -1
     }
 
-    if ( task1.status === "done" && task2.status === "to do" ) {
+    if ( task1.status === TaskFlow.DONE && task2.status === TaskFlow.TODO ) {
         return 1
     }
 
-    if ( task1.status === "to do" && task2.status === "to do" ) {
+    if ( task1.status === TaskFlow.TODO && task2.status === TaskFlow.TODO ) {
         return 0
     }
 
-    if ( task1.status === "done" && task2.status === "done" ) {
+    if ( task1.status === TaskFlow.DONE && task2.status === TaskFlow.DONE ) {
         return 0
     }
 } )
