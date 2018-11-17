@@ -19,7 +19,8 @@ class App extends React.Component {
             tasks: [],
             title: "",
             estimate: "",
-            timerIsOn: false
+            timerIsOn: false,
+            startedTaskId: null
         }
     }
 
@@ -105,8 +106,26 @@ class App extends React.Component {
         this.setState( { tasks: newTasks } )
     }
 
-    onStartTask ( _id, estimate ) {
-        this.setState( { timerIsOn: true } )
+    onStartTask ( _id ) {
+        this.setState( {
+            timerIsOn: true,
+            startedTaskId: _id
+        } )
+    }
+
+    onTimerDone () {
+        const { tasks, startedTaskId } = this.state
+
+        this.setState( {
+            tasks: tasks.map( task => {
+                if ( task._id === startedTaskId ) {
+                    task.estimate = task.estimate - 1
+                    axios.put( `/api/tasks/${task._id}`, task ).catch( error => console.error( error ) )
+                }
+
+                return task
+            } )
+        } )
     }
 
     render () {
@@ -120,7 +139,12 @@ class App extends React.Component {
                 <Container className="container">
                     <Row>
                         <Col xs={ 12 }>
-                            { timerIsOn && <Timer isOn={ timerIsOn }/> }
+                            {
+                                timerIsOn &&
+                                <Timer
+                                    isOn={ timerIsOn }
+                                    onDone={ this.onTimerDone.bind( this ) }/>
+                            }
                             <TaskList
                                 tasks={ tasks }
                                 addComment={ this.addComment.bind( this ) }

@@ -14,12 +14,15 @@ export default class Timer extends React.Component {
         this.startTimer = this.startTimer.bind( this )
         this.stopTimer = this.stopTimer.bind( this )
         this.resetTimer = this.resetTimer.bind( this )
+
+        props.isOn && this.startTimer()
     }
 
     startTimer () {
         this.timer = setInterval( () => {
             if ( Number( this.state.time ) === 0 ) {
                 this.stopTimer()
+                this.props.onDone()
 
                 return
             }
