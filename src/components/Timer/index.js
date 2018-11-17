@@ -1,6 +1,6 @@
 import React from "react"
 
-const POMODORO_INTERVAL = 0.1
+const POMODORO_INTERVAL = 10
 
 export default class Timer extends React.Component {
     constructor ( props ) {
@@ -47,7 +47,16 @@ export default class Timer extends React.Component {
     }
 
     render () {
-        return <h3>{ convertMsToTime( this.state.time ) }</h3>
+        return (
+            <div>
+                <hr/>
+                <h3 style={ {
+                    textAlign: "center",
+                    fontSize: "55px"
+                } }>{ convertMsToTime( this.state.time ) }</h3>
+                <hr/>
+            </div>
+        )
     }
 }
 

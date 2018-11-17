@@ -142,30 +142,32 @@ class App extends React.Component {
         return (
             <div>
                 <header>
-                    <h2>Todo List App</h2>
+                    <h2>Senior Pomodoro</h2>
                 </header>
                 <Container className="container">
                     <Row>
                         <Col xs={ 12 }>
                             {
-                                timerIsOn &&
-                                <Timer
-                                    isOn={ timerIsOn }
-                                    onDone={ this.onTimerDone.bind( this ) }/>
+                                timerIsOn ?
+                                    <Timer
+                                        isOn={ timerIsOn }
+                                        onDone={ this.onTimerDone.bind( this ) }/> :
+                                    <div>
+                                        <TaskList
+                                            tasks={ sortTasksByStatus( tasks ) }
+                                            addComment={ this.addComment.bind( this ) }
+                                            deleteTask={ this.deleteTask.bind( this ) }
+                                            onChangeTaskStatus={ this.onChangeTaskStatus.bind( this ) }
+                                            toggleCommentForm={ this.toggleCommentForm.bind( this ) }
+                                            onStartTask={ this.onStartTask.bind( this ) }/>
+                                        <AddTaskForm
+                                            title={ title }
+                                            estimate={ estimate }
+                                            onAddNewTask={ this.addNewTask.bind( this ) }
+                                            onInputTask={ this.onInputTask.bind( this ) }
+                                            onInputEstimate={ this.onInputEstimate.bind( this ) }/>
+                                    </div>
                             }
-                            <TaskList
-                                tasks={ sortTasksByStatus( tasks ) }
-                                addComment={ this.addComment.bind( this ) }
-                                deleteTask={ this.deleteTask.bind( this ) }
-                                onChangeTaskStatus={ this.onChangeTaskStatus.bind( this ) }
-                                toggleCommentForm={ this.toggleCommentForm.bind( this ) }
-                                onStartTask={ this.onStartTask.bind( this ) }/>
-                            <AddTaskForm
-                                title={ title }
-                                estimate={ estimate }
-                                onAddNewTask={ this.addNewTask.bind( this ) }
-                                onInputTask={ this.onInputTask.bind( this ) }
-                                onInputEstimate={ this.onInputEstimate.bind( this ) }/>
                         </Col>
                     </Row>
                     <footer/>
