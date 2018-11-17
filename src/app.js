@@ -120,6 +120,11 @@ class App extends React.Component {
             tasks: tasks.map( task => {
                 if ( task._id === startedTaskId ) {
                     task.estimate = task.estimate - 1
+
+                    if (task.estimate === 0 ) {
+                        task.status = "done"
+                    }
+
                     axios.put( `/api/tasks/${task._id}`, task ).catch( error => console.error( error ) )
                 }
 

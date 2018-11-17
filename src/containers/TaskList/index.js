@@ -43,6 +43,7 @@ const TaskList = ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, d
                         </Col>
                         <Col xs={ 4 } style={ { textAlign: "right" } }>
                             <ControlButtons
+                                showStartButton={ Number( estimate ) > 0 }
                                 status={ status }
                                 onChangeTaskStatus={ () => onChangeTaskStatus( _id ) }
                                 onDeleteTask={ () => deleteTask( _id ) }
