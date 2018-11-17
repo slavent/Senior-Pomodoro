@@ -130,7 +130,9 @@ class App extends React.Component {
                 }
 
                 return task
-            } )
+            } ),
+            timerIsOn: false,
+            startedTaskId: null
         } )
     }
 
