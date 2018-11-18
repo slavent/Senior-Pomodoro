@@ -11,6 +11,7 @@ import "normalize.css"
 import "./style.css"
 import Timer from "components/Timer"
 import TaskFlow from "constants/TaskFlow"
+import Loader from "components/Loader"
 
 class App extends React.Component {
     constructor ( props ) {
@@ -147,26 +148,30 @@ class App extends React.Component {
                 <Container className="container">
                     <Row>
                         <Col xs={ 12 }>
+                            { !timerIsOn && isEmpty( tasks ) && <Loader/> }
                             {
-                                timerIsOn ?
-                                    <Timer
-                                        isOn={ timerIsOn }
-                                        onDone={ this.onTimerDone.bind( this ) }/> :
-                                    <div>
-                                        <TaskList
-                                            tasks={ sortTasksByStatus( tasks ) }
-                                            addComment={ this.addComment.bind( this ) }
-                                            deleteTask={ this.deleteTask.bind( this ) }
-                                            onChangeTaskStatus={ this.onChangeTaskStatus.bind( this ) }
-                                            toggleCommentForm={ this.toggleCommentForm.bind( this ) }
-                                            onStartTask={ this.onStartTask.bind( this ) }/>
-                                        <AddTaskForm
-                                            title={ title }
-                                            estimate={ estimate }
-                                            onAddNewTask={ this.addNewTask.bind( this ) }
-                                            onInputTask={ this.onInputTask.bind( this ) }
-                                            onInputEstimate={ this.onInputEstimate.bind( this ) }/>
-                                    </div>
+                                timerIsOn &&
+                                <Timer
+                                    isOn={ timerIsOn }
+                                    onDone={ this.onTimerDone.bind( this ) }/>
+                            }
+                            {
+                                !timerIsOn && !isEmpty( tasks ) &&
+                                <div>
+                                    <TaskList
+                                        tasks={ sortTasksByStatus( tasks ) }
+                                        addComment={ this.addComment.bind( this ) }
+                                        deleteTask={ this.deleteTask.bind( this ) }
+                                        onChangeTaskStatus={ this.onChangeTaskStatus.bind( this ) }
+                                        toggleCommentForm={ this.toggleCommentForm.bind( this ) }
+                                        onStartTask={ this.onStartTask.bind( this ) }/>
+                                    <AddTaskForm
+                                        title={ title }
+                                        estimate={ estimate }
+                                        onAddNewTask={ this.addNewTask.bind( this ) }
+                                        onInputTask={ this.onInputTask.bind( this ) }
+                                        onInputEstimate={ this.onInputEstimate.bind( this ) }/>
+                                </div>
                             }
                         </Col>
                     </Row>
