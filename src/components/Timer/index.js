@@ -54,7 +54,6 @@ export default class Timer extends React.Component {
                     textAlign: "center",
                     fontSize: "55px"
                 } }>{ convertMsToTime( this.state.time ) }</h3>
-                <hr/>
             </div>
         )
     }

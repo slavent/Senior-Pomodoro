@@ -15,21 +15,21 @@ const TaskList = ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, d
                     color={ status === STATUSES.DONE ? "success" : "primary" }
                     style={ { margin: "0 0 20px 0" } }>
                     <Row>
-                        <Col xs={ 8 }>
-                            <h6>{ title }</h6>
+                        <Col xs={ 10 }>
+                            <p className="task__title">{ title }</p>
                             {
-                                estimate > 0 &&
-                                <p>Estimate: { renderTomato( estimate ) } </p>
+                                status === STATUSES.TODO && estimate > 0 &&
+                                <p className="estimate">Estimated by: { renderTomato( estimate ) } </p>
                             }
                             {
-                                !isEmpty( comments ) &&
+                                status === STATUSES.TODO && !isEmpty( comments ) &&
                                 <p className="comments">
                                     { comments.length } { comments.length > 1 ? "comments" : "comment" }
                                 </p>
                             }
                             <hr/>
                             {
-                                !isAddComment &&
+                                status === STATUSES.TODO && !isAddComment &&
                                 <Button
                                     color={ "info" }
                                     onClick={ () => toggleCommentForm( _id ) }>
@@ -41,7 +41,7 @@ const TaskList = ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, d
                                 <CommentFrom onAddComment={ () => addComment( _id ) }/>
                             }
                         </Col>
-                        <Col xs={ 4 } style={ { textAlign: "right" } }>
+                        <Col xs={ 2 } style={ { textAlign: "right" } }>
                             <ControlButtons
                                 showStartButton={ Number( estimate ) > 0 }
                                 status={ status }

@@ -1,33 +1,29 @@
 import React from "react"
-import { Button } from "reactstrap"
 import STATUSES from "constants/TaskFlow"
+import "./style.css"
 
 const ControlButtons = ( { status, onChangeTaskStatus, onDeleteTask, onStartTask, showStartButton } ) =>
     <div>
-        <div style={ { margin: "0 0 10px" } }>
-            <Button
-                color={ status === STATUSES.DONE ? "secondary" : "success" }
-                onClick={ onChangeTaskStatus }>
-                { status === STATUSES.DONE ? "Return" : "Done" }
-            </Button>
-        </div>
-        <div style={ { margin: "0 0 10px" } }>
-            <Button
-                color={ "danger" }
-                onClick={ onDeleteTask }>
-                Delete
-            </Button>
-        </div>
         {
-            showStartButton &&
-            <div style={ { margin: "0 0 10px" } }>
-                <Button
-                    color={ "primary" }
-                    onClick={ onStartTask }>
-                    Start
-                </Button>
+            status === STATUSES.TODO && showStartButton &&
+            <div style={ {
+                margin: "0 0 10px",
+                textAlign: "right"
+            } }>
+                <div className="ctrl-button ctrl-button-start" onClick={ onStartTask }/>
             </div>
         }
+        <div style={ { margin: "0 0 10px" } }>
+            <div
+                className={ "ctrl-button ctrl-button-" + ( status === STATUSES.DONE ? "return" : "done" ) }
+                onClick={ onChangeTaskStatus }/>
+        </div>
+        <div style={ {
+            margin: "10px 0",
+            textAlign: "right"
+        } }>
+            <div className="ctrl-button ctrl-button-delete" onClick={ onDeleteTask }/>
+        </div>
     </div>
 
 export default ControlButtons

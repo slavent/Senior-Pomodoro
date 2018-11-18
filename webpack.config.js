@@ -28,11 +28,13 @@ module.exports = {
                 } )
             },
             {
-                test: /\.(png|jpg|gif)$/,
+                test: /\.(png|jpg)$/,
                 use: [
                     {
-                        loader: "file-loader",
-                        options: {}
+                        loader: "url-loader",
+                        options: {
+                            name: "[path][name].[hash].[ext]"
+                        }
                     }
                 ]
             }

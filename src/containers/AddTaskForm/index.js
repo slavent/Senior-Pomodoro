@@ -13,11 +13,11 @@ const AddTaskForm = ( { title, estimate, onInputTask, onAddNewTask, onInputEstim
                             id="input"
                             type="textarea"
                             value={ title }
-                            placeholder="Your new task..."
+                            placeholder="But tomatoes..."
                             onChange={ onInputTask }/>
                     </div>
                     <div>
-                        <Label for="select">Estimate</Label>
+                        <Label for="select">Tomato estimate</Label>
                         <Input
                             value={ estimate }
                             type="select"
@@ -38,7 +38,7 @@ const AddTaskForm = ( { title, estimate, onInputTask, onAddNewTask, onInputEstim
             <Button
                 color={ "success" }
                 onClick={ onAddNewTask }>
-                Add new task
+                Add task
             </Button>
         </div>
     </div>
