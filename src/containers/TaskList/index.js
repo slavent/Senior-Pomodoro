@@ -19,7 +19,7 @@ const TaskList = ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, d
                             <h6>{ title }</h6>
                             {
                                 estimate > 0 &&
-                                <p>Estimated by { estimate }</p>
+                                <p>Estimate: { renderTomato( estimate ) } </p>
                             }
                             {
                                 !isEmpty( comments ) &&
@@ -54,5 +54,15 @@ const TaskList = ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, d
             ) }
         </div>
     </div>
+
+const renderTomato = estimate => {
+    const tomato = []
+
+    for ( let index = 0; index < estimate; index++ ) {
+        tomato.push( <span className="tomato" key={ index }/> )
+    }
+
+    return tomato
+}
 
 export default TaskList
