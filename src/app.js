@@ -22,13 +22,17 @@ class App extends React.Component {
             title: "",
             estimate: "",
             timerIsOn: false,
-            startedTaskId: null
+            startedTaskId: null,
+            isLoading: true
         }
     }
 
     componentDidMount () {
         axios.get( "/api/tasks" ).then( ( { data } ) => {
-            this.setState( { tasks: data } )
+            this.setState( {
+                tasks: data,
+                isLoading: false
+            } )
         } )
     }
 
@@ -138,7 +142,7 @@ class App extends React.Component {
     }
 
     render () {
-        const { tasks, title, estimate, timerIsOn } = this.state
+        const { tasks, title, estimate, timerIsOn, isLoading } = this.state
 
         return (
             <div>
@@ -148,7 +152,7 @@ class App extends React.Component {
                 <Container className="container">
                     <Row>
                         <Col xs={ 12 }>
-                            { !timerIsOn && isEmpty( tasks ) && <Loader/> }
+                            { isLoading && <Loader/> }
                             {
                                 timerIsOn &&
                                 <Timer
@@ -156,22 +160,23 @@ class App extends React.Component {
                                     onDone={ this.onTimerDone.bind( this ) }/>
                             }
                             {
-                                !timerIsOn && !isEmpty( tasks ) &&
-                                <div>
-                                    <TaskList
-                                        tasks={ sortTasksByStatus( tasks ) }
-                                        addComment={ this.addComment.bind( this ) }
-                                        deleteTask={ this.deleteTask.bind( this ) }
-                                        onChangeTaskStatus={ this.onChangeTaskStatus.bind( this ) }
-                                        toggleCommentForm={ this.toggleCommentForm.bind( this ) }
-                                        onStartTask={ this.onStartTask.bind( this ) }/>
-                                    <AddTaskForm
-                                        title={ title }
-                                        estimate={ estimate }
-                                        onAddNewTask={ this.addNewTask.bind( this ) }
-                                        onInputTask={ this.onInputTask.bind( this ) }
-                                        onInputEstimate={ this.onInputEstimate.bind( this ) }/>
-                                </div>
+                                !isLoading && !timerIsOn && !isEmpty( tasks ) &&
+                                <TaskList
+                                    tasks={ sortTasksByStatus( tasks ) }
+                                    addComment={ this.addComment.bind( this ) }
+                                    deleteTask={ this.deleteTask.bind( this ) }
+                                    onChangeTaskStatus={ this.onChangeTaskStatus.bind( this ) }
+                                    toggleCommentForm={ this.toggleCommentForm.bind( this ) }
+                                    onStartTask={ this.onStartTask.bind( this ) }/>
+                            }
+                            {
+                                !isLoading && !timerIsOn &&
+                                <AddTaskForm
+                                    title={ title }
+                                    estimate={ estimate }
+                                    onAddNewTask={ this.addNewTask.bind( this ) }
+                                    onInputTask={ this.onInputTask.bind( this ) }
+                                    onInputEstimate={ this.onInputEstimate.bind( this ) }/>
                             }
                         </Col>
                     </Row>
