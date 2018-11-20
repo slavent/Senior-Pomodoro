@@ -12,6 +12,10 @@ import "./style.css"
 import Timer from "components/Timer"
 import TaskFlow from "constants/TaskFlow"
 import Loader from "components/Loader"
+import Header from "components/Header"
+import Footer from "components/Footer"
+
+const API_PATH = "/api/tasks"
 
 class App extends React.Component {
     constructor ( props ) {
@@ -28,7 +32,7 @@ class App extends React.Component {
     }
 
     componentDidMount () {
-        axios.get( "/api/tasks" ).then( ( { data } ) => {
+        axios.get( API_PATH ).then( ( { data } ) => {
             this.setState( {
                 tasks: data,
                 isLoading: false
@@ -39,7 +43,7 @@ class App extends React.Component {
     addNewTask () {
         const { title, estimate, tasks } = this.state
 
-        axios.post( "/api/tasks", {
+        axios.post( API_PATH, {
             title,
             estimate
         } ).then( response => {
@@ -56,7 +60,7 @@ class App extends React.Component {
     deleteTask ( _id ) {
         const { tasks } = this.state
 
-        axios.delete( `/api/tasks/${_id}` ).then( () => {
+        axios.delete( API_PATH + "/" + _id ).then( () => {
             remove( tasks, task => task._id === _id )
 
             this.setState( { tasks } )
@@ -70,7 +74,7 @@ class App extends React.Component {
 
         taskForChange.status = isDone ? STATUSES.TODO : STATUSES.DONE
 
-        axios.put( `/api/tasks/${_id}`, taskForChange ).then( () => {
+        axios.put( API_PATH + "/" + _id, taskForChange ).then( () => {
             const newTasks = tasks.map( task => {
                 if ( task._id === taskForChange._id ) {
                     task = taskForChange
@@ -93,7 +97,7 @@ class App extends React.Component {
 
     addComment ( taskId ) {
         axios.post( `/api/comments`, { text: "some text" } ).then( response => {
-            axios.put( `/api/tasks/${taskId}`, { comments: [ response.data._id ] } )
+            axios.put( API_PATH + "/" + taskId, { comments: [ response.data._id ] } )
         } ).catch( error => console.error( error ) )
 
         this.toggleCommentForm( taskId )
@@ -131,7 +135,7 @@ class App extends React.Component {
                         task.status = TaskFlow.DONE
                     }
 
-                    axios.put( `/api/tasks/${task._id}`, task ).catch( error => console.error( error ) )
+                    axios.put( API_PATH + "/" + task._id, task ).catch( error => console.error( error ) )
                 }
 
                 return task
@@ -143,12 +147,12 @@ class App extends React.Component {
 
     render () {
         const { tasks, title, estimate, timerIsOn, isLoading } = this.state
+        const isTaskListRender = !isLoading && !timerIsOn && !isEmpty( tasks )
+        const isAddFormRender = !isLoading && !timerIsOn
 
         return (
             <div>
-                <header>
-                    <h2>Senior Pomodoro</h2>
-                </header>
+                <Header/>
                 <Container className="container">
                     <Row>
                         <Col xs={ 12 }>
@@ -160,7 +164,7 @@ class App extends React.Component {
                                     onDone={ this.onTimerDone.bind( this ) }/>
                             }
                             {
-                                !isLoading && !timerIsOn && !isEmpty( tasks ) &&
+                                isTaskListRender &&
                                 <TaskList
                                     tasks={ sortTasksByStatus( tasks ) }
                                     addComment={ this.addComment.bind( this ) }
@@ -170,7 +174,7 @@ class App extends React.Component {
                                     onStartTask={ this.onStartTask.bind( this ) }/>
                             }
                             {
-                                !isLoading && !timerIsOn &&
+                                isAddFormRender &&
                                 <AddTaskForm
                                     title={ title }
                                     estimate={ estimate }
@@ -180,14 +184,7 @@ class App extends React.Component {
                             }
                         </Col>
                     </Row>
-                    <footer>
-                        <hr/>
-                        <p>
-                            Created by <a href="mailto:startupne@gmail.com">Slavent</a>.
-                            <span> </span>
-                            { new Date().getYear() + 1900 }
-                        </p>
-                    </footer>
+                    <Footer/>
                 </Container>
             </div>
         )
