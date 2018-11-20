@@ -1,17 +1,13 @@
 import React from "react"
 import { Input, Button } from "reactstrap"
+import "./style.css"
 
-const CommentFrom = ( { onAddComment } ) =>
-    <div>
-        <Input
-            type="textarea"
-            placeholder="Your comment for this task..."
-            style={ { margin: "0 0 10px" } }/>
-        <Button
-            color={ "info" }
-            onClick={ onAddComment }>
-            Add
-        </Button>
+export default ( { onAddComment } ) =>
+    <div className="commentform">
+        <div className="commentform__item">
+            <Input type="textarea" placeholder="Your comment for this task..."/>
+        </div>
+        <div className="commentform__item">
+            <Button color={ "info" } onClick={ onAddComment }> Add</Button>
+        </div>
     </div>
-
-export default CommentFrom

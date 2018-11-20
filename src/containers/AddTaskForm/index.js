@@ -1,22 +1,23 @@
 import React from "react"
 import { Input, Button, Row, Col, Label } from "reactstrap"
+import "./style.css"
 
-const AddTaskForm = ( { title, estimate, onInputTask, onAddNewTask, onInputEstimate } ) =>
+export default ( { title, estimate, onInputTask, onAddNewTask, onInputEstimate } ) =>
     <div>
         <Row>
             <Col xs={ 12 }>
-                <div style={{ margin: "auto", width: 400 }}>
-                    <div style={ { margin: "0 0 20px" } }>
+                <div className="addform">
+                    <div className="addform__item">
                         <Label for="input">Task</Label>
                         <Input
                             style={ { height: 100 } }
                             id="input"
                             type="textarea"
                             value={ title }
-                            placeholder="But tomatoes..."
+                            placeholder="Buy tomatoes..."
                             onChange={ onInputTask }/>
                     </div>
-                    <div>
+                    <div className="addform__item">
                         <Label for="select">Tomato estimate</Label>
                         <Input
                             value={ estimate }
@@ -33,8 +34,7 @@ const AddTaskForm = ( { title, estimate, onInputTask, onAddNewTask, onInputEstim
                 </div>
             </Col>
         </Row>
-        <br/>
-        <div style={ { textAlign: "center" } }>
+        <div className="addform__wrapper">
             <Button
                 color={ "success" }
                 onClick={ onAddNewTask }>
@@ -42,5 +42,3 @@ const AddTaskForm = ( { title, estimate, onInputTask, onAddNewTask, onInputEstim
             </Button>
         </div>
     </div>
-
-export default AddTaskForm

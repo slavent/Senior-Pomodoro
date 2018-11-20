@@ -5,52 +5,47 @@ import ControlButtons from "containers/ControlButtons"
 import STATUSES from "constants/TaskFlow"
 import { isEmpty } from "lodash"
 
-const TaskList = ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, deleteTask, onStartTask } ) =>
-    <div>
+export default ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, deleteTask, onStartTask } ) =>
+    <div className="tasks">
         <h4>Your tasks:</h4>
-        <div className="tasks">
+        <div className="tasks__wrapper">
             { tasks.map( ( { _id, title, status, comments, isAddComment, estimate }, key ) =>
-                <Alert
-                    key={ key }
-                    color={ status === STATUSES.DONE ? "success" : "primary" }
-                    style={ { margin: "0 0 20px 0" } }>
-                    <Row>
-                        <Col xs={ 10 }>
-                            <p className="task__title">{ title }</p>
-                            {
-                                status === STATUSES.TODO && estimate > 0 &&
-                                <p className="estimate">Estimated by: { renderTomato( estimate ) } </p>
-                            }
-                            {
-                                status === STATUSES.TODO && !isEmpty( comments ) &&
-                                <p className="comments">
-                                    { comments.length } { comments.length > 1 ? "comments" : "comment" }
-                                </p>
-                            }
-                            <hr/>
-                            {
-                                status === STATUSES.TODO && !isAddComment &&
-                                <Button
-                                    color={ "info" }
-                                    onClick={ () => toggleCommentForm( _id ) }>
-                                    Add new comment
-                                </Button>
-                            }
-                            {
-                                isAddComment &&
-                                <CommentFrom onAddComment={ () => addComment( _id ) }/>
-                            }
-                        </Col>
-                        <Col xs={ 2 } style={ { textAlign: "right" } }>
-                            <ControlButtons
-                                showStartButton={ Number( estimate ) > 0 }
-                                status={ status }
-                                onChangeTaskStatus={ () => onChangeTaskStatus( _id ) }
-                                onDeleteTask={ () => deleteTask( _id ) }
-                                onStartTask={ () => onStartTask( _id, estimate ) }/>
-                        </Col>
-                    </Row>
-                </Alert>
+                <div className="tasks__item">
+                    <Alert key={ key } color={ status === STATUSES.DONE ? "success" : "primary" }>
+                        <Row>
+                            <Col xs={ 10 }>
+                                <p className={ getTitleClassName( status ) }>{ title }</p>
+                                {
+                                    status === STATUSES.TODO && estimate > 0 &&
+                                    <p className="tasks__estimate"> Estimated by: { renderTomato( estimate ) } </p>
+                                }
+                                {
+                                    status === STATUSES.TODO && !isEmpty( comments ) &&
+                                    <p className="tasks__comments">
+                                        { comments.length } { createCommentString( comments ) }</p>
+                                }
+                                <hr/>
+                                {
+                                    status === STATUSES.TODO && !isAddComment &&
+                                    <Button
+                                        color={ "info" }
+                                        onClick={ () => toggleCommentForm( _id ) }>
+                                        Add new comment
+                                    </Button>
+                                }
+                                { isAddComment && <CommentFrom onAddComment={ () => addComment( _id ) }/> }
+                            </Col>
+                            <Col xs={ 2 } className="tasks__buttons">
+                                <ControlButtons
+                                    status={ status }
+                                    showStartButton={ Number( estimate ) > 0 }
+                                    onChangeTaskStatus={ () => onChangeTaskStatus( _id ) }
+                                    onDeleteTask={ () => deleteTask( _id ) }
+                                    onStartTask={ () => onStartTask( _id, estimate ) }/>
+                            </Col>
+                        </Row>
+                    </Alert>
+                </div>
             ) }
         </div>
     </div>
@@ -65,4 +60,6 @@ const renderTomato = estimate => {
     return tomato
 }
 
-export default TaskList
+const createCommentString = comments => comments.length > 1 ? "comments" : "comment"
+
+const getTitleClassName = status => "tasks__title " + ( status === status.DONE ? "tasks__title-through" : "" )

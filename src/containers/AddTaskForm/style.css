@@ -1,0 +1,17 @@
+.addform {
+    margin: auto;
+    width: 400px;
+}
+
+.addform__item {
+    margin: 0 0 20px;
+}
+
+.addform__item:last-child {
+    margin: 0;
+}
+
+.addform__wrapper {
+    text-align: center;
+    margin: 20px 0 0;
+}

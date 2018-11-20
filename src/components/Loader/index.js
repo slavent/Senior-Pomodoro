@@ -1,6 +1,4 @@
 import React from "react"
 import "./style.css"
 
-const Loader = () => <div className="loader"/>
-
-export default Loader
+export default () => <div className="loader"/>
