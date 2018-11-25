@@ -4,6 +4,7 @@ import "./style.css"
 
 export default () =>
     <div className="menu">
+        <div className="menu__icon"></div>
         <ul>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/reg">Registration</Link></li>

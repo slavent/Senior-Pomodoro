@@ -6,12 +6,12 @@ body {
 }
 
 header {
-    min-height: 140px;
+    min-height: 100px;
+    position: relative;
 }
 
 header h2 {
-    color: #fff;
-    text-align: center;
+    color: #ece65a;
     margin: 0;
     padding: 20px 0;
 }

@@ -19,8 +19,8 @@ class App extends React.Component {
             <div>
                 <Router>
                     <div>
-                        <Header/>
                         <Container className="container">
+                            <Header/>
                             <Row>
                                 <Col xs={ 12 }>
                                     <Route exact path="/" component={ Home }/>
