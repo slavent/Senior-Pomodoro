@@ -1,4 +1,7 @@
 .timer {
     text-align: center;
-    font-size: 55px;
+}
+
+.timer h3 {
+    font-size: 55px
 }
