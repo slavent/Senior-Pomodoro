@@ -4,14 +4,19 @@
 
 .tasks__item {
     position: relative;
-    margin: 0 0 30px 0;
+    margin: 0 0 20px 0;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 3px;
     background: #ffff41; /* Old browsers */
     background: -moz-linear-gradient(-45deg, #ffff41 0%, #5bb3ef 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(-45deg, #ffff41 0%,#5bb3ef 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(135deg, #ffff41 0%,#5bb3ef 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffff41', endColorstr='#5bb3ef',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.tasks__item-done {
+    filter: grayscale(100%);
+    opacity: .5;
 }
 
 .tasks__title {

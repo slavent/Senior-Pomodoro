@@ -9,7 +9,7 @@ import "./style.css"
 export default ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, deleteTask, onStartTask, toggleComments, showComments } ) =>
     <div className="tasks">
         { tasks.map( ( { _id, title, status, comments, isAddComment, estimate }, key ) =>
-            <div className="tasks__item">
+            <div className={ "tasks__item " + (status === STATUSES.DONE && "tasks__item-done") }>
                 <Row>
                     <Col xs={ 12 }>
                         <p className={ getTitleClassName( status ) }>{ title }</p>
