@@ -24,6 +24,7 @@ export default class Menu extends React.Component {
                 {
                     show &&
                     <div className="menu__wrapper">
+                        <div className="menu__close" onClick={ this.toggle.bind( this ) }/>
                         <ul>
                             <li><Link to="/">Home</Link></li>
                             <li><Link to="/reg">Registration</Link></li>

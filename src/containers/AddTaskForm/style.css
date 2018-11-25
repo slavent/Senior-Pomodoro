@@ -1,7 +1,8 @@
 .addform {
-    margin: auto;
     width: 400px;
+    float: right;
     color: #fff;
+    margin: -15px 0 0;
 }
 
 .addform__item {
@@ -13,7 +14,7 @@
 }
 
 .addform__wrapper {
-    text-align: center;
+    text-align: right;
     margin: 20px 0 0;
 }
 

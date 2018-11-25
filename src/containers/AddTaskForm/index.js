@@ -8,7 +8,6 @@ export default ( { title, estimate, onInputTask, onAddNewTask, onInputEstimate }
             <Col xs={ 12 }>
                 <div className="addform">
                     <div className="addform__item">
-                        <Label for="input">Task</Label>
                         <Input
                             style={ { height: 100 } }
                             id="input"
@@ -18,7 +17,6 @@ export default ( { title, estimate, onInputTask, onAddNewTask, onInputEstimate }
                             onChange={ onInputTask }/>
                     </div>
                     <div className="addform__item">
-                        <Label for="select">Tomato estimate</Label>
                         <Input
                             value={ estimate }
                             type="select"
