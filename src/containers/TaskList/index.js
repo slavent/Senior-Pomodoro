@@ -8,7 +8,6 @@ import "./style.css"
 
 export default ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, deleteTask, onStartTask, toggleComments, showComments } ) =>
     <div className="tasks">
-        <h4>Your tasks:</h4>
         <div className="tasks__wrapper">
             { tasks.map( ( { _id, title, status, comments, isAddComment, estimate }, key ) =>
                 <div className="tasks__item">
