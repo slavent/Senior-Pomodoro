@@ -1,5 +1,5 @@
 import React from "react"
-import { Alert, Row, Col, Button } from "reactstrap"
+import { Alert, Row, Col } from "reactstrap"
 import CommentFrom from "containers/CommentForm"
 import ControlButtons from "containers/ControlButtons"
 import STATUSES from "constants/TaskFlow"
@@ -18,7 +18,9 @@ export default ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, del
                                 <p className={ getTitleClassName( status ) }>{ title }</p>
                                 {
                                     status === STATUSES.TODO && estimate > 0 &&
-                                    <p className="tasks__estimate"> Estimated by: { renderTomato( estimate ) } </p>
+                                    <p className="tasks__estimate">
+                                        Estimate: { estimate } x <span className="tomato"/>
+                                    </p>
                                 }
                                 {
                                     status === STATUSES.TODO && !isEmpty( comments ) &&
@@ -42,16 +44,6 @@ export default ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, del
             ) }
         </div>
     </div>
-
-const renderTomato = estimate => {
-    const tomato = []
-
-    for ( let index = 0; index < estimate; index++ ) {
-        tomato.push( <span className="tomato" key={ index }/> )
-    }
-
-    return tomato
-}
 
 const createCommentString = comments => comments.length > 1 ? "comments" : "comment"
 
