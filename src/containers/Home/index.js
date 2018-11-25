@@ -16,7 +16,7 @@ export default class Home extends React.Component {
         this.state = {
             tasks: [],
             title: "",
-            estimate: "",
+            estimate: 1,
             timerIsOn: false,
             startedTaskId: null,
             isLoading: true,
