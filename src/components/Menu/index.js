@@ -26,10 +26,10 @@ export default class Menu extends React.Component {
                     <div className="menu__wrapper">
                         <div className="menu__close" onClick={ this.toggle.bind( this ) }/>
                         <ul>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/reg">Registration</Link></li>
-                            <li><Link to="/auth">Authorization</Link></li>
-                            <li><Link to="/about">About</Link></li>
+                            <li><Link to="/" onClick={ this.toggle.bind( this ) }>Home</Link></li>
+                            <li><Link to="/reg" onClick={ this.toggle.bind( this ) }>Registration</Link></li>
+                            <li><Link to="/auth" onClick={ this.toggle.bind( this ) }>Authorization</Link></li>
+                            <li><Link to="/about" onClick={ this.toggle.bind( this ) }>About</Link></li>
                         </ul>
                     </div>
                 }

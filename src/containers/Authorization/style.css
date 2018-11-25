@@ -1,0 +1,22 @@
+.auth {
+    width: 400px;
+    margin: auto;
+}
+
+.auth label {
+    color: #fff;
+}
+
+.auth__item {
+    margin: 0 0 20px 0;
+}
+
+.auth__button {
+    border-radius: 3px;
+    background: #01b19c;
+    border: none;
+    padding: 7px 30px;
+    color: #fff;
+    float: right;
+    margin: 5px 0 0;
+}

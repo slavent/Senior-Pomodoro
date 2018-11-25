@@ -16,24 +16,20 @@ import "./style.css"
 class App extends React.Component {
     render () {
         return (
-            <div>
-                <Router>
-                    <div>
-                        <Container className="container">
-                            <Header/>
-                            <Row>
-                                <Col xs={ 12 }>
-                                    <Route exact path="/" component={ Home }/>
-                                    <Route path="/reg" component={ Registration }/>
-                                    <Route path="/auth" component={ Authorization }/>
-                                    <Route path="/about" component={ About }/>
-                                </Col>
-                            </Row>
-                            <Footer/>
-                        </Container>
-                    </div>
-                </Router>
-            </div>
+            <Router>
+                <Container className="container">
+                    <Header/>
+                    <Row>
+                        <Col xs={ 12 }>
+                            <Route exact path="/" component={ Home }/>
+                            <Route path="/reg" component={ Registration }/>
+                            <Route path="/auth" component={ Authorization }/>
+                            <Route path="/about" component={ About }/>
+                        </Col>
+                    </Row>
+                    <Footer/>
+                </Container>
+            </Router>
         )
     }
 }
