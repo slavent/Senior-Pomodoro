@@ -6,7 +6,7 @@ import STATUSES from "constants/TaskFlow"
 import { isEmpty } from "lodash"
 import "./style.css"
 
-export default ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, deleteTask, onStartTask } ) =>
+export default ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, deleteTask, onStartTask, toggleComments, showComments } ) =>
     <div className="tasks">
         <h4>Your tasks:</h4>
         <div className="tasks__wrapper">
@@ -24,8 +24,23 @@ export default ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, del
                                 }
                                 {
                                     status === STATUSES.TODO && !isEmpty( comments ) &&
-                                    <p className="tasks__comments">
-                                        { comments.length } { createCommentString( comments ) }</p>
+                                    <div className="comments">
+                                        <a href="#"
+                                           className={ "comments__toggler " + ( showComments ? "comments__toggler-selected" : "" ) }
+                                           onClick={ () => toggleComments() }>
+                                            { comments.length } { createCommentString( comments ) }
+                                        </a>
+                                        <div className="comments__wrapper">
+                                            {
+                                                showComments ? comments.map( ( { date, text }, key ) =>
+                                                    <div className="comments__item" key={ key }>
+                                                        <div className="comments__date">{ getTimeFromISO( date ) }</div>
+                                                        <div className="comments__content">{ text }</div>
+                                                    </div>
+                                                ) : ""
+                                            }
+                                        </div>
+                                    </div>
                                 }
                                 { isAddComment && <CommentFrom onAddComment={ () => addComment( _id ) }/> }
                             </Col>
@@ -49,3 +64,12 @@ export default ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, del
 const createCommentString = comments => comments.length > 1 ? "comments" : "comment"
 
 const getTitleClassName = status => "tasks__title " + ( status === STATUSES.DONE ? "tasks__title-through" : "" )
+
+const getTimeFromISO = ISO => {
+    const milliseconds = Date.parse( ISO )
+    const date = new Date( milliseconds )
+    const timeString = date.getHours() + ":" + date.getMinutes()
+    const dateString = date.getDate() + "." + date.getMonth() + "." + date.getFullYear()
+
+    return timeString + ", " + dateString
+}

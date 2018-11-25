@@ -29,7 +29,33 @@
     float: right;
 }
 
-.tasks__comments a {
+.comments__toggler{
+    font-size: 12px;
+    text-decoration: underline;
+}
+
+.comments__toggler-selected {
+    color: #d65445;
+}
+
+.comments__wrapper {
+    margin: 10px 0 0;
+}
+
+.comments__toggler:hover{
+    color: #d65445;
+}
+
+.comments__item {
+    font-size: 14px;
+    background: #fff;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.comments__date {
+    font-style: italic;
+    color: #666;
     font-size: 12px;
 }
 

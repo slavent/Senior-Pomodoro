@@ -19,7 +19,8 @@ export default class Home extends React.Component {
             estimate: "",
             timerIsOn: false,
             startedTaskId: null,
-            isLoading: true
+            isLoading: true,
+            showComments: false
         }
     }
 
@@ -30,6 +31,10 @@ export default class Home extends React.Component {
                 isLoading: false
             } )
         } )
+    }
+
+    toggleComments () {
+        this.setState( { showComments: !this.state.showComments } )
     }
 
     addNewTask () {
@@ -145,7 +150,7 @@ export default class Home extends React.Component {
     }
 
     render () {
-        const { tasks, title, estimate, timerIsOn, isLoading } = this.state
+        const { tasks, title, estimate, timerIsOn, isLoading, showComments } = this.state
         const isTaskListRender = !isLoading && !timerIsOn && !isEmpty( tasks )
         const isAddFormRender = !isLoading && !timerIsOn
 
@@ -163,6 +168,8 @@ export default class Home extends React.Component {
                     isTaskListRender &&
                     <TaskList
                         tasks={ sortTasksByStatus( tasks ) }
+                        showComments={ showComments }
+                        toggleComments={ this.toggleComments.bind( this ) }
                         addComment={ this.addComment.bind( this ) }
                         deleteTask={ this.deleteTask.bind( this ) }
                         onChangeTaskStatus={ this.onChangeTaskStatus.bind( this ) }
