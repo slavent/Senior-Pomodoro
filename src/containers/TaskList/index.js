@@ -4,6 +4,7 @@ import CommentFrom from "containers/CommentForm"
 import ControlButtons from "containers/ControlButtons"
 import STATUSES from "constants/TaskFlow"
 import { isEmpty } from "lodash"
+import "./style.css"
 
 export default ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, deleteTask, onStartTask } ) =>
     <div className="tasks">

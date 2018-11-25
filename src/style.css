@@ -1,14 +1,12 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 
 body {
-    background: url("./images/pattern.png");
+    background: url("./images/chalkboard.jpg");
     font-family: 'Roboto', sans-serif;
 }
 
 header {
     min-height: 140px;
-    background: url("./images/chalkboard.jpg");
-    border-bottom: 5px solid #ff2929;
 }
 
 header h2 {
@@ -31,8 +29,8 @@ footer p {
 .container {
     width: 800px;
     margin: auto;
-    padding: 40px 20px 5px 20px;
+    padding: 20px 20px 5px 20px;
     background: #fff;
-    border-radius: 0 0 10px 10px;
+    border-radius: 10px;
 }
 
