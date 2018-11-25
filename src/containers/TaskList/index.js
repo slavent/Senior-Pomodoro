@@ -42,6 +42,7 @@ export default ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, del
                     </Alert>
                 </div>
             ) }
+            <hr/>
         </div>
     </div>
 
