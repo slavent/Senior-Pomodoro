@@ -2,12 +2,19 @@ import React from "react"
 import STATUSES from "constants/TaskFlow"
 import "./style.css"
 
-export default ( { status, onChangeTaskStatus, onDeleteTask, onStartTask, showStartButton } ) =>
+export default ( { status, onChangeTaskStatus, onDeleteTask, onStartTask, showStartButton, onToggleCommentForm } ) =>
     <div className="controls">
         {
             status === STATUSES.TODO && showStartButton &&
             <div className="controls__item">
                 <div className="button button-start" onClick={ onStartTask }/>
+            </div>
+
+        }
+        {
+            status === STATUSES.TODO &&
+            <div className="controls__item">
+                <div className="button button-comment" onClick={ onToggleCommentForm }/>
             </div>
         }
         <div className="controls__item">

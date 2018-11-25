@@ -25,21 +25,13 @@ export default ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, del
                                     <p className="tasks__comments">
                                         { comments.length } { createCommentString( comments ) }</p>
                                 }
-                                <hr/>
-                                {
-                                    status === STATUSES.TODO && !isAddComment &&
-                                    <Button
-                                        color={ "info" }
-                                        onClick={ () => toggleCommentForm( _id ) }>
-                                        Add new comment
-                                    </Button>
-                                }
                                 { isAddComment && <CommentFrom onAddComment={ () => addComment( _id ) }/> }
                             </Col>
                             <Col xs={ 2 } className="tasks__buttons">
                                 <ControlButtons
                                     status={ status }
                                     showStartButton={ Number( estimate ) > 0 }
+                                    onToggleCommentForm={ () => toggleCommentForm( _id ) }
                                     onChangeTaskStatus={ () => onChangeTaskStatus( _id ) }
                                     onDeleteTask={ () => deleteTask( _id ) }
                                     onStartTask={ () => onStartTask( _id, estimate ) }/>
