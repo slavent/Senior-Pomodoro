@@ -5,8 +5,10 @@ import "./style.css"
 export default () =>
     <header>
         <h2>
-            <div className="logo"></div>
-            Senior Pomodoro
+            <a href="/">
+                <div className="logo"/>
+                Senior Pomodoro
+            </a>
         </h2>
         <Menu/>
     </header>

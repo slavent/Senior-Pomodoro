@@ -20,6 +20,15 @@ header h2 {
     padding: 20px 0;
 }
 
+header a {
+    color: #fff;
+}
+
+header a:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
 footer {
 }
 
