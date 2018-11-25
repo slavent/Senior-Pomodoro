@@ -52,8 +52,8 @@ export default class Timer extends React.Component {
         return (
             <div className="timer">
                 <hr/>
-                <h3>{ convertMsToTime( this.state.time ) }</h3>
-                <Button color="danger" onClick={ () => this.props.cancelTimer() }>Cancel</Button>
+                <p className="timer__time">{ convertMsToTime( this.state.time ) }</p>
+                <div className="timer__close" onClick={ () => this.props.cancelTimer() }/>
             </div>
         )
     }
