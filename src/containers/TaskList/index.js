@@ -48,4 +48,4 @@ export default ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, del
 
 const createCommentString = comments => comments.length > 1 ? "comments" : "comment"
 
-const getTitleClassName = status => "tasks__title " + ( status === status.DONE ? "tasks__title-through" : "" )
+const getTitleClassName = status => "tasks__title " + ( status === STATUSES.DONE ? "tasks__title-through" : "" )
