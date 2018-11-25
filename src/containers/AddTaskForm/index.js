@@ -1,5 +1,5 @@
 import React from "react"
-import { Input, Button, Row, Col, Label } from "reactstrap"
+import { Input, Row, Col, Label } from "reactstrap"
 import "./style.css"
 
 export default ( { title, estimate, onInputTask, onAddNewTask, onInputEstimate } ) =>
@@ -35,10 +35,10 @@ export default ( { title, estimate, onInputTask, onAddNewTask, onInputEstimate }
             </Col>
         </Row>
         <div className="addform__wrapper">
-            <Button
-                color={ "success" }
+            <button
+                className="addform__button"
                 onClick={ onAddNewTask }>
                 Add task
-            </Button>
+            </button>
         </div>
     </div>

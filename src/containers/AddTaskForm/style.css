@@ -1,6 +1,7 @@
 .addform {
     margin: auto;
     width: 400px;
+    color: #fff;
 }
 
 .addform__item {
@@ -14,4 +15,12 @@
 .addform__wrapper {
     text-align: center;
     margin: 20px 0 0;
+}
+
+.addform__button {
+    border-radius: 3px;
+    background: #01b19c;
+    border: none;
+    padding: 7px 30px;
+    color: #fff;
 }
