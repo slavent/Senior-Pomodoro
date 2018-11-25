@@ -1,5 +1,6 @@
 import React from "react"
 import "./style.css"
+import { Button } from "reactstrap"
 
 const POMODORO_INTERVAL = 10
 
@@ -52,6 +53,7 @@ export default class Timer extends React.Component {
             <div>
                 <hr/>
                 <h3 className="timer">{ convertMsToTime( this.state.time ) }</h3>
+                <Button color="danger" onClick={ () => this.props.cancelTimer() }>Cancel</Button>
             </div>
         )
     }

@@ -145,6 +145,13 @@ class App extends React.Component {
         } )
     }
 
+    cancelTimer() {
+        this.setState( {
+            timerIsOn: false,
+            startedTaskId: null
+        } )
+    }
+
     render () {
         const { tasks, title, estimate, timerIsOn, isLoading } = this.state
         const isTaskListRender = !isLoading && !timerIsOn && !isEmpty( tasks )
@@ -161,6 +168,7 @@ class App extends React.Component {
                                 timerIsOn &&
                                 <Timer
                                     isOn={ timerIsOn }
+                                    cancelTimer={ this.cancelTimer.bind( this ) }
                                     onDone={ this.onTimerDone.bind( this ) }/>
                             }
                             {
