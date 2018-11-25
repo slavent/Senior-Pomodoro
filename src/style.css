@@ -6,7 +6,7 @@ body {
 }
 
 header {
-    min-height: 60px;
+    min-height: 140px;
     background: url("./images/chalkboard.jpg");
     border-bottom: 5px solid #ff2929;
 }

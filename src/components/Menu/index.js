@@ -1,8 +1,9 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import "./style.css"
 
 export default () =>
-    <div>
+    <div className="menu">
         <ul>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/reg">Registration</Link></li>

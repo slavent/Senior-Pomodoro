@@ -1,8 +1,12 @@
 import React from "react"
 import Menu from "components/Menu"
+import "./style.css"
 
 export default () =>
     <header>
-        <h2>Senior Pomodoro</h2>
+        <h2>
+            <div className="logo"></div>
+            Senior Pomodoro
+        </h2>
         <Menu/>
     </header>
