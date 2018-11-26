@@ -1,5 +1,5 @@
 import React from "react"
-import { Input, Row, Col, Label } from "reactstrap"
+import { Input, Row, Col } from "reactstrap"
 import "./style.css"
 
 export default ( { title, estimate, onInputTask, onAddNewTask, onInputEstimate } ) =>
