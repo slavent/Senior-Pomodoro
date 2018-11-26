@@ -14,6 +14,11 @@ SettingsSchema = new Schema( {
         required: "Task's estimation is required.",
         default: 0
     },
+    priority: {
+        type: String,
+        enum: [ "minor", "major", "critical" ],
+        default: "minor"
+    },
     createdDate: {
         type: Date,
         default: Date.now

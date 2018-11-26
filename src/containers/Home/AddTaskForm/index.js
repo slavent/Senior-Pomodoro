@@ -2,7 +2,7 @@ import React from "react"
 import { Input, Row, Col } from "reactstrap"
 import "./style.css"
 
-export default ( { title, estimate, onInputTask, onAddNewTask, onInputEstimate } ) =>
+export default ( { title, estimate, priority, onInputTask, onInputPriority, onAddNewTask, onInputEstimate } ) =>
     <div>
         <Row>
             <Col xs={ 12 }>
@@ -18,9 +18,18 @@ export default ( { title, estimate, onInputTask, onAddNewTask, onInputEstimate }
                     </div>
                     <div className="addform__item">
                         <Input
-                            value={ estimate }
                             type="select"
-                            id="select"
+                            value={ priority }
+                            onChange={ onInputPriority }>
+                            <option>minor</option>
+                            <option>major</option>
+                            <option>critical</option>
+                        </Input>
+                    </div>
+                    <div className="addform__item">
+                        <Input
+                            type="select"
+                            value={ estimate }
                             onChange={ onInputEstimate }>
                             <option>1</option>
                             <option>2</option>

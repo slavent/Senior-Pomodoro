@@ -17,6 +17,7 @@ export default class Home extends React.Component {
             tasks: [],
             title: "",
             estimate: 1,
+            priority: "",
             timerIsOn: false,
             startedTaskId: null,
             isLoading: true,
@@ -49,7 +50,8 @@ export default class Home extends React.Component {
             this.setState( {
                 tasks,
                 title: "",
-                estimate: ""
+                estimate: "",
+                priority: ""
             } )
         } ).catch( error => console.error( error ) )
     }
@@ -149,8 +151,12 @@ export default class Home extends React.Component {
         } )
     }
 
+    onInputPriority ( event ) {
+        this.setState( { priority: event.target.value } )
+    }
+
     render () {
-        const { tasks, title, estimate, timerIsOn, isLoading, showComments } = this.state
+        const { tasks, title, estimate, priority, timerIsOn, isLoading, showComments } = this.state
         const isTaskListRender = !isLoading && !timerIsOn && !isEmpty( tasks )
         const isAddFormRender = !isLoading && !timerIsOn
 
@@ -181,6 +187,8 @@ export default class Home extends React.Component {
                     <AddTaskForm
                         title={ title }
                         estimate={ estimate }
+                        priority={ priority }
+                        onInputPriority={ this.onInputPriority.bind( this ) }
                         onAddNewTask={ this.addNewTask.bind( this ) }
                         onInputTask={ this.onInputTask.bind( this ) }
                         onInputEstimate={ this.onInputEstimate.bind( this ) }/>
