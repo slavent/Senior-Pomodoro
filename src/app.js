@@ -9,6 +9,7 @@ import Home from "containers/Home"
 import Registration from "containers/Registration"
 import Authorization from "containers/Authorization"
 import About from "containers/About"
+import Task from "containers/Task"
 import "bootstrap/dist/css/bootstrap.css"
 import "normalize.css"
 import "./style.css"
@@ -25,6 +26,7 @@ class App extends React.Component {
                             <Route path="/reg" component={ Registration }/>
                             <Route path="/auth" component={ Authorization }/>
                             <Route path="/about" component={ About }/>
+                            <Route path="/task/:id" component={ Task }/>
                         </Col>
                     </Row>
                     <Footer/>
