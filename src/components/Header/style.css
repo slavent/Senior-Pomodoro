@@ -1,3 +1,23 @@
+header {
+    min-height: 100px;
+    position: relative;
+}
+
+header h2 {
+    color: #ece65a;
+    margin: 0;
+    padding: 20px 0;
+}
+
+header a {
+    color: #fff;
+}
+
+header a:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
 .logo {
     display: inline-block;
     margin: 15px 5px -9px 0;
