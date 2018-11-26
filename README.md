@@ -1,3 +1,10 @@
-```npm run dev``` - run app by webpack dev server
+# Senior Pomodoro
+#### Time-management App
 
-```npm run server``` - run express.js server
+#### Dependencies:
+* node.js
+* npm
+
+#### CLI:
+* ```npm run dev``` - run app by webpack dev server
+* ```npm run server``` - run express.js server
