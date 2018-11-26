@@ -54,7 +54,9 @@ module.exports = {
         alias: {
             constants: path.resolve( __dirname, "./src/constants" ),
             containers: path.resolve( __dirname, "./src/containers" ),
-            components: path.resolve( __dirname, "./src/components" )
+            components: path.resolve( __dirname, "./src/components" ),
+            reducers: path.resolve( __dirname, "./src/reducers" ),
+            actions: path.resolve( __dirname, "./src/actions" )
         }
     },
     devServer: {
