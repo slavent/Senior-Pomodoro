@@ -5,7 +5,7 @@ import TaskList from "containers/TaskList"
 import AddTaskForm from "containers/AddTaskForm"
 import { isEmpty, remove } from "lodash"
 import axios from "axios"
-import STATUSES from "constants/taskFlow"
+import STATUSES from "constants/statuses"
 
 const API_PATH = "/api/tasks"
 

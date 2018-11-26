@@ -1,5 +1,5 @@
 import React from "react"
-import STATUSES from "constants/TaskFlow"
+import STATUSES from "constants/statuses"
 import "./style.css"
 
 export default ( { status, onChangeTaskStatus, onDeleteTask, onStartTask, showStartButton, onToggleCommentForm } ) =>

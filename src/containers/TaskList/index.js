@@ -2,7 +2,7 @@ import React from "react"
 import { Alert, Row, Col } from "reactstrap"
 import CommentFrom from "containers/CommentForm"
 import ControlButtons from "containers/ControlButtons"
-import STATUSES from "constants/TaskFlow"
+import STATUSES from "constants/statuses"
 import { isEmpty } from "lodash"
 import "./style.css"
 
