@@ -6,6 +6,7 @@ import AddTaskForm from "containers/Home/AddTaskForm"
 import { isEmpty, remove } from "lodash"
 import axios from "axios"
 import STATUSES from "constants/statuses"
+import PRIORITIES from "constants/priorities"
 
 const API_PATH = "/api/tasks"
 
@@ -173,7 +174,7 @@ export default class Home extends React.Component {
                 {
                     isTaskListRender &&
                     <TaskList
-                        tasks={ sortTasksByStatus( tasks ) }
+                        tasks={ sortTasks( tasks ) }
                         showComments={ showComments }
                         toggleComments={ this.toggleComments.bind( this ) }
                         addComment={ this.addComment.bind( this ) }
@@ -198,6 +199,8 @@ export default class Home extends React.Component {
     }
 }
 
+const sortTasks = tasks => sortTasksByPriority( sortTasksByStatus( tasks ) )
+
 const sortTasksByStatus = tasks => tasks.sort( ( task1, task2 ) => {
     if ( task1.status === STATUSES.TODO && task2.status === STATUSES.DONE ) {
         return -1
@@ -215,3 +218,30 @@ const sortTasksByStatus = tasks => tasks.sort( ( task1, task2 ) => {
         return 0
     }
 } )
+
+const sortTasksByPriority = tasks => tasks.sort( ( task1, task2 ) => {
+    if ( task1.priority === PRIORITIES.MINOR && task2.priority === PRIORITIES.MAJOR ) {
+        return -1
+    }
+
+    if ( task1.priority === PRIORITIES.MINOR && task2.priority === PRIORITIES.CRITICAL ) {
+        return -1
+    }
+
+    if ( task1.priority === PRIORITIES.MAJOR && task2.priority === PRIORITIES.CRITICAL ) {
+        return -1
+    }
+
+    if ( task1.priority === PRIORITIES.MINOR && task2.priority === PRIORITIES.MINOR ) {
+        return 0
+    }
+
+    if ( task1.priority === PRIORITIES.MAJOR && task2.priority === PRIORITIES.MAJOR ) {
+        return 0
+    }
+
+    if ( task1.priority === PRIORITIES.CRITICAL && task2.priority === PRIORITIES.CRITICAL ) {
+        return 0
+    }
+} )
+

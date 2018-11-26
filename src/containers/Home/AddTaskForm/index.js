@@ -1,5 +1,6 @@
 import React from "react"
 import { Input, Row, Col } from "reactstrap"
+import PRIORITIES from "constants/priorities"
 import "./style.css"
 
 export default ( { title, estimate, priority, onInputTask, onInputPriority, onAddNewTask, onInputEstimate } ) =>
@@ -21,9 +22,9 @@ export default ( { title, estimate, priority, onInputTask, onInputPriority, onAd
                             type="select"
                             value={ priority }
                             onChange={ onInputPriority }>
-                            <option>minor</option>
-                            <option>major</option>
-                            <option>critical</option>
+                            <option>{ PRIORITIES.MINOR }</option>
+                            <option>{ PRIORITIES.MAJOR }</option>
+                            <option>{ PRIORITIES.CRITICAL }</option>
                         </Input>
                     </div>
                     <div className="addform__item">
