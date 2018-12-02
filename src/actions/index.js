@@ -98,18 +98,18 @@ export const toggleComments = () => dispatch => dispatch( {
     type: TYPES.TOGGLE_COMMENTS
 } )
 
-export const inputTaskTitle = title => dispatch => dispatch( {
+export const inputTaskTitle = event => dispatch => dispatch( {
     type: TYPES.INPUT_TASK_TITLE,
-    payload: title
+    payload: event.target.value
 } )
 
-export const inputTaskEstimate = estimate => dispatch => dispatch( {
+export const inputTaskEstimate = event => dispatch => dispatch( {
     type: TYPES.INPUT_TASK_TITLE,
-    payload: estimate
+    payload: event.target.value
 } )
 
-export const inputTaskPriority = priority => dispatch => dispatch( {
+export const inputTaskPriority = event => dispatch => dispatch( {
     type: TYPES.INPUT_TASK_PRIORITY,
-    payload: priority
+    payload: event.target.value
 } )
 

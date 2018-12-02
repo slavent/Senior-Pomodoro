@@ -45,7 +45,8 @@ export default ( state = initialState, { type, payload } ) => {
             }
         }
 
-        case TYPES.FINISH_TASK: {}
+        case TYPES.FINISH_TASK: {
+        }
             return {
                 ...state,
                 timerIsOn: false,
