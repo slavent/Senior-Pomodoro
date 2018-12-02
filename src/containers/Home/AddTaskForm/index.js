@@ -3,7 +3,7 @@ import { Input, Row, Col } from "reactstrap"
 import PRIORITIES from "constants/priorities"
 import "./style.css"
 
-export default ( { title, estimate, priority, onInputTask, onInputPriority, onAddNewTask, onInputEstimate } ) =>
+export default ( { title, estimate, priority, onInputTitle, onInputPriority, onAddNewTask, onInputEstimate } ) =>
     <div>
         <Row>
             <Col xs={ 12 }>
@@ -15,7 +15,7 @@ export default ( { title, estimate, priority, onInputTask, onInputPriority, onAd
                             type="textarea"
                             value={ title }
                             placeholder="Buy tomatoes..."
-                            onChange={ onInputTask }/>
+                            onChange={ onInputTitle }/>
                     </div>
                     <div className="addform__item">
                         <Input
