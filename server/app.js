@@ -1,5 +1,10 @@
 const express = require( "express" )
 const mongoose = require( "mongoose" )
+const morgan = require( "morgan" )
+const cookieParser = require( "cookie-parser" )
+const session = require( "express-session" )
+const passport = require( "passport" )
+const flash = require( "connect-flash" )
 const Task = require( "./models/task" )
 const User = require( "./models/user" )
 const Comment = require( "./models/comment" )
@@ -17,8 +22,24 @@ const dbLocalPath = "mongodb://localhost/TodoDataBase"
 mongoose.Promise = global.Promise
 mongoose.connect( dbPath, { useNewUrlParser: true } )
 
+app.use( morgan( "dev" ) )
 app.use( bodyParser.urlencoded( { extended: true } ) )
 app.use( bodyParser.json() )
+app.use( cookieParser() )
+app.use( session( {
+    cookie: { maxAge: 60000 },
+    secret: "codeworkrsecret",
+    saveUninitialized: false,
+    resave: false
+} ) )
+app.use( passport.initialize() )
+app.use( passport.session() )
+app.use( flash() )
+app.use( ( req, res, next ) => {
+    res.locals.success_mesages = req.flash( "success" )
+    res.locals.error_messages = req.flash( "error" )
+    next()
+} )
 
 app.route( "/users" )
     .get( userController.getAllUsers )
