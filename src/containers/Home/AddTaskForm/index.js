@@ -3,7 +3,7 @@ import { Input, Row, Col } from "reactstrap"
 import PRIORITIES from "constants/priorities"
 import "./style.css"
 
-export default ( { title, estimate, priority, onInputTitle, onInputPriority, onAddNewTask, onInputEstimate } ) =>
+export default ( { title, estimate, priority, onInputTitle, onInputPriority, onCreateTask, onInputEstimate } ) =>
     <div>
         <Row>
             <Col xs={ 12 }>
@@ -45,7 +45,7 @@ export default ( { title, estimate, priority, onInputTitle, onInputPriority, onA
         <div className="addform__wrapper">
             <button
                 className="addform__button"
-                onClick={ onAddNewTask }>
+                onClick={ onCreateTask }>
                 Add task
             </button>
         </div>

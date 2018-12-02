@@ -51,7 +51,7 @@ class Home extends React.Component {
                         estimate={ estimate }
                         priority={ priority }
                         onInputPriority={ inputTaskPriority }
-                        onAddNewTask={ createTask }
+                        onCreateTask={ createTask }
                         onInputTitle={ inputTaskTitle }
                         onInputEstimate={ inputTaskEstimate }/>
                 }
