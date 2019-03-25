@@ -20,7 +20,7 @@ const dbPath = "mongodb+srv://slavent:b7cahZoR1hjF4V4U@cluster0-punqb.azure.mong
 const dbLocalPath = "mongodb://localhost/TodoDataBase"
 
 mongoose.Promise = global.Promise
-mongoose.connect( dbPath, { useNewUrlParser: true } )
+mongoose.connect( dbLocalPath, { useNewUrlParser: true } )
 
 app.use( morgan( "dev" ) )
 app.use( bodyParser.urlencoded( { extended: true } ) )

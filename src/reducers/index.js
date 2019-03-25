@@ -1,5 +1,11 @@
-import TYPES from "constants/actions"
-import { remove } from "lodash"
+import {
+    CANCEL_TIMER, CLEAR_ADD_TASK_FORM,
+    FINISH_TASK,
+    GET_TASKS, INPUT_TASK_ESTIMATE, INPUT_TASK_PRIORITY, INPUT_TASK_TITLE,
+    START_TASK,
+    TOGGLE_COMMENT_FORM, TOGGLE_COMMENTS,
+    UPDATE_TASK
+} from "constants/actions"
 
 const initialState = {
     tasks: [],
@@ -13,57 +19,35 @@ const initialState = {
 
 export default ( state = initialState, { type, payload } ) => {
     switch ( type ) {
-        case TYPES.GET_TASKS:
+        case GET_TASKS:
             return {
                 ...state,
                 tasks: payload,
                 isLoading: false
             }
 
-        case TYPES.CREATE_TASK: {
-            const { tasks } = state
-
-            tasks.push( payload )
-
-            return {
-                ...state,
-                tasks
-            }
-        }
-
-        case TYPES.DELETE_TASK: {
-            const { tasks } = state
-
-            remove( tasks, task => task._id === payload )
-
-            return {
-                ...state,
-                tasks
-            }
-        }
-
-        case TYPES.FINISH_TASK:
+        case FINISH_TASK:
             return {
                 ...state,
                 timerIsOn: false,
                 startedTaskId: null
             }
 
-        case TYPES.START_TASK:
+        case START_TASK:
             return {
                 ...state,
                 timerIsOn: true,
                 startedTaskId: payload
             }
 
-        case TYPES.CANCEL_TIMER:
+        case CANCEL_TIMER:
             return {
                 ...state,
                 timerIsOn: false,
                 startedTaskId: null
             }
 
-        case TYPES.UPDATE_TASK: {
+        case UPDATE_TASK: {
             const { tasks } = state
 
             const newTasks = tasks.map( task => {
@@ -80,7 +64,7 @@ export default ( state = initialState, { type, payload } ) => {
             }
         }
 
-        case TYPES.TOGGLE_COMMENT_FORM: {
+        case TOGGLE_COMMENT_FORM: {
             const { tasks } = state
             const newTasks = tasks.map( task => {
                 if ( task._id === payload ) {
@@ -96,31 +80,31 @@ export default ( state = initialState, { type, payload } ) => {
             }
         }
 
-        case TYPES.TOGGLE_COMMENTS:
+        case TOGGLE_COMMENTS:
             return {
                 ...state,
                 showComments: !state.showComments
             }
 
-        case TYPES.INPUT_TASK_TITLE:
+        case INPUT_TASK_TITLE:
             return {
                 ...state,
                 title: payload
             }
 
-        case TYPES.INPUT_TASK_ESTIMATE:
+        case INPUT_TASK_ESTIMATE:
             return {
                 ...state,
                 estimate: payload
             }
 
-        case TYPES.INPUT_TASK_PRIORITY:
+        case INPUT_TASK_PRIORITY:
             return {
                 ...state,
                 priority: payload
             }
 
-        case TYPES.CLEAR_ADD_TASK_FORM:
+        case CLEAR_ADD_TASK_FORM:
             return {
                 ...state,
                 title: "",

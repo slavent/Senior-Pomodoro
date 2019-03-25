@@ -12,7 +12,7 @@ const Task = (
         deleteTask, onStartTask, toggleComments, showComments
     }
 ) =>
-    <div key={ key } className={ "tasks__item " + ( status === STATUSES.DONE && "tasks__item-done" ) }>
+    <div className={ "tasks__item " + ( status === STATUSES.DONE && "tasks__item-done" ) }>
         <Row>
             <Col xs={ 12 }>
                 <p className={ getTitleClassName( status ) }>{ title }</p>
