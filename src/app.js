@@ -1,6 +1,6 @@
 import React from "react"
 import { render } from "react-dom"
-import { createStore, applyMiddleware } from "redux"
+import { createStore, applyMiddleware, compose } from "redux"
 import { Provider } from "react-redux"
 import thunk from "redux-thunk"
 import { BrowserRouter as Router, Route } from "react-router-dom"
@@ -17,7 +17,9 @@ import "bootstrap/dist/css/bootstrap.css"
 import "normalize.css"
 import "./style.css"
 
-const store = createStore( reducers, {}, applyMiddleware( thunk ) )
+const devTools = window.__REDUX_DEVTOOLS_EXTENSION__()
+
+const store = createStore( reducers, {}, compose( applyMiddleware( thunk ), devTools ) )
 
 const App = () =>
     <Provider store={ store }>
