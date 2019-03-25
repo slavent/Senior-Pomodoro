@@ -8,8 +8,8 @@ import { Col, Row } from "reactstrap"
 
 const Task = (
     {
-        _id, title, status, comments, isAddComment, estimate, toggleCommentForm, addComment, onChangeTaskStatus,
-        deleteTask, onStartTask, toggleComments, showComments
+        _id, title, status, comments, isAddComment, estimate, onToggleCommentForm, onAddComment, onChangeTaskStatus,
+        onDeleteTask, onStartTask, onToggleComments, onShowComments
     }
 ) =>
     <div className={ "tasks__item " + ( status === STATUSES.DONE && "tasks__item-done" ) }>
@@ -26,13 +26,13 @@ const Task = (
                     status === STATUSES.TODO && !isEmpty( comments ) &&
                     <div className="comments">
                         <a href="#"
-                           className={ "comments__toggler " + ( showComments ? "comments__toggler-selected" : "" ) }
-                           onClick={ () => toggleComments() }>
+                           className={ "comments__toggler " + ( onShowComments ? "comments__toggler-selected" : "" ) }
+                           onClick={ () => onToggleComments() }>
                             { comments.length } { createCommentString( comments ) }
                         </a>
                         <div className="comments__wrapper">
                             {
-                                showComments ? comments.map( ( { date, text }, key ) =>
+                                onShowComments ? comments.map( ( { date, text }, key ) =>
                                     <div className="comments__item" key={ key }>
                                         <div className="comments__date">{ getTimeFromISO( date ) }</div>
                                         <div className="comments__content">{ text }</div>
@@ -42,15 +42,15 @@ const Task = (
                         </div>
                     </div>
                 }
-                { isAddComment && <CommentFrom onAddComment={ () => addComment( _id ) }/> }
+                { isAddComment && <CommentFrom onAddComment={ () => onAddComment( _id ) }/> }
             </Col>
             <div className="tasks__buttons">
                 <ToolBar
                     status={ status }
                     showStartButton={ Number( estimate ) > 0 }
-                    onToggleCommentForm={ () => toggleCommentForm( _id ) }
+                    onToggleCommentForm={ () => onToggleCommentForm( _id ) }
                     onChangeTaskStatus={ () => onChangeTaskStatus( _id ) }
-                    onDeleteTask={ () => deleteTask( _id ) }
+                    onDeleteTask={ () => onDeleteTask( _id ) }
                     onStartTask={ () => onStartTask( _id, estimate ) }/>
             </div>
         </Row>

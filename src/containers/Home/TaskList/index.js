@@ -27,13 +27,13 @@ class TaskList extends React.Component {
                     <Task
                         key={ key }
                         { ...item }
-                        toggleCommentForm={ toggleCommentForm }
-                        addComment={ addComment }
-                        onChangeTaskStatus={ updateTaskStatus }
-                        deleteTask={ deleteTask }
                         onStartTask={ onStartTask }
-                        toggleComments={ toggleComments }
-                        showComments={ showComments }/>
+                        onDeleteTask={ deleteTask }
+                        onChangeTaskStatus={ updateTaskStatus }
+                        onAddComment={ addComment }
+                        onToggleCommentForm={ toggleCommentForm }
+                        onToggleComments={ toggleComments }
+                        onShowComments={ showComments }/>
                 ) }
                 <hr/>
             </div>
