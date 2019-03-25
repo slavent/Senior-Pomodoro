@@ -1,5 +1,5 @@
 import React from "react"
-import { Alert, Row, Col } from "reactstrap"
+import { Row, Col } from "reactstrap"
 import CommentFrom from "containers/Home/TaskList/CommentForm"
 import ControlButtons from "containers/Home/TaskList/ControlButtons"
 import STATUSES from "constants/statuses"
@@ -9,7 +9,7 @@ import "./style.css"
 export default ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, deleteTask, onStartTask, toggleComments, showComments } ) =>
     <div className="tasks">
         { tasks.map( ( { _id, title, status, comments, isAddComment, estimate }, key ) =>
-            <div className={ "tasks__item " + (status === STATUSES.DONE && "tasks__item-done") }>
+            <div key={ key } className={ "tasks__item " + ( status === STATUSES.DONE && "tasks__item-done" ) }>
                 <Row>
                     <Col xs={ 12 }>
                         <p className={ getTitleClassName( status ) }>{ title }</p>
@@ -23,7 +23,7 @@ export default ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, del
                             status === STATUSES.TODO && !isEmpty( comments ) &&
                             <div className="comments">
                                 <a href="#"
-                                   className={ "comments__toggler " + (showComments ? "comments__toggler-selected" : "") }
+                                   className={ "comments__toggler " + ( showComments ? "comments__toggler-selected" : "" ) }
                                    onClick={ () => toggleComments() }>
                                     { comments.length } { createCommentString( comments ) }
                                 </a>
@@ -58,7 +58,7 @@ export default ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, del
 
 const createCommentString = comments => comments.length > 1 ? "comments" : "comment"
 
-const getTitleClassName = status => "tasks__title " + (status === STATUSES.DONE ? "tasks__title-through" : "")
+const getTitleClassName = status => "tasks__title " + ( status === STATUSES.DONE ? "tasks__title-through" : "" )
 
 const getTimeFromISO = ISO => {
     const milliseconds = Date.parse( ISO )

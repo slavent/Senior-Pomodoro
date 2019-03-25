@@ -1,6 +1,5 @@
 import React from "react"
 import "./style.css"
-import { Button } from "reactstrap"
 
 const POMODORO_INTERVAL = 10
 
