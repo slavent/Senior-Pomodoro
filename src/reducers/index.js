@@ -120,6 +120,14 @@ export default ( state = initialState, { type, payload } ) => {
                 priority: payload
             }
 
+        case TYPES.CLEAR_ADD_TASK_FORM:
+            return {
+                ...state,
+                title: "",
+                priority: "",
+                estimate: ""
+            }
+
         default:
             return state
     }

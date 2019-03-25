@@ -26,6 +26,8 @@ export const createTask = () => ( dispatch, getState ) => {
             payload: data
         } )
     } ).catch( error => console.error( error ) )
+
+    dispatch( clearAddTaskForm() )
 }
 
 export const deleteTask = id => dispatch => {
@@ -108,4 +110,8 @@ export const inputTaskEstimate = event => dispatch => dispatch( {
 export const inputTaskPriority = event => dispatch => dispatch( {
     type: TYPES.INPUT_TASK_PRIORITY,
     payload: event.target.value
+} )
+
+export const clearAddTaskForm = () => dispatch => dispatch( {
+    type: TYPES.CLEAR_ADD_TASK_FORM
 } )

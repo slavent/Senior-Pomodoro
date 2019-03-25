@@ -44,4 +44,10 @@ class Home extends React.Component {
     }
 }
 
-export default connect( state => state, actions )( Home )
+const mapStateToProps = state => ( {
+    tasks: state.tasks,
+    isLoading: state.isLoading,
+    timerIsOn: state.timerIsOn
+} )
+
+export default connect( mapStateToProps, actions )( Home )
