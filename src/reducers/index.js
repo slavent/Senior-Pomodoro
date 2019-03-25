@@ -27,10 +27,7 @@ export default ( state = initialState, { type, payload } ) => {
 
             return {
                 ...state,
-                tasks,
-                title: "",
-                estimate: "",
-                priority: ""
+                tasks
             }
         }
 
@@ -45,8 +42,7 @@ export default ( state = initialState, { type, payload } ) => {
             }
         }
 
-        case TYPES.FINISH_TASK: {
-        }
+        case TYPES.FINISH_TASK:
             return {
                 ...state,
                 timerIsOn: false,

@@ -19,12 +19,15 @@ class Home extends React.Component {
             inputTaskPriority, createTask, deleteTask, updateTaskStatus, startTask, cancelTimer, finishTask,
             showComments, toggleCommentForm, addComment, toggleComments
         } = this.props
-        const isTaskListRender = !isLoading && !timerIsOn && !isEmpty( tasks )
-        const isAddFormRender = !isLoading && !timerIsOn
+        const isTaskListRender = !timerIsOn && !isEmpty( tasks )
+        const isAddFormRender = !timerIsOn
+
+        if ( isLoading ) {
+            return <Loader/>
+        }
 
         return (
             <div>
-                { isLoading && <Loader/> }
                 {
                     timerIsOn &&
                     <Timer

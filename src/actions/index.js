@@ -1,6 +1,5 @@
 import TYPES from "constants/actions"
 import axios from "axios"
-import { remove } from "lodash"
 import STATUSES from "constants/statuses"
 
 const API_PATH = "/api/tasks"
@@ -15,11 +14,12 @@ export const getTasks = () => dispatch => {
 }
 
 export const createTask = () => ( dispatch, getState ) => {
-    const { title, estimate } = getState()
+    const { title, estimate, priority } = getState()
 
     axios.post( API_PATH, {
         title,
-        estimate
+        estimate,
+        priority
     } ).then( ( { data } ) => {
         dispatch( {
             type: TYPES.CREATE_TASK,
@@ -35,22 +35,19 @@ export const deleteTask = id => dispatch => {
             payload: id
         } )
     } ).catch( error => console.error( error ) )
-
 }
+
 export const finishTask = () => ( dispatch, getState ) => {
     const { startedTaskId, tasks } = getState()
+    const task = tasks.find( task => task._id === startedTaskId )
 
-    tasks.forEach( task => {
-        if ( task._id === startedTaskId ) {
-            task.estimate = task.estimate - 1
+    task.estimate = task.estimate - 1
 
-            if ( task.estimate === 0 ) {
-                task.status = STATUSES.DONE
-            }
+    if ( task.estimate === 0 ) {
+        task.status = STATUSES.DONE
+    }
 
-            dispatch( updateTask( task ) )
-        }
-    } )
+    dispatch( updateTask( task ) )
 }
 
 export const startTask = taskId => dispatch => dispatch( {
@@ -83,7 +80,7 @@ export const updateTaskStatus = id => ( dispatch, getState ) => {
 
 export const addComment = taskId => dispatch => {
     axios.post( `/api/comments`, { text: "some text" } ).then( ( { data } ) => {
-        axios.put( API_PATH + "/" + taskId, { comments: [ data._id ] } )
+        axios.put( API_PATH + "/" + taskId, { comments: [data._id] } )
     } ).catch( error => console.error( error ) )
 
     dispatch( toggleCommentForm( taskId ) )
@@ -104,7 +101,7 @@ export const inputTaskTitle = event => dispatch => dispatch( {
 } )
 
 export const inputTaskEstimate = event => dispatch => dispatch( {
-    type: TYPES.INPUT_TASK_TITLE,
+    type: TYPES.INPUT_TASK_ESTIMATE,
     payload: event.target.value
 } )
 
@@ -112,4 +109,3 @@ export const inputTaskPriority = event => dispatch => dispatch( {
     type: TYPES.INPUT_TASK_PRIORITY,
     payload: event.target.value
 } )
-
