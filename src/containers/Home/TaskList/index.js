@@ -1,12 +1,12 @@
 import React from "react"
 import { Row, Col } from "reactstrap"
 import CommentFrom from "containers/Home/TaskList/CommentForm"
-import ControlButtons from "containers/Home/TaskList/ControlButtons"
+import ControlButtons from "containers/Home/TaskList/ToolBar"
 import STATUSES from "constants/statuses"
 import { isEmpty } from "lodash"
 import "./style.css"
 
-export default ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, deleteTask, onStartTask, toggleComments, showComments } ) =>
+const TaskList = ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, deleteTask, onStartTask, toggleComments, showComments } ) =>
     <div className="tasks">
         { tasks.map( ( { _id, title, status, comments, isAddComment, estimate }, key ) =>
             <div key={ key } className={ "tasks__item " + ( status === STATUSES.DONE && "tasks__item-done" ) }>
@@ -55,6 +55,8 @@ export default ( { tasks, toggleCommentForm, addComment, onChangeTaskStatus, del
         ) }
         <hr/>
     </div>
+
+export default TaskList
 
 const createCommentString = comments => comments.length > 1 ? "comments" : "comment"
 

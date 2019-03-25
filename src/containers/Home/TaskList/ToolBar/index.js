@@ -2,7 +2,7 @@ import React from "react"
 import STATUSES from "constants/statuses"
 import "./style.css"
 
-export default ( { status, onChangeTaskStatus, onDeleteTask, onStartTask, showStartButton, onToggleCommentForm } ) =>
+const ToolBar = ( { status, onChangeTaskStatus, onDeleteTask, onStartTask, showStartButton, onToggleCommentForm } ) =>
     <div className="controls">
         {
             status === STATUSES.TODO && showStartButton &&
@@ -26,3 +26,5 @@ export default ( { status, onChangeTaskStatus, onDeleteTask, onStartTask, showSt
             <div className="button button-delete" onClick={ onDeleteTask }/>
         </div>
     </div>
+
+export default ToolBar
