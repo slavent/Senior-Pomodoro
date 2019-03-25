@@ -6,11 +6,13 @@ import {
     TOGGLE_COMMENT_FORM, TOGGLE_COMMENTS,
     UPDATE_TASK
 } from "constants/actions"
+import PRIORITIES from "constants/priorities"
 
 const initialState = {
     tasks: [],
     title: "",
     estimate: 1,
+    priority: PRIORITIES.MINOR,
     timerIsOn: false,
     startedTaskId: null,
     isLoading: true,
@@ -108,8 +110,8 @@ export default ( state = initialState, { type, payload } ) => {
             return {
                 ...state,
                 title: "",
-                priority: "",
-                estimate: ""
+                priority: PRIORITIES.MINOR,
+                estimate: 1
             }
 
         default:
