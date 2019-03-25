@@ -6,6 +6,12 @@ if ( workbox ) {
     console.log( `Boo! Workbox didn't load 😬` )
 }
 
+workbox.precaching.precacheAndRoute( [
+    { url: "/index.html" },
+    { url: "/bundle.js" },
+    { url: "/css/styles.css" }
+] )
+
 workbox.routing.registerRoute(
     /.*api.*/,
     new workbox.strategies.NetworkFirst( {
