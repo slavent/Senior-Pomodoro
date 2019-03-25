@@ -13,7 +13,7 @@ class TaskList extends React.Component {
 
     render() {
         const {
-            tasks, toggleCommentForm, addComment, onChangeTaskStatus, deleteTask, onStartTask, toggleComments,
+            tasks, toggleCommentForm, addComment, updateTaskStatus, deleteTask, onStartTask, toggleComments,
             showComments
         } = this.props
 
@@ -29,7 +29,7 @@ class TaskList extends React.Component {
                         { ...item }
                         toggleCommentForm={ toggleCommentForm }
                         addComment={ addComment }
-                        onChangeTaskStatus={ onChangeTaskStatus }
+                        onChangeTaskStatus={ updateTaskStatus }
                         deleteTask={ deleteTask }
                         onStartTask={ onStartTask }
                         toggleComments={ toggleComments }
