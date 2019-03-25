@@ -16,7 +16,7 @@ const commentController = require( "./controllers/commentController" )
 
 const app = express()
 const port = process.env.PORT || 3000
-const dbPath = "mongodb+srv://slavent:V35CypcmOO0vutjt@cluster0-punqb.azure.mongodb.net/test?retryWrites=true"
+const dbPath = "mongodb+srv://slavent:b7cahZoR1hjF4V4U@cluster0-punqb.azure.mongodb.net/test?retryWrites=true"
 const dbLocalPath = "mongodb://localhost/TodoDataBase"
 
 mongoose.Promise = global.Promise

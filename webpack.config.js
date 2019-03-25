@@ -65,7 +65,7 @@ module.exports = {
         clientLogLevel: "error",
         watchContentBase: true,
         hot: true,
-        // open: "Chrome",
+        open: true,
         proxy: {
             "/api": {
                 target: "http://localhost:3000",
