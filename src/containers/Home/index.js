@@ -15,12 +15,9 @@ class Home extends React.Component {
 
     render() {
         const {
-            title, estimate, priority, tasks, isLoading, timerIsOn, inputTaskTitle, inputTaskEstimate,
-            inputTaskPriority, createTask, deleteTask, updateTaskStatus, startTask, cancelTimer, finishTask,
+            tasks, isLoading, timerIsOn, deleteTask, updateTaskStatus, startTask,
             showComments, toggleCommentForm, addComment, toggleComments
         } = this.props
-        const isTaskListRender = !timerIsOn && !isEmpty( tasks )
-        const isAddFormRender = !timerIsOn
 
         if ( isLoading ) {
             return <Loader/>
@@ -28,15 +25,9 @@ class Home extends React.Component {
 
         return (
             <div>
+                { timerIsOn && <Timer/> }
                 {
-                    timerIsOn &&
-                    <Timer
-                        isOn={ timerIsOn }
-                        cancelTimer={ cancelTimer }
-                        onDone={ finishTask }/>
-                }
-                {
-                    isTaskListRender &&
+                    !timerIsOn && !isEmpty( tasks ) &&
                     <TaskList
                         tasks={ sortTasks( tasks ) }
                         showComments={ showComments }
@@ -47,7 +38,7 @@ class Home extends React.Component {
                         toggleCommentForm={ toggleCommentForm }
                         onStartTask={ startTask }/>
                 }
-                { isAddFormRender && <AddTaskForm/> }
+                { !timerIsOn && <AddTaskForm/> }
             </div>
         )
     }

@@ -1,29 +1,32 @@
 import React from "react"
+import { convertMsToTime, convertToMs } from "components/Timer/utils"
+import { connect } from "react-redux"
+import { cancelTimer, finishTask } from "actions"
 import "./style.css"
 
 const POMODORO_INTERVAL = 10
 
-export default class Timer extends React.Component {
-    constructor ( props ) {
+class Timer extends React.Component {
+    constructor( props ) {
         super( props )
 
         this.state = {
             time: convertToMs( POMODORO_INTERVAL ),
-            isOn: props.isOn || false
+            isOn: props.timerIsOn || false
         }
 
         this.startTimer = this.startTimer.bind( this )
         this.stopTimer = this.stopTimer.bind( this )
         this.resetTimer = this.resetTimer.bind( this )
 
-        props.isOn && this.startTimer()
+        props.timerIsOn && this.startTimer()
     }
 
-    startTimer () {
+    startTimer() {
         this.timer = setInterval( () => {
             if ( Number( this.state.time ) === 0 ) {
                 this.stopTimer()
-                this.props.onDone()
+                this.props.finishTask()
 
                 return
             }
@@ -34,20 +37,20 @@ export default class Timer extends React.Component {
         }, 1000 )
     }
 
-    stopTimer () {
+    stopTimer() {
         this.setState( { isOn: false } )
 
         clearInterval( this.timer )
     }
 
-    resetTimer () {
+    resetTimer() {
         this.setState( {
             time: 0,
             isOn: false
         } )
     }
 
-    render () {
+    render() {
         return (
             <div className="timer">
                 <hr/>
@@ -58,19 +61,7 @@ export default class Timer extends React.Component {
     }
 }
 
-const convertToMs = value => value * 60 * 1000
+const mapStateToProps = store => store
+const actions = { cancelTimer, finishTask }
 
-const convertMsToTime = value => {
-    let milliseconds = value % 1000
-    value = ( value - milliseconds ) / 1000
-    let seconds = value % 60
-    value = ( value - seconds ) / 60
-    let minutes = value % 60
-    let hours = ( value - minutes ) / 60
-
-    seconds = seconds.toString().length === 1 ? "0" + seconds : seconds
-    minutes = minutes.toString().length === 1 ? "0" + minutes : minutes
-    hours = hours.toString().length === 1 ? "0" + hours : hours
-
-    return hours + ":" + minutes + ":" + seconds
-}
+export default connect( mapStateToProps, actions )( Timer )
