@@ -3,17 +3,17 @@ import Loader from "components/Loader"
 import Timer from "components/Timer"
 import TaskList from "containers/Home/TaskList"
 import AddTaskForm from "containers/Home/AddTaskForm"
-import { isEmpty, remove } from "lodash"
+import { isEmpty } from "lodash"
 import { sortTasks } from "./utils"
 import { connect } from "react-redux"
 import * as actions from "actions"
 
 class Home extends React.Component {
-    componentDidMount () {
+    componentDidMount() {
         this.props.getTasks()
     }
 
-    render () {
+    render() {
         const {
             title, estimate, priority, tasks, isLoading, timerIsOn, inputTaskTitle, inputTaskEstimate,
             inputTaskPriority, createTask, deleteTask, updateTaskStatus, startTask, cancelTimer, finishTask,

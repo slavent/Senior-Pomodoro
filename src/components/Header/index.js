@@ -2,7 +2,7 @@ import React from "react"
 import Menu from "components/Menu"
 import "./style.css"
 
-export default () =>
+const Header = () =>
     <header>
         <h2>
             <a href="/">
@@ -12,3 +12,5 @@ export default () =>
         </h2>
         <Menu/>
     </header>
+
+export default Header
