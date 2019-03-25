@@ -47,17 +47,7 @@ class Home extends React.Component {
                         toggleCommentForm={ toggleCommentForm }
                         onStartTask={ startTask }/>
                 }
-                {
-                    isAddFormRender &&
-                    <AddTaskForm
-                        title={ title }
-                        estimate={ estimate }
-                        priority={ priority }
-                        onInputPriority={ inputTaskPriority }
-                        onCreateTask={ createTask }
-                        onInputTitle={ inputTaskTitle }
-                        onInputEstimate={ inputTaskEstimate }/>
-                }
+                { isAddFormRender && <AddTaskForm/> }
             </div>
         )
     }
