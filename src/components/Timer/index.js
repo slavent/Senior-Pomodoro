@@ -4,28 +4,28 @@ import { connect } from "react-redux"
 import { cancelTimer, finishTask } from "actions"
 import "./style.css"
 
-const POMODORO_INTERVAL = 10
+const INTERVAL = 10
 
 class Timer extends React.Component {
     constructor( props ) {
         super( props )
 
         this.state = {
-            time: convertToMs( POMODORO_INTERVAL ),
+            time: convertToMs( INTERVAL ),
             isOn: props.timerIsOn || false
         }
 
-        this.startTimer = this.startTimer.bind( this )
-        this.stopTimer = this.stopTimer.bind( this )
-        this.resetTimer = this.resetTimer.bind( this )
+        this.onStart = this.onStart.bind( this )
+        this.onStop = this.onStop.bind( this )
+        this.onClose = this.onClose.bind( this )
 
-        props.timerIsOn && this.startTimer()
+        props.timerIsOn && this.onStart()
     }
 
-    startTimer() {
+    onStart() {
         this.timer = setInterval( () => {
             if ( Number( this.state.time ) === 0 ) {
-                this.stopTimer()
+                this.onStop()
                 this.props.finishTask()
 
                 return
@@ -37,17 +37,17 @@ class Timer extends React.Component {
         }, 1000 )
     }
 
-    stopTimer() {
+    onStop() {
         this.setState( { isOn: false } )
 
         clearInterval( this.timer )
     }
 
-    resetTimer() {
-        this.setState( {
-            time: 0,
-            isOn: false
-        } )
+    onClose() {
+        const { cancelTimer } = this.props
+
+        this.onStop()
+        cancelTimer && cancelTimer()
     }
 
     render() {
@@ -55,13 +55,12 @@ class Timer extends React.Component {
             <div className="timer">
                 <hr/>
                 <p className="timer__time">{ convertMsToTime( this.state.time ) }</p>
-                <div className="timer__close" onClick={ () => this.props.cancelTimer() }/>
+                <div className="timer__close" onClick={ this.onClose }/>
             </div>
         )
     }
 }
 
-const mapStateToProps = store => store
 const actions = { cancelTimer, finishTask }
 
-export default connect( mapStateToProps, actions )( Timer )
+export default connect( state => state, actions )( Timer )
