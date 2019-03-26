@@ -24,4 +24,10 @@
     border: none;
     padding: 7px 30px;
     color: #fff;
+    cursor: pointer;
+}
+
+.addform__button-disabled {
+    opacity: .4;
+    cursor: default;
 }
