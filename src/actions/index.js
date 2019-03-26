@@ -25,6 +25,7 @@ export const onToggleComments = () => ( {
     type: ON_TOGGLE_COMMENTS
 } )
 
+// todo: сделать экшены ввода универсальными
 export const onInputTitle = event => ( {
     type: ON_INPUT_TITLE,
     payload: event.target.value
