@@ -60,7 +60,8 @@ module.exports = {
             containers: path.resolve( __dirname, "./src/containers" ),
             components: path.resolve( __dirname, "./src/components" ),
             reducers: path.resolve( __dirname, "./src/reducers" ),
-            actions: path.resolve( __dirname, "./src/actions" )
+            actions: path.resolve( __dirname, "./src/actions" ),
+            middlewares: path.resolve( __dirname, "./src/middlewares" )
         }
     },
     devServer: {

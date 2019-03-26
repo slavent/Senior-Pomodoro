@@ -2,7 +2,8 @@ import React from "react"
 import Task from "containers/Home/TaskList/Task"
 import { sortTasks } from "containers/Home/utils"
 import { connect } from "react-redux"
-import * as actions from "actions"
+import { addComment, updateTaskStatus, deleteTask } from "middlewares"
+import { toggleCommentForm, startTask, toggleComments } from "actions"
 import { isEmpty } from "lodash"
 import "./style.css"
 
@@ -12,7 +13,7 @@ class TaskList extends React.Component {
             tasks, toggleCommentForm, addComment, updateTaskStatus, deleteTask, startTask, toggleComments,
             showComments
         } = this.props
-        
+
         if ( isEmpty( tasks ) ) {
             return <div/>
         }
@@ -35,6 +36,10 @@ class TaskList extends React.Component {
             </div>
         )
     }
+}
+
+const actions = {
+    toggleCommentForm, addComment, updateTaskStatus, deleteTask, startTask, toggleComments
 }
 
 export default connect( state => state, actions )( TaskList )

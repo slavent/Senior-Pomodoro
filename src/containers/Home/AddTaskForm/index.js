@@ -2,7 +2,8 @@ import React from "react"
 import { connect } from "react-redux"
 import { Input, Row, Col } from "reactstrap"
 import PRIORITIES from "constants/priorities"
-import { inputTaskEstimate, inputTaskPriority, inputTaskTitle, createTask } from "actions"
+import { createTask } from "middlewares"
+import { inputTaskEstimate, inputTaskPriority, inputTaskTitle } from "actions"
 import "./style.css"
 
 const AddTaskForm = ( { title, estimate, priority, inputTaskEstimate, inputTaskPriority, inputTaskTitle, createTask } ) =>

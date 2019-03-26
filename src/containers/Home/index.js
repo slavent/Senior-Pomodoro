@@ -4,7 +4,7 @@ import Timer from "components/Timer"
 import TaskList from "containers/Home/TaskList"
 import AddTaskForm from "containers/Home/AddTaskForm"
 import { connect } from "react-redux"
-import * as actions from "actions"
+import { getTasks } from "middlewares"
 
 class Home extends React.Component {
     componentDidMount() {
@@ -32,5 +32,7 @@ class Home extends React.Component {
         )
     }
 }
+
+const actions = { getTasks }
 
 export default connect( state => state, actions )( Home )

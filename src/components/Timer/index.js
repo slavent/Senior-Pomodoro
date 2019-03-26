@@ -1,7 +1,8 @@
 import React from "react"
 import { convertMsToTime, convertToMs } from "components/Timer/utils"
 import { connect } from "react-redux"
-import { cancelTimer, finishTask } from "actions"
+import { finishTask } from "middlewares"
+import { cancelTimer } from "actions"
 import "./style.css"
 
 const INTERVAL = 10
