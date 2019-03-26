@@ -1,28 +1,28 @@
 import {
-    CANCEL_TIMER, CLEAR_ADD_TASK_FORM, DISABLE_LOADING, ENABLE_LOADING,
+    ON_CANCEL_TIMER, ON_CLEAR_ADDING_FORM, DISABLE_LOADING, ENABLE_LOADING,
     ON_INPUT_ESTIMATE, ON_INPUT_PRIORITY,
     ON_INPUT_TITLE,
-    START_TASK,
-    TOGGLE_COMMENT_FORM,
-    TOGGLE_COMMENTS
+    ON_START_TASK,
+    ON_TOGGLE_COMMENT_FORM,
+    ON_TOGGLE_COMMENTS
 } from "constants/actions"
 
-export const startTask = taskId => ( {
-    type: START_TASK,
+export const onStartTask = taskId => ( {
+    type: ON_START_TASK,
     payload: taskId
 } )
 
-export const cancelTimer = () => ( {
-    type: CANCEL_TIMER
+export const onCancelTimer = () => ( {
+    type: ON_CANCEL_TIMER
 } )
 
-export const toggleCommentForm = taskId => ( {
-    type: TOGGLE_COMMENT_FORM,
+export const onToggleCommentForm = taskId => ( {
+    type: ON_TOGGLE_COMMENT_FORM,
     payload: taskId
 } )
 
-export const toggleComments = () => ( {
-    type: TOGGLE_COMMENTS
+export const onToggleComments = () => ( {
+    type: ON_TOGGLE_COMMENTS
 } )
 
 export const onInputTitle = event => ( {
@@ -40,8 +40,8 @@ export const onInputPriority = event => ( {
     payload: event.target.value
 } )
 
-export const clearAddTaskForm = () => ( {
-    type: CLEAR_ADD_TASK_FORM
+export const onClearAddingForm = () => ( {
+    type: ON_CLEAR_ADDING_FORM
 } )
 
 export const disableLoading = () => ( {

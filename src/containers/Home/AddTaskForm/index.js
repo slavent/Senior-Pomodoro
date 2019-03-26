@@ -2,11 +2,11 @@ import React from "react"
 import { connect } from "react-redux"
 import { Input, Row, Col } from "reactstrap"
 import PRIORITIES from "constants/priorities"
-import { createTask } from "middlewares"
+import { onCreateTask } from "middlewares"
 import { onInputEstimate, onInputPriority, onInputTitle } from "actions"
 import "./style.css"
 
-const AddTaskForm = ( { title, estimate, priority, onInputEstimate, onInputPriority, onInputTitle, createTask } ) =>
+const AddTaskForm = ( { title, estimate, priority, onInputEstimate, onInputPriority, onInputTitle, onCreateTask } ) =>
     <div>
         <Row>
             <Col xs={ 12 }>
@@ -48,7 +48,7 @@ const AddTaskForm = ( { title, estimate, priority, onInputEstimate, onInputPrior
         <div className="addform__wrapper">
             <button
                 className="addform__button"
-                onClick={ createTask }>
+                onClick={ onCreateTask }>
                 Add task
             </button>
         </div>
@@ -56,7 +56,7 @@ const AddTaskForm = ( { title, estimate, priority, onInputEstimate, onInputPrior
 
 const mapStateToProps = state => state
 const actions = {
-    onInputEstimate, onInputPriority, onInputTitle, createTask
+    onInputEstimate, onInputPriority, onInputTitle, onCreateTask
 }
 
 export default connect( mapStateToProps, actions )( AddTaskForm )

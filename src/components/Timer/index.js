@@ -1,8 +1,8 @@
 import React from "react"
 import { convertMsToTime, convertToMs } from "components/Timer/utils"
 import { connect } from "react-redux"
-import { finishTask } from "middlewares"
-import { cancelTimer } from "actions"
+import { onFinishTask } from "middlewares"
+import { onCancelTimer } from "actions"
 import "./style.css"
 
 const INTERVAL = 10
@@ -27,7 +27,7 @@ class Timer extends React.Component {
         this.timer = setInterval( () => {
             if ( Number( this.state.time ) === 0 ) {
                 this.onStop()
-                this.props.finishTask()
+                this.props.onFinishTask()
 
                 return
             }
@@ -45,10 +45,10 @@ class Timer extends React.Component {
     }
 
     onClose() {
-        const { cancelTimer } = this.props
+        const { onCancelTimer } = this.props
 
         this.onStop()
-        cancelTimer && cancelTimer()
+        onCancelTimer && onCancelTimer()
     }
 
     render() {
@@ -62,6 +62,6 @@ class Timer extends React.Component {
     }
 }
 
-const actions = { cancelTimer, finishTask }
+const actions = { onCancelTimer, onFinishTask }
 
 export default connect( state => state, actions )( Timer )

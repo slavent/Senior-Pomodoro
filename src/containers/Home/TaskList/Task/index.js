@@ -9,7 +9,7 @@ import { Col, Row } from "reactstrap"
 const Task = (
     {
         _id, title, status, comments, isAddComment, estimate, onToggleCommentForm, onAddComment, onChangeTaskStatus,
-        onDeleteTask, onStartTask, onToggleComments, onShowComments
+        onDeleteTask, onStartTask, onToggleComments, isShowComments
     }
 ) =>
     <div className={ "tasks__item " + ( status === STATUSES.DONE && "tasks__item-done" ) }>
@@ -26,13 +26,13 @@ const Task = (
                     status === STATUSES.TODO && !isEmpty( comments ) &&
                     <div className="comments">
                         <a href="#"
-                           className={ "comments__toggler " + ( onShowComments ? "comments__toggler-selected" : "" ) }
+                           className={ "comments__toggler " + ( isShowComments ? "comments__toggler-selected" : "" ) }
                            onClick={ () => onToggleComments() }>
                             { comments.length } { createCommentString( comments ) }
                         </a>
                         <div className="comments__wrapper">
                             {
-                                onShowComments ? comments.map( ( { date, text }, key ) =>
+                                isShowComments ? comments.map( ( { date, text }, key ) =>
                                     <div className="comments__item" key={ key }>
                                         <div className="comments__date">{ getTimeFromISO( date ) }</div>
                                         <div className="comments__content">{ text }</div>

@@ -1,10 +1,10 @@
 import {
-    CANCEL_TIMER, CLEAR_ADD_TASK_FORM, DISABLE_LOADING, ENABLE_LOADING,
-    FINISH_TASK,
+    ON_CANCEL_TIMER, ON_CLEAR_ADDING_FORM, DISABLE_LOADING, ENABLE_LOADING,
+    ON_FINISH_TASK,
     GET_TASKS, ON_INPUT_ESTIMATE, ON_INPUT_PRIORITY, ON_INPUT_TITLE,
-    START_TASK,
-    TOGGLE_COMMENT_FORM, TOGGLE_COMMENTS,
-    UPDATE_TASK
+    ON_START_TASK,
+    ON_TOGGLE_COMMENT_FORM, ON_TOGGLE_COMMENTS,
+    ON_UPDATE_TASK
 } from "constants/actions"
 import PRIORITIES from "constants/priorities"
 
@@ -16,7 +16,7 @@ const initialState = {
     timerIsOn: false,
     startedTaskId: null,
     isLoading: true,
-    showComments: false
+    isShowComments: false
 }
 
 export default ( state = initialState, { type, payload } ) => {
@@ -27,28 +27,28 @@ export default ( state = initialState, { type, payload } ) => {
                 tasks: payload,
             }
 
-        case FINISH_TASK:
+        case ON_FINISH_TASK:
             return {
                 ...state,
                 timerIsOn: false,
                 startedTaskId: null
             }
 
-        case START_TASK:
+        case ON_START_TASK:
             return {
                 ...state,
                 timerIsOn: true,
                 startedTaskId: payload
             }
 
-        case CANCEL_TIMER:
+        case ON_CANCEL_TIMER:
             return {
                 ...state,
                 timerIsOn: false,
                 startedTaskId: null
             }
 
-        case UPDATE_TASK: {
+        case ON_UPDATE_TASK: {
             const { tasks } = state
 
             const newTasks = tasks.map( task => {
@@ -65,7 +65,7 @@ export default ( state = initialState, { type, payload } ) => {
             }
         }
 
-        case TOGGLE_COMMENT_FORM: {
+        case ON_TOGGLE_COMMENT_FORM: {
             const { tasks } = state
             const newTasks = tasks.map( task => {
                 if ( task._id === payload ) {
@@ -81,10 +81,10 @@ export default ( state = initialState, { type, payload } ) => {
             }
         }
 
-        case TOGGLE_COMMENTS:
+        case ON_TOGGLE_COMMENTS:
             return {
                 ...state,
-                showComments: !state.showComments
+                isShowComments: !state.isShowComments
             }
 
         case ON_INPUT_TITLE:
@@ -105,7 +105,7 @@ export default ( state = initialState, { type, payload } ) => {
                 priority: payload
             }
 
-        case CLEAR_ADD_TASK_FORM:
+        case ON_CLEAR_ADDING_FORM:
             return {
                 ...state,
                 title: "",

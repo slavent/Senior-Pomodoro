@@ -1,8 +1,8 @@
-import { clearAddTaskForm, disableLoading, enableLoading, toggleCommentForm } from "actions"
+import { onClearAddingForm, disableLoading, enableLoading, onToggleCommentForm } from "actions"
 import axios from "axios"
 import {
     GET_TASKS,
-    UPDATE_TASK
+    ON_UPDATE_TASK
 } from "constants/actions"
 import STATUSES from "constants/statuses"
 
@@ -21,7 +21,7 @@ export const getTasks = () => dispatch => {
     } )
 }
 
-export const createTask = () => ( dispatch, getState ) => {
+export const onCreateTask = () => ( dispatch, getState ) => {
     const { title, estimate, priority } = getState()
 
     axios.post( API_PATH, {
@@ -32,16 +32,16 @@ export const createTask = () => ( dispatch, getState ) => {
         dispatch( getTasks() )
     } ).catch( error => console.error( error ) )
 
-    dispatch( clearAddTaskForm() )
+    dispatch( onClearAddingForm() )
 }
 
-export const deleteTask = id => dispatch => {
+export const onDeleteTask = id => dispatch => {
     axios.delete( API_PATH + "/" + id ).then( () => {
         dispatch( getTasks() )
     } ).catch( error => console.error( error ) )
 }
 
-export const finishTask = () => ( dispatch, getState ) => {
+export const onFinishTask = () => ( dispatch, getState ) => {
     const { startedTaskId, tasks } = getState()
     const task = tasks.find( task => task._id === startedTaskId )
 
@@ -51,32 +51,32 @@ export const finishTask = () => ( dispatch, getState ) => {
         task.status = STATUSES.DONE
     }
 
-    dispatch( updateTask( task ) )
+    dispatch( onUpdateTask( task ) )
 }
 
-export const updateTask = task => dispatch => {
+export const onUpdateTask = task => dispatch => {
     axios.put( API_PATH + "/" + task._id, task ).then( () => {
         dispatch( {
-            type: UPDATE_TASK,
+            type: ON_UPDATE_TASK,
             payload: task
         } )
     } ).catch( error => console.error( error ) )
 }
 
-export const updateTaskStatus = id => ( dispatch, getState ) => {
+export const onUpdateTaskStatus = id => ( dispatch, getState ) => {
     const { tasks } = getState()
     const task = tasks.find( task => task._id === id )
     const isDone = task.status === STATUSES.DONE
 
     task.status = isDone ? STATUSES.TODO : STATUSES.DONE
 
-    dispatch( updateTask( task ) )
+    dispatch( onUpdateTask( task ) )
 }
 
-export const addComment = taskId => dispatch => {
+export const onAddComment = taskId => dispatch => {
     axios.post( `/api/comments`, { text: "some text" } ).then( ( { data } ) => {
         axios.put( API_PATH + "/" + taskId, { comments: [data._id] } )
     } ).catch( error => console.error( error ) )
 
-    dispatch( toggleCommentForm( taskId ) )
+    dispatch( onToggleCommentForm( taskId ) )
 }
