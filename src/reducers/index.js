@@ -1,7 +1,7 @@
 import {
     CANCEL_TIMER, CLEAR_ADD_TASK_FORM, DISABLE_LOADING, ENABLE_LOADING,
     FINISH_TASK,
-    GET_TASKS, INPUT_TASK_ESTIMATE, INPUT_TASK_PRIORITY, INPUT_TASK_TITLE,
+    GET_TASKS, ON_INPUT_ESTIMATE, ON_INPUT_PRIORITY, ON_INPUT_TITLE,
     START_TASK,
     TOGGLE_COMMENT_FORM, TOGGLE_COMMENTS,
     UPDATE_TASK
@@ -87,19 +87,19 @@ export default ( state = initialState, { type, payload } ) => {
                 showComments: !state.showComments
             }
 
-        case INPUT_TASK_TITLE:
+        case ON_INPUT_TITLE:
             return {
                 ...state,
                 title: payload
             }
 
-        case INPUT_TASK_ESTIMATE:
+        case ON_INPUT_ESTIMATE:
             return {
                 ...state,
                 estimate: payload
             }
 
-        case INPUT_TASK_PRIORITY:
+        case ON_INPUT_PRIORITY:
             return {
                 ...state,
                 priority: payload

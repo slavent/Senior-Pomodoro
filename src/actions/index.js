@@ -1,7 +1,7 @@
 import {
     CANCEL_TIMER, CLEAR_ADD_TASK_FORM, DISABLE_LOADING, ENABLE_LOADING,
-    INPUT_TASK_ESTIMATE, INPUT_TASK_PRIORITY,
-    INPUT_TASK_TITLE,
+    ON_INPUT_ESTIMATE, ON_INPUT_PRIORITY,
+    ON_INPUT_TITLE,
     START_TASK,
     TOGGLE_COMMENT_FORM,
     TOGGLE_COMMENTS
@@ -25,18 +25,18 @@ export const toggleComments = () => ( {
     type: TOGGLE_COMMENTS
 } )
 
-export const inputTaskTitle = event => ( {
-    type: INPUT_TASK_TITLE,
+export const onInputTitle = event => ( {
+    type: ON_INPUT_TITLE,
     payload: event.target.value
 } )
 
-export const inputTaskEstimate = event => ( {
-    type: INPUT_TASK_ESTIMATE,
+export const onInputEstimate = event => ( {
+    type: ON_INPUT_ESTIMATE,
     payload: event.target.value
 } )
 
-export const inputTaskPriority = event => ( {
-    type: INPUT_TASK_PRIORITY,
+export const onInputPriority = event => ( {
+    type: ON_INPUT_PRIORITY,
     payload: event.target.value
 } )
 
