@@ -1,19 +1,32 @@
 import { onClearAddingForm, disableLoading, enableLoading, onToggleCommentForm } from "actions"
 import axios from "axios"
 import {
-    GET_TASKS,
-    ON_UPDATE_TASK
+    GET_TASKS, ON_UPDATE_TASK, SET_CURRENT_TASK
 } from "constants/actions"
 import STATUSES from "constants/statuses"
 
-const API_PATH = "/api/tasks"
+const API_TASKS = "/api/tasks/"
+const API_TASK = "/api/task/"
 
 export const getTasks = () => dispatch => {
     dispatch( enableLoading() )
 
-    axios.get( API_PATH ).then( ( { data } ) => {
+    axios.get( API_TASKS ).then( ( { data } ) => {
         dispatch( {
             type: GET_TASKS,
+            payload: data
+        } )
+
+        dispatch( disableLoading() )
+    } )
+}
+
+export const getTask = taskId => dispatch => {
+    dispatch( enableLoading() )
+
+    axios.get( API_TASK + taskId ).then( ( { data } ) => {
+        dispatch( {
+            type: SET_CURRENT_TASK,
             payload: data
         } )
 
@@ -24,7 +37,7 @@ export const getTasks = () => dispatch => {
 export const onCreateTask = () => ( dispatch, getState ) => {
     const { title, estimate, priority } = getState()
 
-    axios.post( API_PATH, {
+    axios.post( API_TASKS, {
         title,
         estimate,
         priority
@@ -36,7 +49,7 @@ export const onCreateTask = () => ( dispatch, getState ) => {
 }
 
 export const onDeleteTask = id => dispatch => {
-    axios.delete( API_PATH + "/" + id ).then( () => {
+    axios.delete( API_TASKS + id ).then( () => {
         dispatch( getTasks() )
     } ).catch( error => console.error( error ) )
 }
@@ -55,7 +68,7 @@ export const onFinishTask = () => ( dispatch, getState ) => {
 }
 
 export const onUpdateTask = task => dispatch => {
-    axios.put( API_PATH + "/" + task._id, task ).then( () => {
+    axios.put( API_TASKS + task._id, task ).then( () => {
         dispatch( {
             type: ON_UPDATE_TASK,
             payload: task
@@ -75,7 +88,7 @@ export const onUpdateTaskStatus = id => ( dispatch, getState ) => {
 
 export const onAddComment = taskId => dispatch => {
     axios.post( `/api/comments`, { text: "some text" } ).then( ( { data } ) => {
-        axios.put( API_PATH + "/" + taskId, { comments: [data._id] } )
+        axios.put( API_TASKS + taskId, { comments: [data._id] } )
     } ).catch( error => console.error( error ) )
 
     dispatch( onToggleCommentForm( taskId ) )

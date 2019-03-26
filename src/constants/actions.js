@@ -1,4 +1,5 @@
 export const GET_TASKS =  "GET_TASKS"
+export const SET_CURRENT_TASK = "SET_CURRENT_TASK"
 export const ON_UPDATE_TASK =  "ON_UPDATE_TASK"
 export const ON_START_TASK =  "ON_START_TASK"
 export const ON_FINISH_TASK =  "ON_FINISH_TASK"
