@@ -13,10 +13,10 @@ class TaskList extends React.Component {
 
     render() {
         const {
-            tasks, toggleCommentForm, addComment, updateTaskStatus, deleteTask, onStartTask, toggleComments,
+            tasks, toggleCommentForm, addComment, updateTaskStatus, deleteTask, startTask, toggleComments,
             showComments
         } = this.props
-
+        
         if ( isEmpty( tasks ) ) {
             return <div/>
         }
@@ -27,7 +27,7 @@ class TaskList extends React.Component {
                     <Task
                         key={ key }
                         { ...item }
-                        onStartTask={ onStartTask }
+                        onStartTask={ startTask }
                         onDeleteTask={ deleteTask }
                         onChangeTaskStatus={ updateTaskStatus }
                         onAddComment={ addComment }
