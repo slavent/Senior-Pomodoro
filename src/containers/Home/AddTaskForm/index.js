@@ -1,9 +1,12 @@
 import React from "react"
+import { connect } from "react-redux"
 import { Input, Row, Col } from "reactstrap"
 import PRIORITIES from "constants/priorities"
+import { onCreateTask } from "middlewares"
+import { onInputEstimate, onInputPriority, onInputTitle } from "actions"
 import "./style.css"
 
-export default ( { title, estimate, priority, onInputTask, onInputPriority, onAddNewTask, onInputEstimate } ) =>
+const AddTaskForm = ( { title, estimate, priority, onInputEstimate, onInputPriority, onInputTitle, onCreateTask } ) =>
     <div>
         <Row>
             <Col xs={ 12 }>
@@ -15,7 +18,7 @@ export default ( { title, estimate, priority, onInputTask, onInputPriority, onAd
                             type="textarea"
                             value={ title }
                             placeholder="Buy tomatoes..."
-                            onChange={ onInputTask }/>
+                            onChange={ onInputTitle }/>
                     </div>
                     <div className="addform__item">
                         <Input
@@ -45,8 +48,15 @@ export default ( { title, estimate, priority, onInputTask, onInputPriority, onAd
         <div className="addform__wrapper">
             <button
                 className="addform__button"
-                onClick={ onAddNewTask }>
+                onClick={ onCreateTask }>
                 Add task
             </button>
         </div>
     </div>
+
+const mapStateToProps = state => state
+const actions = {
+    onInputEstimate, onInputPriority, onInputTitle, onCreateTask
+}
+
+export default connect( mapStateToProps, actions )( AddTaskForm )

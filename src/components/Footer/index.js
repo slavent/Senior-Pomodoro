@@ -1,7 +1,7 @@
 import React from "react"
 import "./style.css"
 
-export default () =>
+const Footer = () =>
     <footer>
         <hr/>
         <p>
@@ -10,3 +10,5 @@ export default () =>
             { new Date().getYear() + 1900 }
         </p>
     </footer>
+
+export default Footer

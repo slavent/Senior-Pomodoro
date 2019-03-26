@@ -1,33 +1,53 @@
-import TYPES from "constants/actions"
+import {
+    ON_CANCEL_TIMER, ON_CLEAR_ADDING_FORM, DISABLE_LOADING, ENABLE_LOADING,
+    ON_INPUT_ESTIMATE, ON_INPUT_PRIORITY,
+    ON_INPUT_TITLE,
+    ON_START_TASK,
+    ON_TOGGLE_COMMENT_FORM,
+    ON_TOGGLE_COMMENTS
+} from "constants/actions"
 
-export const createTask = () => ( {
-    type: TYPES.CREATE_TASK
+export const onStartTask = taskId => ( {
+    type: ON_START_TASK,
+    payload: taskId
 } )
 
-export const deleteTask = () => ( {
-    type: TYPES.DELETE_TASK
+export const onCancelTimer = () => ( {
+    type: ON_CANCEL_TIMER
 } )
 
-export const finishTask = () => ( {
-    type: TYPES.FINISH_TASK
+export const onToggleCommentForm = taskId => ( {
+    type: ON_TOGGLE_COMMENT_FORM,
+    payload: taskId
 } )
 
-export const startTask = () => ( {
-    type: TYPES.START_TASK
+export const onToggleComments = () => ( {
+    type: ON_TOGGLE_COMMENTS
 } )
 
-export const updateTask = () => ( {
-    type: TYPES.UPDATE_TASK
+export const onInputTitle = event => ( {
+    type: ON_INPUT_TITLE,
+    payload: event.target.value
 } )
 
-export const sortTasks = () => ( {
-    type: TYPES.SORT_TASKS
+export const onInputEstimate = event => ( {
+    type: ON_INPUT_ESTIMATE,
+    payload: event.target.value
 } )
 
-export const addComment = () => ( {
-    type: TYPES.ADD_COMMENT
+export const onInputPriority = event => ( {
+    type: ON_INPUT_PRIORITY,
+    payload: event.target.value
 } )
 
-export const toggleCommentForm = () => ( {
-    type: TYPES.TOGGLE_COMMENT_FORM
+export const onClearAddingForm = () => ( {
+    type: ON_CLEAR_ADDING_FORM
+} )
+
+export const disableLoading = () => ( {
+    type: DISABLE_LOADING
+} )
+
+export const enableLoading = () => ( {
+    type: ENABLE_LOADING
 } )

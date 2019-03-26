@@ -1,8 +1,11 @@
 import React from "react"
 import { render } from "react-dom"
+import { createStore, applyMiddleware, compose } from "redux"
+import { Provider } from "react-redux"
+import thunk from "redux-thunk"
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import { Container, Row, Col } from "reactstrap"
-import { remove, isEmpty, find } from "lodash"
+import reducers from "reducers"
 import Header from "components/Header"
 import Footer from "components/Footer"
 import Home from "containers/Home"
@@ -14,26 +17,27 @@ import "bootstrap/dist/css/bootstrap.css"
 import "normalize.css"
 import "./style.css"
 
-class App extends React.Component {
-    render () {
-        return (
-            <Router>
-                <Container className="container">
-                    <Header/>
-                    <Row>
-                        <Col xs={ 12 }>
-                            <Route exact path="/" component={ Home }/>
-                            <Route path="/reg" component={ Registration }/>
-                            <Route path="/auth" component={ Authorization }/>
-                            <Route path="/about" component={ About }/>
-                            <Route path="/task/:id" component={ Task }/>
-                        </Col>
-                    </Row>
-                    <Footer/>
-                </Container>
-            </Router>
-        )
-    }
-}
+const devTools = window.__REDUX_DEVTOOLS_EXTENSION__()
+
+const store = createStore( reducers, {}, compose( applyMiddleware( thunk ), devTools ) )
+
+const App = () =>
+    <Provider store={ store }>
+        <Router>
+            <Container className="container">
+                <Header/>
+                <Row>
+                    <Col xs={ 12 }>
+                        <Route exact path="/" component={ Home }/>
+                        <Route path="/reg" component={ Registration }/>
+                        <Route path="/auth" component={ Authorization }/>
+                        <Route path="/about" component={ About }/>
+                        <Route path="/task/:id" component={ Task }/>
+                    </Col>
+                </Row>
+                <Footer/>
+            </Container>
+        </Router>
+    </Provider>
 
 render( <App/>, document.getElementById( "app" ) )

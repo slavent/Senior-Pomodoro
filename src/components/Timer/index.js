@@ -1,30 +1,33 @@
 import React from "react"
+import { convertMsToTime, convertToMs } from "components/Timer/utils"
+import { connect } from "react-redux"
+import { onFinishTask } from "middlewares"
+import { onCancelTimer } from "actions"
 import "./style.css"
-import { Button } from "reactstrap"
 
-const POMODORO_INTERVAL = 10
+const INTERVAL = 10
 
-export default class Timer extends React.Component {
-    constructor ( props ) {
+class Timer extends React.Component {
+    constructor( props ) {
         super( props )
 
         this.state = {
-            time: convertToMs( POMODORO_INTERVAL ),
-            isOn: props.isOn || false
+            time: convertToMs( INTERVAL ),
+            isOn: props.timerIsOn || false
         }
 
-        this.startTimer = this.startTimer.bind( this )
-        this.stopTimer = this.stopTimer.bind( this )
-        this.resetTimer = this.resetTimer.bind( this )
+        this.onStart = this.onStart.bind( this )
+        this.onStop = this.onStop.bind( this )
+        this.onClose = this.onClose.bind( this )
 
-        props.isOn && this.startTimer()
+        props.timerIsOn && this.onStart()
     }
 
-    startTimer () {
+    onStart() {
         this.timer = setInterval( () => {
             if ( Number( this.state.time ) === 0 ) {
-                this.stopTimer()
-                this.props.onDone()
+                this.onStop()
+                this.props.onFinishTask()
 
                 return
             }
@@ -35,43 +38,30 @@ export default class Timer extends React.Component {
         }, 1000 )
     }
 
-    stopTimer () {
+    onStop() {
         this.setState( { isOn: false } )
 
         clearInterval( this.timer )
     }
 
-    resetTimer () {
-        this.setState( {
-            time: 0,
-            isOn: false
-        } )
+    onClose() {
+        const { onCancelTimer } = this.props
+
+        this.onStop()
+        onCancelTimer && onCancelTimer()
     }
 
-    render () {
+    render() {
         return (
             <div className="timer">
                 <hr/>
                 <p className="timer__time">{ convertMsToTime( this.state.time ) }</p>
-                <div className="timer__close" onClick={ () => this.props.cancelTimer() }/>
+                <div className="timer__close" onClick={ this.onClose }/>
             </div>
         )
     }
 }
 
-const convertToMs = value => value * 60 * 1000
+const actions = { onCancelTimer, onFinishTask }
 
-const convertMsToTime = value => {
-    let milliseconds = value % 1000
-    value = ( value - milliseconds ) / 1000
-    let seconds = value % 60
-    value = ( value - seconds ) / 60
-    let minutes = value % 60
-    let hours = ( value - minutes ) / 60
-
-    seconds = seconds.toString().length === 1 ? "0" + seconds : seconds
-    minutes = minutes.toString().length === 1 ? "0" + minutes : minutes
-    hours = hours.toString().length === 1 ? "0" + hours : hours
-
-    return hours + ":" + minutes + ":" + seconds
-}
+export default connect( state => state, actions )( Timer )

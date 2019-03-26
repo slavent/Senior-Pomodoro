@@ -1,4 +1,17 @@
 import React from "react"
 import "./style.css"
 
-export default () => <div className="loader"/>
+const Loader = () =>
+    <div className="loader">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+export default Loader

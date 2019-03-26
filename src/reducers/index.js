@@ -1,62 +1,128 @@
-import TYPES from "constants/actions"
+import {
+    ON_CANCEL_TIMER, ON_CLEAR_ADDING_FORM, DISABLE_LOADING, ENABLE_LOADING,
+    ON_FINISH_TASK,
+    GET_TASKS, ON_INPUT_ESTIMATE, ON_INPUT_PRIORITY, ON_INPUT_TITLE,
+    ON_START_TASK,
+    ON_TOGGLE_COMMENT_FORM, ON_TOGGLE_COMMENTS,
+    ON_UPDATE_TASK
+} from "constants/actions"
+import PRIORITIES from "constants/priorities"
 
 const initialState = {
     tasks: [],
     title: "",
-    estimate: "",
+    estimate: 1,
+    priority: PRIORITIES.MINOR,
     timerIsOn: false,
     startedTaskId: null,
-    isLoading: true
+    isLoading: true,
+    isShowComments: false
 }
 
 export default ( state = initialState, { type, payload } ) => {
     switch ( type ) {
-        case TYPES.CREATE_TASK:
+        case GET_TASKS:
             return {
                 ...state,
-                payload
+                tasks: payload,
             }
 
-        case TYPES.DELETE_TASK:
+        case ON_FINISH_TASK:
             return {
                 ...state,
-                payload
+                timerIsOn: false,
+                startedTaskId: null
             }
 
-        case TYPES.FINISH_TASK:
+        case ON_START_TASK:
             return {
                 ...state,
-                payload
+                timerIsOn: true,
+                startedTaskId: payload
             }
 
-        case TYPES.START_TASK:
+        case ON_CANCEL_TIMER:
             return {
                 ...state,
-                payload
+                timerIsOn: false,
+                startedTaskId: null
             }
 
-        case TYPES.UPDATE_TASK:
+        case ON_UPDATE_TASK: {
+            const { tasks } = state
+
+            const newTasks = tasks.map( task => {
+                if ( task._id === payload._id ) {
+                    task = payload
+                }
+
+                return task
+            } )
+
             return {
                 ...state,
-                payload
+                tasks: newTasks
+            }
+        }
+
+        case ON_TOGGLE_COMMENT_FORM: {
+            const { tasks } = state
+            const newTasks = tasks.map( task => {
+                if ( task._id === payload ) {
+                    task.isAddComment = !task.isAddComment
+                }
+
+                return task
+            } )
+
+            return {
+                ...state,
+                tasks: newTasks
+            }
+        }
+
+        case ON_TOGGLE_COMMENTS:
+            return {
+                ...state,
+                isShowComments: !state.isShowComments
             }
 
-        case TYPES.SORT_TASKS:
+        case ON_INPUT_TITLE:
             return {
                 ...state,
-                payload
+                title: payload
             }
 
-        case TYPES.ADD_COMMENT:
+        case ON_INPUT_ESTIMATE:
             return {
                 ...state,
-                payload
+                estimate: payload
             }
 
-        case TYPES.TOGGLE_COMMENT_FORM:
+        case ON_INPUT_PRIORITY:
             return {
                 ...state,
-                payload
+                priority: payload
+            }
+
+        case ON_CLEAR_ADDING_FORM:
+            return {
+                ...state,
+                title: "",
+                priority: PRIORITIES.MINOR,
+                estimate: 1
+            }
+
+        case DISABLE_LOADING:
+            return {
+                ...state,
+                isLoading: false
+            }
+
+        case ENABLE_LOADING:
+            return {
+                ...state,
+                isLoading: true
             }
 
         default:
