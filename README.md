@@ -1,4 +1,4 @@
-# Senior Pomodoro
+# Senior Pomodoro1
 #### Time-management App
 
 #### Dependencies:
