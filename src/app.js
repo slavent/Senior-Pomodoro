@@ -5,7 +5,7 @@ import { Provider } from "react-redux"
 import thunk from "redux-thunk"
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import { Container, Row, Col } from "reactstrap"
-import reducers from "reducers"
+import reducers, { initialState } from "reducers"
 import Header from "components/Header"
 import Footer from "components/Footer"
 import Home from "containers/Home"
@@ -19,7 +19,7 @@ import "./style.css"
 
 const devTools = window.__REDUX_DEVTOOLS_EXTENSION__()
 
-const store = createStore( reducers, {}, compose( applyMiddleware( thunk ), devTools ) )
+const store = createStore( reducers, initialState, compose( applyMiddleware( thunk ), devTools ) )
 
 const App = () =>
     <Provider store={ store }>

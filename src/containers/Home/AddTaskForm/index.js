@@ -28,9 +28,9 @@ const AddTaskForm = ( { title, estimate, priority, onInputEstimate, onInputPrior
                                 type="select"
                                 value={ priority }
                                 onChange={ onInputPriority }>
-                                <option>{ PRIORITIES.MINOR }</option>
-                                <option>{ PRIORITIES.MAJOR }</option>
-                                <option>{ PRIORITIES.CRITICAL }</option>
+                                <option value={ PRIORITIES.MINOR }>{ PRIORITIES.MINOR }</option>
+                                <option value={ PRIORITIES.MAJOR }>{ PRIORITIES.MAJOR }</option>
+                                <option value={ PRIORITIES.CRITICAL }>{ PRIORITIES.CRITICAL }</option>
                             </Input>
                         </div>
                         <div className="addform__item">
@@ -38,11 +38,11 @@ const AddTaskForm = ( { title, estimate, priority, onInputEstimate, onInputPrior
                                 type="select"
                                 value={ estimate }
                                 onChange={ onInputEstimate }>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                                <option value={ 1 }>1</option>
+                                <option value={ 2 }>2</option>
+                                <option value={ 3 }>3</option>
+                                <option value={ 4 }>4</option>
+                                <option value={ 5 }>5</option>
                             </Input>
                         </div>
                     </div>

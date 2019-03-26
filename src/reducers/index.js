@@ -8,7 +8,7 @@ import {
 } from "constants/actions"
 import PRIORITIES from "constants/priorities"
 
-const initialState = {
+export const initialState = {
     tasks: [],
     title: "",
     estimate: 1,
