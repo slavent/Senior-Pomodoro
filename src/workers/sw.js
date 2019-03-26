@@ -27,5 +27,3 @@ workbox.routing.registerRoute(
         ]
     } )
 )
-
-console.log( 1123 )
