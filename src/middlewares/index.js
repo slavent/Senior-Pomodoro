@@ -6,7 +6,6 @@ import {
 import STATUSES from "constants/statuses"
 
 const API_TASKS = "/api/tasks/"
-const API_TASK = "/api/task/"
 
 export const getTasks = () => dispatch => {
     dispatch( enableLoading() )
@@ -24,7 +23,7 @@ export const getTasks = () => dispatch => {
 export const getTask = taskId => dispatch => {
     dispatch( enableLoading() )
 
-    axios.get( API_TASK + taskId ).then( ( { data } ) => {
+    axios.get( API_TASKS + taskId ).then( ( { data } ) => {
         dispatch( {
             type: SET_CURRENT_TASK,
             payload: data

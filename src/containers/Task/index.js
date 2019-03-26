@@ -12,7 +12,13 @@ class Task extends React.Component {
     }
 
     render() {
-        const { currentTask: { title, status, priority, estimate, createDate, comments } } = this.props
+        const { currentTask } = this.props
+
+        if ( !currentTask ) {
+            return <div/>
+        }
+
+        const { title, status, priority, estimate, createdDate, comments } = currentTask
 
         return (
             <Layout>
@@ -21,7 +27,7 @@ class Task extends React.Component {
                     <li>Status: { status }</li>
                     <li>Priority: { priority }</li>
                     <li>Estimate: { estimate }</li>
-                    <li>Create date: { createDate }</li>
+                    <li>Create date: { createdDate }</li>
                     <li>Comments: { comments && comments.length }</li>
                 </ul>
             </Layout>

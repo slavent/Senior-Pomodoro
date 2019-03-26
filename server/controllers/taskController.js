@@ -1,5 +1,4 @@
 const mongoose = require( "mongoose" )
-const commentController = require( "./commentController" )
 const Tasks = mongoose.model( "Tasks" )
 const Comments = mongoose.model( "Comments" )
 const { isEmpty } = require( "lodash" )
@@ -13,10 +12,10 @@ exports.getAllTasks = ( request, response ) => {
 
             tasks.forEach( task => {
                 !isEmpty( comments ) && comments.forEach( comment => {
-                    const isEqualIds = !isEmpty( task.comments ) && task.comments[ 0 ].toString() === comment._id.toString()
+                    const isEqualIds = !isEmpty( task.comments ) && task.comments[0].toString() === comment._id.toString()
 
                     if ( isEqualIds ) {
-                        task.comments = [ comment ]
+                        task.comments = [comment]
                     }
                 } )
             } )
@@ -36,28 +35,24 @@ exports.createTask = ( request, response ) => {
     } )
 }
 
-exports.getTask = ( request, response ) => {
-    Tasks.findById( request.params.taskId, ( error, task ) => {
-        error && response.send( error )
-
-        const comments = commentController.getTaskComments( request.params.taskId )
-
-        task.comments = comments
-
-        response.json( task )
-    } )
-}
-
-exports.updateTask = ( request, response ) => {
-    Tasks.findOneAndUpdate( { _id: request.params.taskId }, request.body, { new: true }, ( error, task ) => {
+exports.getTask = ( { params: { taskId } }, response ) => {
+    Tasks.findById( taskId, ( error, task ) => {
         error && response.send( error )
 
         response.json( task )
     } )
 }
 
-exports.deleteTask = ( request, response ) => {
-    Tasks.remove( { _id: request.params.taskId }, ( error, task ) => {
+exports.updateTask = ( { body, params: { taskId } }, response ) => {
+    Tasks.findOneAndUpdate( { _id: taskId }, body, { new: true }, ( error, task ) => {
+        error && response.send( error )
+
+        response.json( task )
+    } )
+}
+
+exports.deleteTask = ( { params: { taskId } }, response ) => {
+    Tasks.remove( { _id: taskId }, ( error, task ) => {
         error && response.send( error )
 
         response.json( { message: "Task successfully deleted" } )
