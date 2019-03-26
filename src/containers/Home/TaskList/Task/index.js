@@ -4,6 +4,7 @@ import STATUSES from "constants/statuses"
 import ToolBar from "containers/Home/TaskList/ToolBar"
 import { createCommentString, getTimeFromISO, getTitleClassName } from "containers/Home/TaskList/utils"
 import { isEmpty } from "lodash"
+import { Link } from "react-router-dom"
 import { Col, Row } from "reactstrap"
 
 const Task = (
@@ -15,7 +16,11 @@ const Task = (
     <div className={ "tasks__item " + ( status === STATUSES.DONE && "tasks__item-done" ) }>
         <Row>
             <Col xs={ 12 }>
-                <p className={ getTitleClassName( status ) }>{ title }</p>
+                <p className={ getTitleClassName( status ) }>
+                    <Link to={ `/task/${ _id }` }>
+                        { title }
+                    </Link>
+                </p>
                 {
                     status === STATUSES.TODO && estimate > 0 &&
                     <p className="tasks__estimate">

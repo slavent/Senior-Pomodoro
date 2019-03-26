@@ -1,15 +1,14 @@
 import React from "react"
+import { withRouter } from "react-router-dom"
 
-export default class Task extends React.Component {
-    constructor ( props ) {
-        super( props )
+class Task extends React.Component {
+    render() {
+        console.log( this.props )
 
-        this.state = {}
-    }
-
-    render () {
         return (
             <div>Task's page</div>
         )
     }
 }
+
+export default withRouter( Task )
