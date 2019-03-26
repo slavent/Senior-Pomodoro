@@ -18,11 +18,12 @@ class Task extends React.Component {
             return <div/>
         }
 
-        const { title, status, priority, estimate, createdDate, comments } = currentTask
+        const { title, description, status, priority, estimate, createdDate, comments } = currentTask
 
         return (
             <Layout>
                 <h3>{ title }</h3>
+                <p>{ description }</p>
                 <ul>
                     <li>Status: { status }</li>
                     <li>Priority: { priority }</li>

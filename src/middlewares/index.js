@@ -34,10 +34,11 @@ export const getTask = taskId => dispatch => {
 }
 
 export const onCreateTask = () => ( dispatch, getState ) => {
-    const { title, estimate, priority } = getState()
+    const { title, description, estimate, priority } = getState()
 
     axios.post( API_TASKS, {
         title,
+        description,
         estimate,
         priority
     } ).then( ( { data } ) => {

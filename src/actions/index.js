@@ -4,7 +4,7 @@ import {
     ON_INPUT_TITLE,
     ON_START_TASK,
     ON_TOGGLE_COMMENT_FORM,
-    ON_TOGGLE_COMMENTS
+    ON_TOGGLE_COMMENTS, ON_INPUT_DESCRIPTION
 } from "constants/actions"
 
 export const onStartTask = taskId => ( {
@@ -27,6 +27,11 @@ export const onToggleComments = () => ( {
 
 export const onInputTitle = event => ( {
     type: ON_INPUT_TITLE,
+    payload: event.target.value
+} )
+
+export const onInputDescription = event => ( {
+    type: ON_INPUT_DESCRIPTION,
     payload: event.target.value
 } )
 

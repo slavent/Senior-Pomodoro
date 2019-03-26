@@ -3,10 +3,10 @@ import { connect } from "react-redux"
 import { Input, Row, Col } from "reactstrap"
 import PRIORITIES from "constants/priorities"
 import { onCreateTask } from "middlewares"
-import { onInputEstimate, onInputPriority, onInputTitle } from "actions"
+import { onInputDescription, onInputEstimate, onInputPriority, onInputTitle } from "actions"
 import "./style.css"
 
-const AddTaskForm = ( { title, estimate, priority, onInputEstimate, onInputPriority, onInputTitle, onCreateTask } ) => {
+const AddTaskForm = ( { title, description, estimate, priority, onInputEstimate, onInputPriority, onInputTitle, onCreateTask, onInputDescription } ) => {
     const isButtonLock = !title || !priority || !estimate
 
     return (
@@ -16,12 +16,19 @@ const AddTaskForm = ( { title, estimate, priority, onInputEstimate, onInputPrior
                     <div className="addform">
                         <div className="addform__item">
                             <Input
-                                style={ { height: 100 } }
                                 id="input"
-                                type="textarea"
                                 value={ title }
                                 placeholder="Buy tomatoes..."
                                 onChange={ onInputTitle }/>
+                        </div>
+                        <div className="addform__item">
+                            <Input
+                                style={ { height: 100 } }
+                                id="input"
+                                type="textarea"
+                                value={ description }
+                                placeholder="I want..."
+                                onChange={ onInputDescription }/>
                         </div>
                         <div className="addform__item">
                             <Input
@@ -62,7 +69,7 @@ const AddTaskForm = ( { title, estimate, priority, onInputEstimate, onInputPrior
 
 const mapStateToProps = state => state
 const actions = {
-    onInputEstimate, onInputPriority, onInputTitle, onCreateTask
+    onInputEstimate, onInputPriority, onInputTitle, onInputDescription, onCreateTask
 }
 
 export default connect( mapStateToProps, actions )( AddTaskForm )

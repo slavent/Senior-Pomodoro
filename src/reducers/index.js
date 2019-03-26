@@ -4,13 +4,14 @@ import {
     GET_TASKS, ON_INPUT_ESTIMATE, ON_INPUT_PRIORITY, ON_INPUT_TITLE,
     ON_START_TASK,
     ON_TOGGLE_COMMENT_FORM, ON_TOGGLE_COMMENTS,
-    ON_UPDATE_TASK, SET_CURRENT_TASK
+    ON_UPDATE_TASK, SET_CURRENT_TASK, ON_INPUT_DESCRIPTION
 } from "constants/actions"
 import PRIORITIES from "constants/priorities"
 
 export const initialState = {
     tasks: [],
     title: "",
+    description: "",
     estimate: 1,
     priority: PRIORITIES.MINOR,
     timerIsOn: false,
@@ -98,6 +99,12 @@ export default ( state = initialState, { type, payload } ) => {
             return {
                 ...state,
                 title: payload
+            }
+
+        case ON_INPUT_DESCRIPTION:
+            return {
+                ...state,
+                description: payload
             }
 
         case ON_INPUT_ESTIMATE:

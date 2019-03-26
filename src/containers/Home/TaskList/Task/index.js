@@ -9,8 +9,8 @@ import { Col, Row } from "reactstrap"
 
 const Task = (
     {
-        _id, title, status, comments, isAddComment, estimate, onToggleCommentForm, onAddComment, onChangeTaskStatus,
-        onDeleteTask, onStartTask, onToggleComments, isShowComments
+        _id, title, description, status, comments, isAddComment, estimate, onToggleCommentForm, onAddComment,
+        onChangeTaskStatus, onDeleteTask, onStartTask, onToggleComments, isShowComments
     }
 ) =>
     <div className={ "tasks__item " + ( status === STATUSES.DONE && "tasks__item-done" ) }>
@@ -20,6 +20,9 @@ const Task = (
                     <Link to={ `/task/${ _id }` }>
                         { title }
                     </Link>
+                </p>
+                <p>
+                    { description }
                 </p>
                 {
                     status === STATUSES.TODO && estimate > 0 &&
