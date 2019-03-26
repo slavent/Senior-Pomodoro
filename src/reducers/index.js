@@ -1,5 +1,5 @@
 import {
-    CANCEL_TIMER, CLEAR_ADD_TASK_FORM,
+    CANCEL_TIMER, CLEAR_ADD_TASK_FORM, DISABLE_LOADING, ENABLE_LOADING,
     FINISH_TASK,
     GET_TASKS, INPUT_TASK_ESTIMATE, INPUT_TASK_PRIORITY, INPUT_TASK_TITLE,
     START_TASK,
@@ -25,7 +25,6 @@ export default ( state = initialState, { type, payload } ) => {
             return {
                 ...state,
                 tasks: payload,
-                isLoading: false
             }
 
         case FINISH_TASK:
@@ -112,6 +111,18 @@ export default ( state = initialState, { type, payload } ) => {
                 title: "",
                 priority: PRIORITIES.MINOR,
                 estimate: 1
+            }
+
+        case DISABLE_LOADING:
+            return {
+                ...state,
+                isLoading: false
+            }
+
+        case ENABLE_LOADING:
+            return {
+                ...state,
+                isLoading: true
             }
 
         default:

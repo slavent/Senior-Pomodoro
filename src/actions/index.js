@@ -1,6 +1,6 @@
 import axios from "axios"
 import {
-    CANCEL_TIMER, CLEAR_ADD_TASK_FORM,
+    CANCEL_TIMER, CLEAR_ADD_TASK_FORM, DISABLE_LOADING, ENABLE_LOADING,
     GET_TASKS, INPUT_TASK_ESTIMATE, INPUT_TASK_PRIORITY, INPUT_TASK_TITLE,
     START_TASK,
     TOGGLE_COMMENT_FORM,
@@ -12,11 +12,15 @@ import STATUSES from "constants/statuses"
 const API_PATH = "/api/tasks"
 
 export const getTasks = () => dispatch => {
+    dispatch( enableLoading() )
+
     axios.get( API_PATH ).then( ( { data } ) => {
         dispatch( {
             type: GET_TASKS,
             payload: data
         } )
+
+        dispatch( disableLoading() )
     } )
 }
 
@@ -53,15 +57,6 @@ export const finishTask = () => ( dispatch, getState ) => {
     dispatch( updateTask( task ) )
 }
 
-export const startTask = taskId => dispatch => dispatch( {
-    type: START_TASK,
-    payload: taskId
-} )
-
-export const cancelTimer = () => dispatch => dispatch( {
-    type: CANCEL_TIMER
-} )
-
 export const updateTask = task => dispatch => {
     axios.put( API_PATH + "/" + task._id, task ).then( () => {
         dispatch( {
@@ -89,30 +84,47 @@ export const addComment = taskId => dispatch => {
     dispatch( toggleCommentForm( taskId ) )
 }
 
-export const toggleCommentForm = taskId => dispatch => dispatch( {
+export const startTask = taskId => ( {
+    type: START_TASK,
+    payload: taskId
+} )
+
+export const cancelTimer = () => ( {
+    type: CANCEL_TIMER
+} )
+
+export const toggleCommentForm = taskId => ( {
     type: TOGGLE_COMMENT_FORM,
     payload: taskId
 } )
 
-export const toggleComments = () => dispatch => dispatch( {
+export const toggleComments = () => ( {
     type: TOGGLE_COMMENTS
 } )
 
-export const inputTaskTitle = event => dispatch => dispatch( {
+export const inputTaskTitle = event => ( {
     type: INPUT_TASK_TITLE,
     payload: event.target.value
 } )
 
-export const inputTaskEstimate = event => dispatch => dispatch( {
+export const inputTaskEstimate = event => ( {
     type: INPUT_TASK_ESTIMATE,
     payload: event.target.value
 } )
 
-export const inputTaskPriority = event => dispatch => dispatch( {
+export const inputTaskPriority = event => ( {
     type: INPUT_TASK_PRIORITY,
     payload: event.target.value
 } )
 
-export const clearAddTaskForm = () => dispatch => dispatch( {
+export const clearAddTaskForm = () => ( {
     type: CLEAR_ADD_TASK_FORM
+} )
+
+export const disableLoading = () => ( {
+    type: DISABLE_LOADING
+} )
+
+export const enableLoading = () => ( {
+    type: ENABLE_LOADING
 } )

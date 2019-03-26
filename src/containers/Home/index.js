@@ -7,6 +7,10 @@ import { connect } from "react-redux"
 import * as actions from "actions"
 
 class Home extends React.Component {
+    componentDidMount() {
+        this.props.getTasks()
+    }
+
     render() {
         const { isLoading, timerIsOn } = this.props
 
@@ -16,9 +20,14 @@ class Home extends React.Component {
 
         return (
             <div>
-                { timerIsOn && <Timer/> }
-                { !timerIsOn && <TaskList/> }
-                { !timerIsOn && <AddTaskForm/> }
+                {
+                    timerIsOn
+                        ? <Timer/>
+                        : <div>
+                            <TaskList/>
+                            <AddTaskForm/>
+                        </div>
+                }
             </div>
         )
     }

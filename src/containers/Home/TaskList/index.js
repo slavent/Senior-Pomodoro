@@ -7,10 +7,6 @@ import { isEmpty } from "lodash"
 import "./style.css"
 
 class TaskList extends React.Component {
-    componentDidMount() {
-        this.props.getTasks()
-    }
-
     render() {
         const {
             tasks, toggleCommentForm, addComment, updateTaskStatus, deleteTask, startTask, toggleComments,
