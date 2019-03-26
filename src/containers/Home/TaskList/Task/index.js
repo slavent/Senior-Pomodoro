@@ -1,6 +1,6 @@
+import CommentForm from "containers/Home/TaskList/CommentForm"
 import React from "react"
 import STATUSES from "constants/statuses"
-import CommentFrom from "containers/Home/TaskList/index"
 import ToolBar from "containers/Home/TaskList/ToolBar"
 import { createCommentString, getTimeFromISO, getTitleClassName } from "containers/Home/TaskList/utils"
 import { isEmpty } from "lodash"
@@ -42,7 +42,7 @@ const Task = (
                         </div>
                     </div>
                 }
-                { isAddComment && <CommentFrom onAddComment={ () => onAddComment( _id ) }/> }
+                { isAddComment && <CommentForm onAddComment={ () => onAddComment( _id ) }/> }
             </Col>
             <div className="tasks__buttons">
                 <ToolBar
