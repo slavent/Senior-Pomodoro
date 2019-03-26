@@ -12,8 +12,19 @@ class Task extends React.Component {
     }
 
     render() {
+        const { currentTask: { title, status, priority, estimate, createDate, comments } } = this.props
+
         return (
-            <Layout>Task's page</Layout>
+            <Layout>
+                <h3>{ title }</h3>
+                <ul>
+                    <li>Status: { status }</li>
+                    <li>Priority: { priority }</li>
+                    <li>Estimate: { estimate }</li>
+                    <li>Create date: { createDate }</li>
+                    <li>Comments: { comments && comments.length }</li>
+                </ul>
+            </Layout>
         )
     }
 }
