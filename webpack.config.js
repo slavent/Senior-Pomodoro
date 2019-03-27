@@ -3,7 +3,7 @@ const webpack = require( "webpack" )
 const ExtractTextPlugin = require( "extract-text-webpack-plugin" )
 const CleanWebpackPlugin = require( "clean-webpack-plugin" )
 const HtmlWebpackPlugin = require( "html-webpack-plugin" )
-const { GenerateSW } = require( "workbox-webpack-plugin" )
+const { InjectManifest } = require( "workbox-webpack-plugin" )
 
 module.exports = {
     entry: "./src/app.js",
@@ -49,19 +49,9 @@ module.exports = {
             template: "./src/index.html"
         } ),
         new webpack.HotModuleReplacementPlugin(),
-        new GenerateSW( {
-            swDest: "sw.js",
-            clientsClaim: true,
-            skipWaiting: true,
-            runtimeCaching: [{
-                urlPattern: /api/,
-                handler: "NetworkFirst",
-                options: {
-                    cacheableResponse: {
-                        statuses: [0, 200]
-                    }
-                }
-            }]
+        new InjectManifest( {
+            swSrc: "./src/workers/sw.js",
+            swDest: "sw.js"
         } )
     ],
     resolve: {
