@@ -136,9 +136,9 @@ export default ( state = initialState, { type, payload } ) => {
         case ON_CLEAR_ADDING_FORM:
             return {
                 ...state,
-                title: "",
-                priority: PRIORITIES.MINOR,
-                estimate: 1
+                newTask: {
+                    ...initialState.newTask
+                }
             }
 
         case DISABLE_LOADING:
