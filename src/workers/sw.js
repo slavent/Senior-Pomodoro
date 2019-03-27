@@ -25,6 +25,8 @@ const onFail = request => {
     const intervalId = setInterval( () => {
         console.log( "Connection is " + ( navigator.onLine ? "success" : "fail." ) )
 
+        request.credential = "include"
+
         if ( navigator.onLine ) {
             fetch( request )
                 .then( response => response )
