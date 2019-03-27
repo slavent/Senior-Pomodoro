@@ -8,8 +8,8 @@ if ( workbox ) {
 
 workbox.precaching.precacheAndRoute( [
     { url: "/index.html" },
-    // { url: "/bundle.js" },
-    // { url: "/css/styles.css" }
+    { url: "/bundle.js" },
+    { url: "/css/styles.css" }
 ] )
 
 workbox.routing.registerRoute(
