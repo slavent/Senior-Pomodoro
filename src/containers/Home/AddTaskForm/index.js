@@ -6,7 +6,8 @@ import { onCreateTask } from "middlewares"
 import { onInputDescription, onInputEstimate, onInputPriority, onInputTitle } from "actions"
 import "./style.css"
 
-const AddTaskForm = ( { title, description, estimate, priority, onInputEstimate, onInputPriority, onInputTitle, onCreateTask, onInputDescription } ) => {
+const AddTaskForm = ( { newTask, onInputEstimate, onInputPriority, onInputTitle, onCreateTask, onInputDescription } ) => {
+    const { title, description, estimate, priority } = newTask
     const isButtonLock = !title || !priority || !estimate
 
     return (
@@ -68,6 +69,7 @@ const AddTaskForm = ( { title, description, estimate, priority, onInputEstimate,
 }
 
 const mapStateToProps = state => state
+
 const actions = {
     onInputEstimate, onInputPriority, onInputTitle, onInputDescription, onCreateTask
 }

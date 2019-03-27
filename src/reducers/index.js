@@ -10,15 +10,17 @@ import PRIORITIES from "constants/priorities"
 
 export const initialState = {
     tasks: [],
-    title: "",
-    description: "",
-    estimate: 1,
-    priority: PRIORITIES.MINOR,
     timerIsOn: false,
     startedTaskId: null,
     isLoading: true,
     isShowComments: false,
-    currentTask: null
+    currentTask: null,
+    newTask: {
+        title: "",
+        description: "",
+        estimate: 1,
+        priority: PRIORITIES.MINOR
+    }
 }
 
 export default ( state = initialState, { type, payload } ) => {
@@ -98,25 +100,37 @@ export default ( state = initialState, { type, payload } ) => {
         case ON_INPUT_TITLE:
             return {
                 ...state,
-                title: payload
+                newTask: {
+                    ...state.newTask,
+                    title: payload
+                }
             }
 
         case ON_INPUT_DESCRIPTION:
             return {
                 ...state,
-                description: payload
+                newTask: {
+                    ...state.newTask,
+                    description: payload
+                }
             }
 
         case ON_INPUT_ESTIMATE:
             return {
                 ...state,
-                estimate: payload
+                estimate: {
+                    ...state.newTask,
+                    title: payload
+                }
             }
 
         case ON_INPUT_PRIORITY:
             return {
                 ...state,
-                priority: payload
+                priority: {
+                    ...state.newTask,
+                    title: payload
+                }
             }
 
         case ON_CLEAR_ADDING_FORM:
