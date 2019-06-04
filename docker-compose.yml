@@ -1,5 +1,13 @@
 version: "3"
 services:
+  ui:
+    container_name: pomodoro-ui
+    build: ui/
+    ports:
+      - "8080:8080"
+    depends_on:
+      - server
+      - mongo
   server:
      container_name: pomodoro-server
      restart: always
