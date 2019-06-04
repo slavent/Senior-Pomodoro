@@ -1,0 +1,18 @@
+version: "3"
+services:
+  client:
+      container_name: pomodoro-client
+
+  server:
+     container_name: pomodoro-server
+     restart: always
+     build: .
+     ports:
+       - "3001:3001"
+     links:
+       - mongo
+  mongo:
+      container_name: pomodoro-db
+      image: mongo
+      ports:
+        - "27017:27017"

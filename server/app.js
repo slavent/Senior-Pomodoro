@@ -15,9 +15,9 @@ const taskController = require( "./controllers/taskController" )
 const commentController = require( "./controllers/commentController" )
 
 const app = express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3001
 const dbPath = "mongodb+srv://slavent:b7cahZoR1hjF4V4U@cluster0-punqb.azure.mongodb.net/test?retryWrites=true"
-const dbLocalPath = "mongodb://localhost/TodoDataBase"
+const dbLocalPath = "mongodb://mongo:27017/TodoDataBase"
 
 mongoose.Promise = global.Promise
 mongoose.connect( dbLocalPath, { useNewUrlParser: true } )
