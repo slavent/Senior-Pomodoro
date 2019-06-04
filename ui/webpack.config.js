@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require( "html-webpack-plugin" )
 const { InjectManifest } = require( "workbox-webpack-plugin" )
 
 module.exports = {
-    entry: "./src/app.js",
+    entry: "./app.js",
     output: {
         path: path.resolve( "dist" ),
         filename: "bundle.js"
@@ -46,23 +46,23 @@ module.exports = {
         new CleanWebpackPlugin( ["dist"] ),
         new ExtractTextPlugin( "css/styles.css" ),
         new HtmlWebpackPlugin( {
-            template: "./src/index.html"
+            template: "./index.html"
         } ),
         new webpack.HotModuleReplacementPlugin(),
         new InjectManifest( {
-            swSrc: "./src/workers/sw.js",
+            swSrc: "./workers/sw.js",
             swDest: "sw.js"
         } )
     ],
     resolve: {
         extensions: [".js", ".jsx"],
         alias: {
-            constants: path.resolve( __dirname, "./src/constants" ),
-            containers: path.resolve( __dirname, "./src/containers" ),
-            components: path.resolve( __dirname, "./src/components" ),
-            reducers: path.resolve( __dirname, "./src/reducers" ),
-            actions: path.resolve( __dirname, "./src/actions" ),
-            middlewares: path.resolve( __dirname, "./src/middlewares" )
+            constants: path.resolve( __dirname, "./constants" ),
+            containers: path.resolve( __dirname, "./containers" ),
+            components: path.resolve( __dirname, "./components" ),
+            reducers: path.resolve( __dirname, "./reducers" ),
+            actions: path.resolve( __dirname, "./actions" ),
+            middlewares: path.resolve( __dirname, "./middlewares" )
         }
     },
     devServer: {

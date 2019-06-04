@@ -1,6 +1,5 @@
 FROM node:carbon
 
-WORKDIR src/
 WORKDIR server/
 
 COPY package*.json ./

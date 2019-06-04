@@ -2,7 +2,7 @@
     "name": "pomodoro-client",
     "version": "0.0.1",
     "description": "Time-managment app",
-    "main": "src/app.js",
+    "main": "app.js",
     "scripts": {
         "dev": "webpack-dev-server --hot --progress --mode development",
         "prod": "webpack --mode production"
