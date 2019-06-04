@@ -4,10 +4,7 @@ services:
     container_name: pomodoro-ui
     build: ui/
     ports:
-      - "8080:8080"
-    depends_on:
-      - server
-      - mongo
+      - "8080:80"
   server:
      container_name: pomodoro-server
      restart: always
