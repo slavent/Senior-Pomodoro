@@ -4,9 +4,7 @@ WORKDIR src/
 WORKDIR server/
 
 COPY package*.json ./
-COPY webpack.config.js ./
-COPY src src/
-COPY server server/
+COPY . server/
 
 RUN npm install
 

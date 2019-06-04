@@ -1,12 +1,9 @@
 version: "3"
 services:
-  client:
-      container_name: pomodoro-client
-
   server:
      container_name: pomodoro-server
      restart: always
-     build: .
+     build: server/
      ports:
        - "3001:3001"
      links:
